@@ -20,6 +20,11 @@ View a wireframe of the app here:
 
 https://www.figma.com/file/qqC9nOXYWFf7DncYYf8cg4/Untitled?node-id=0%3A1
 
+# Jira
+Link to Jira Roadmap
+
+https://project-3-trip-planner.atlassian.net/jira/software/projects/TP/boards/1/roadmap
+
 ## Development Team Members
 * Steve Babb - MongoDB Database
 * Kolton Decker - Frontend Javascript & UI/UX

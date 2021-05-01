@@ -21,10 +21,10 @@ View a wireframe of the app here:
 https://www.figma.com/file/qqC9nOXYWFf7DncYYf8cg4/Untitled?node-id=0%3A1
 
 ## Development Team Members
-* Steve Babb - role
-* Kolton Decker - role
-* Carly Gouge - role
-* Christina Moss - role
+* Steve Babb - MongoDB Database
+* Kolton Decker - Frontend Javascript & UI/UX
+* Carly Gouge - React Routes
+* Christina Moss - Components & UI/UX
 
 
 

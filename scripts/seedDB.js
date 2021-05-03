@@ -6,9 +6,11 @@ mongoose.connect("mongodb://localhost/tripplanner", {
   useFindAndModify: false,
 });
 
+// seed users
 let userSeed = [
   {
     userName: "studentSteve",
+    password: "sdfsdfwerwer6t",
     name: {
       firstName: "Steve",
       lastname: "Babb",
@@ -17,6 +19,7 @@ let userSeed = [
   },
   {
     userName: "studentKolton",
+    password: "%%(#selsdf0",
     name: {
       firstName: "Kolton",
       lastName: "Decker",
@@ -25,22 +28,25 @@ let userSeed = [
   },
   {
     userName: "studentCarly",
+    password: "$(()DFASLD",
     name: {
       firstName: "Carly",
       lastName: "Gouge",
     },
-    // memberOf: ["Nashville"],
+    memberOf: ["Nashville"],
   },
   {
     userName: "studentChristina",
+    password: "@))R,LRJELEFE",
     name: {
       firstName: "Christina",
       lastName: "Moss",
     },
-    memberOf: "Nashville",
+    memberOf: ["Nashville"],
   },
 ];
 
+// insert users into user table
 db.User.deleteMany({})
   .then(() => db.User.collection.insertMany(userSeed))
   .then((data) => {
@@ -52,9 +58,9 @@ db.User.deleteMany({})
     process.exit(1);
   });
 
+// see trips
 let tripSeed = [
   {
-    members: ["studentSteve, studentKolton"],
     tripName: "Nashville",
     collections: [
       {
@@ -72,7 +78,6 @@ let tripSeed = [
     ],
   },
   {
-    members: ["studentCarly", "studentChristina"],
     tripName: "Vegas",
     collections: [
       {
@@ -91,6 +96,7 @@ let tripSeed = [
   },
 ];
 
+//insert trips into trip table
 db.Trip.deleteMany({})
   .then(() => db.Trip.collection.insertMany(tripSeed))
   .then((data) => {

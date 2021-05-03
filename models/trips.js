@@ -8,18 +8,8 @@ const TripSchema = new Schema({
     default: Date.now,
   },
 
-  //   is this necessary?
-
-  //   is the above necessary?
-
   trips: [
     {
-      members: [
-        {
-          type: Schema.Types.ObjectId,
-          ref: "User",
-        },
-      ],
       tripName: {
         type: String,
         trim: true,

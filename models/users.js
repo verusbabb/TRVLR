@@ -14,6 +14,11 @@ const UserSchema = new Schema({
     required: "Enter a user name",
   },
 
+  password: {
+    type: String,
+    required: "Enter a password",
+  },
+
   name: {
     firstName: {
       type: String,

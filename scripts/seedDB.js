@@ -13,14 +13,7 @@ let userSeed = [
       firstName: "Steve",
       lastname: "Babb",
     },
-    trips: [
-      {
-        tripName: "Nashville",
-      },
-      {
-        tripName: "Camping",
-      },
-    ],
+    memberOf: ["Nashville", "Vegas"],
   },
   {
     userName: "studentKolton",
@@ -28,11 +21,7 @@ let userSeed = [
       firstName: "Kolton",
       lastName: "Decker",
     },
-    trips: [
-      {
-        tripName: "Vegas",
-      },
-    ],
+    memberOf: ["Vegas"],
   },
   {
     userName: "studentCarly",
@@ -40,14 +29,7 @@ let userSeed = [
       firstName: "Carly",
       lastName: "Gouge",
     },
-    trips: [
-      {
-        tripName: "NYC Symphony",
-      },
-      {
-        tripName: "Road trip West",
-      },
-    ],
+    // memberOf: ["Nashville"],
   },
   {
     userName: "studentChristina",
@@ -55,19 +37,62 @@ let userSeed = [
       firstName: "Christina",
       lastName: "Moss",
     },
-    trips: [
-      {
-        tripName: "Road trip East",
-      },
-      {
-        tripName: "Rio de Janeiro",
-      },
-    ],
+    memberOf: "Nashville",
   },
 ];
 
 db.User.deleteMany({})
   .then(() => db.User.collection.insertMany(userSeed))
+  .then((data) => {
+    console.log(data.result.n + " records inserted!");
+    process.exit(0);
+  })
+  .catch((err) => {
+    console.error(err);
+    process.exit(1);
+  });
+
+let tripSeed = [
+  {
+    members: ["studentSteve, studentKolton"],
+    tripName: "Nashville",
+    collections: [
+      {
+        name: "Dinner Spot",
+        url: "https://mcdonalds.com",
+      },
+    ],
+    expenses: [
+      {
+        description: "dinner with everyone",
+        cost: "120",
+        submitter: "Steve",
+        date: Date.now,
+      },
+    ],
+  },
+  {
+    members: ["studentCarly", "studentChristina"],
+    tripName: "Vegas",
+    collections: [
+      {
+        name: "Lunch Spot",
+        url: "https://burgerking.com",
+      },
+    ],
+    expenses: [
+      {
+        description: "lunch with everyone",
+        cost: "125",
+        submitter: "Carly",
+        date: Date.now,
+      },
+    ],
+  },
+];
+
+db.Trip.deleteMany({})
+  .then(() => db.Trip.collection.insertMany(tripSeed))
   .then((data) => {
     console.log(data.result.n + " records inserted!");
     process.exit(0);

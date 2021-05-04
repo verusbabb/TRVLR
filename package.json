@@ -1,5 +1,5 @@
 {
-  "name": "trip planner",
+  "name": "tripplanner",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -17,6 +17,7 @@
     "express": "^4.17.1",
     "if-env": "^1.0.4",
     "mongoose": "^5.12.7",
+    "passport": "^0.4.1",
     "react-router-dom": "^5.2.0"
   },
   "devDependencies": {

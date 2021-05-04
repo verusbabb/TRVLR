@@ -1,4 +1,4 @@
-function Nav(props) {
+function Card(props) {
     return (
         <>
         
@@ -6,4 +6,4 @@ function Nav(props) {
     )
 }
 
-export default Nav;
+export default Card;

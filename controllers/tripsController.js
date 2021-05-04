@@ -1,30 +1,30 @@
 const db = require("../models");
 
-// Defining methods for the UsersController
+// Defining methods for the TripsController
 module.exports = {
-  findAllUsers: function (req, res) {
-    db.User.find(req.query)
+  findAllTrips: function (req, res) {
+    db.Trip.find(req.query)
       .sort({ date: -1 })
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
-  findUserById: function (req, res) {
-    db.User.findById(req.params.id)
+  findTripById: function (req, res) {
+    db.Trip.findById(req.params.id)
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
-  createUser: function (req, res) {
-    db.User.create(req.body)
+  createTrip: function (req, res) {
+    db.Trip.create(req.body)
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
-  updateUser: function (req, res) {
-    db.User.findOneAndUpdate({ _id: req.params.id }, req.body)
+  updateTrip: function (req, res) {
+    db.Trip.findOneAndUpdate({ _id: req.params.id }, req.body)
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
-  removeUser: function (req, res) {
-    db.User.findById({ _id: req.params.id })
+  removeTrip: function (req, res) {
+    db.Trip.findById({ _id: req.params.id })
       .then((dbModel) => dbModel.remove())
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));

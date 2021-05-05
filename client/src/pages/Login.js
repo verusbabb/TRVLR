@@ -1,17 +1,15 @@
-import React, { useState, useEffect } from "react";
-
+import React, { useState } from "react";
 import { Input, FormBtn } from "../components/SignUpForm";
 
-
 function Login() {
-    const [formObject, setFormObject] = useState({});
+  const [formObject, setFormObject] = useState({});
 
-    function handleInputChange(event) {
-      const { name, value } = event.target;
-      setFormObject({ ...formObject, [name]: value });
-    }
+  function handleInputChange(event) {
+    const { name, value } = event.target;
+    setFormObject({ ...formObject, [name]: value });
+  }
 
-    return (
+  return (
     <div className="container login-box">
       <div className="row">
         <div className="col l8 offset-l2">
@@ -26,21 +24,14 @@ function Login() {
               name="password"
               placeholder="Password"
             />
-            <FormBtn
-              disabled={
-                !(
-                  formObject.userName &&
-                  formObject.password
-                )
-              }
-            >
+            <FormBtn disabled={!(formObject.userName && formObject.password)}>
               Log in
             </FormBtn>
           </form>
         </div>
       </div>
     </div>
-    )
+  );
 }
 
 export default Login;

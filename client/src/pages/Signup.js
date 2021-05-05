@@ -1,11 +1,31 @@
 import React, { useState, useEffect } from "react";
 import API from "../utils/API";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { Input, FormBtn } from "../components/SignUpForm";
 
 function Signup() {
-  //   const [user, setUser] = useState([]);
+  const [user, setUser] = useState([]);
+  const [users, setUsers] = useState([]);
   const [formObject, setFormObject] = useState({});
+  const [lastSignUp, setLastSignUp] = useState({});
+
+  useEffect(() => {
+    API.getUsers().then((users) => {
+      setUsers(users.data);
+      setUser(users.data[0]);
+      console.log(users.data);
+      let userArray = users.data;
+      function last(array, n) {
+        if (array == null) return void 0;
+        if (n == null) return array[array.length - 1];
+        return array.slice(Math.max(array.length - n, 0));
+      }
+      console.log(last(userArray));
+      let newSignUp = last(userArray).name.firstName;
+      setLastSignUp(newSignUp);
+      console.log(lastSignUp);
+    });
+  }, []);
 
   function handleInputChange(event) {
     const { name, value } = event.target;
@@ -37,12 +57,14 @@ function Signup() {
         .then((res) => alert("User added!"))
         .catch((err) => console.log(err));
     }
+    window.location.href = "/login";
   }
 
   return (
     <div className="container">
       <div className="row">
         <div className="col lg 6">
+          {/* <UserContext.Provider value={{ users }}> */}
           <form>
             <Input
               onChange={handleInputChange}
@@ -78,6 +100,7 @@ function Signup() {
               Submit User
             </FormBtn>
           </form>
+          {/* </UserContext.Provider> */}
         </div>
       </div>
     </div>

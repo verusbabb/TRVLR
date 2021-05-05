@@ -103,7 +103,7 @@ function Signup() {
             >
               Submit User
             </FormBtn>
-            {success && <div> Success! Please go to login page.</div>}
+            {success && <div> Success! Redirecting to login page.</div>}
           </form>
         </div>
       </div>

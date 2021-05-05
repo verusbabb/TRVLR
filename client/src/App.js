@@ -14,23 +14,24 @@ function App() {
       <div className="App">
         <Nav />
         <main>
-        <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route exact path="/dashboard">
-            <Dashboard />
-          </Route>
-          <Route exact path="/signup">
-            <Signup />
+          <Switch>
+            <Route exact path="/">
+              <Home />
             </Route>
+            <Route exact path="/dashboard">
+              <Dashboard />
+            </Route>
+            <Route exact path="/signup">
+              <Signup />
+            </Route>
+
             <Route exact path="/login">
               <Login />
             </Route>
             {/* <Route>
             <NoMatch />
           </Route> */}
-        </Switch>
+          </Switch>
         </main>
         <Footer />
       </div>
@@ -39,4 +40,3 @@ function App() {
 }
 
 export default App;
-

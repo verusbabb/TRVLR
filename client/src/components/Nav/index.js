@@ -1,7 +1,17 @@
-function Nav(props) {
+import { Link } from "react-router-dom";
+
+function Nav() {
     return (
         <>
-        
+            <nav>
+                <div class="nav-wrapper">
+                    <Link to="/">Trip Planner</Link>
+                    <ul id="nav-mobile" class="right hide-on-med-and-down">
+                        <li><Link to="/signup">Signup</Link></li>
+                        <li><Link to="/login">Login</Link></li>
+                    </ul>
+                </div>
+            </nav>
         </>
     )
 }

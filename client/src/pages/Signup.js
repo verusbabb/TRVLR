@@ -14,7 +14,9 @@ function Signup() {
     setTimeout(function () {
       window.location.href = "/login/";
     }, 2000);
-    return;
+    return () => {
+      clearTimeout();
+    };
   };
 
   useEffect(() => {
@@ -60,7 +62,7 @@ function Signup() {
         },
         password: formObject.password,
       })
-        .then((res) => validated())
+        .then((res) => validated()) //add dispatch inside here {type: "addUser",payload: formObject}
         .catch((err) => console.log(err));
     }
   }

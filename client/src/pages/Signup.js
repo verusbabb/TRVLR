@@ -7,7 +7,12 @@ function Signup() {
   const [user, setUser] = useState([]);
   const [users, setUsers] = useState([]);
   const [formObject, setFormObject] = useState({});
-  const [lastSignUp, setLastSignUp] = useState({});
+  const [success, setSuccess] = useState(false);
+
+  const validated = () => {
+    setSuccess(true);
+    return;
+  };
 
   useEffect(() => {
     API.getUsers().then((users) => {
@@ -21,9 +26,7 @@ function Signup() {
         return array.slice(Math.max(array.length - n, 0));
       }
       console.log(last(userArray));
-      let newSignUp = last(userArray).name.firstName;
-      setLastSignUp(newSignUp);
-      console.log(lastSignUp);
+      console.log(last(userArray).name.firstName);
     });
   }, []);
 
@@ -54,17 +57,16 @@ function Signup() {
         },
         password: formObject.password,
       })
-        .then((res) => alert("User added!"))
+        .then((res) => validated())
         .catch((err) => console.log(err));
     }
-    window.location.href = "/login";
+    // validated();
   }
 
   return (
     <div className="container">
       <div className="row">
         <div className="col lg 6">
-          {/* <UserContext.Provider value={{ users }}> */}
           <form>
             <Input
               onChange={handleInputChange}
@@ -99,8 +101,8 @@ function Signup() {
             >
               Submit User
             </FormBtn>
+            {success && <div> Success! Please go to login page.</div>}
           </form>
-          {/* </UserContext.Provider> */}
         </div>
       </div>
     </div>

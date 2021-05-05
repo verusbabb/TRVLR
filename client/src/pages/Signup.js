@@ -11,6 +11,9 @@ function Signup() {
 
   const validated = () => {
     setSuccess(true);
+    setTimeout(function () {
+      window.location.href = "/login/";
+    }, 2000);
     return;
   };
 
@@ -60,7 +63,6 @@ function Signup() {
         .then((res) => validated())
         .catch((err) => console.log(err));
     }
-    // validated();
   }
 
   return (

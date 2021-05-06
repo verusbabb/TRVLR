@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Input, FormBtn } from "../components/SignUpForm";
-
 import { Col, Row, Container } from "../components/Grid";
 import Card from "../components/Card";
 import API from "../utils/API";
+import { useUserContext, UserProvider } from "../utils/userContext";
 
 function Login() {
   const [formObject, setFormObject] = useState({});
+  const [state, dispatch] = useUserContext();
 
   function handleInputChange(event) {
     const { name, value } = event.target;
@@ -21,7 +22,14 @@ function Login() {
         userName: formObject.userName,
         password: formObject.password,
       })
-        .then((res) => (window.location.href = "/dashboard/"))
+        .then((res) => {
+          dispatch({
+            type: "add",
+            userName: res.data.userName,
+            firstName: res.data.name.firstName,
+            lastName: res.data.name.lastName,
+          });
+        })
         .catch((err) => console.log(401));
     }
   }

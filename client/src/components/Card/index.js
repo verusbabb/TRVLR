@@ -1,4 +1,5 @@
 import { Container } from "../Grid";
+import "./style.css";
 
 function Card(props) {
     return (

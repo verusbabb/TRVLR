@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import "./style.css";
 
 function Nav() {
   return (
@@ -8,11 +9,14 @@ function Nav() {
           <Link to="/">Trip Planner</Link>
           <ul id="nav-mobile" className="right hide-on-med-and-down">
             <li>
+              <Link to="/dashboard">Dashboard</Link>
+            </li>
+            <li>
               <Link to="/signup">Signup</Link>
             </li>
             <li>
               <Link to="/login">Login</Link>
-            </li>
+            </li>            
           </ul>
         </div>
       </nav>

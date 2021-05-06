@@ -19,21 +19,21 @@ function Signup() {
     return;
   };
 
-  useEffect(() => {
-    API.getUsers().then((users) => {
-      setUsers(users.data);
-      setUser(users.data[0]);
-      console.log(users.data);
-      let userArray = users.data;
-      function last(array, n) {
-        if (array == null) return void 0;
-        if (n == null) return array[array.length - 1];
-        return array.slice(Math.max(array.length - n, 0));
-      }
-      console.log(last(userArray));
-      console.log(last(userArray).name.firstName);
-    });
-  }, []);
+  // useEffect(() => {
+  //   API.getUsers().then((users) => {
+  //     setUsers(users.data);
+  //     setUser(users.data[0]);
+  //     console.log(users.data);
+  //     let userArray = users.data;
+  //     function last(array, n) {
+  //       if (array == null) return void 0;
+  //       if (n == null) return array[array.length - 1];
+  //       return array.slice(Math.max(array.length - n, 0));
+  //     }
+  //     console.log(last(userArray));
+  //     console.log(last(userArray).name.firstName);
+  //   });
+  // }, []);
 
   function handleInputChange(event) {
     const { name, value } = event.target;
@@ -105,7 +105,7 @@ function Signup() {
                 onClick={handleFormSubmit}
               >
                 Submit User
-            </FormBtn>
+              </FormBtn>
               {success && <div> Success! Redirecting to login page.</div>}
             </form>
           </Col>

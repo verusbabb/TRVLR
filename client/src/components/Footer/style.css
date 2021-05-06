@@ -1,0 +1,12 @@
+.page-footer {
+    margin-top: 2%;
+    background-color: #2196f3 ;
+  }
+
+  footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    overflow: hidden;
+  }

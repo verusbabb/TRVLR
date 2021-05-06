@@ -8,7 +8,7 @@ module.exports = {
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
-  fone: function (req, res) {
+  findOneUser: function (req, res) {
     db.User.findOne({ userName: req.query.userName })
       .then((dbModel) => {
         dbModel.comparePassword(req.query.password, function (err, isMatch) {

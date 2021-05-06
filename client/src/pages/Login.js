@@ -17,7 +17,7 @@ function Login() {
     event.preventDefault();
     console.log(formObject.userName, formObject.password);
     if (formObject.userName && formObject.password) {
-      API.fone({
+      API.findOneUser({
         userName: formObject.userName,
         password: formObject.password,
       })

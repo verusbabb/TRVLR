@@ -19,7 +19,7 @@ export default {
     return axios.post("/api/users", userData);
   },
 
-  fone: function (userData) {
+  findOneUser: function (userData) {
     console.log(userData);
     return axios.get("/api/users", {
       params: {

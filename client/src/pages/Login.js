@@ -1,16 +1,20 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import { Input, FormBtn } from "../components/SignUpForm";
 import { Col, Row, Container } from "../components/Grid";
 import Card from "../components/Card";
 import API from "../utils/API";
-import { useUserContext, UserProvider } from "../utils/userContext";
+import { useUserContext } from "../utils/userContext";
+import { useHistory } from "react-router-dom";
 
 function Login() {
   const [formObject, setFormObject] = useState({});
   const [state, dispatch] = useUserContext();
+  const [success, setSuccess] = useState(true);
+  // const history = useHistory();
 
   function handleInputChange(event) {
     const { name, value } = event.target;
+
     setFormObject({ ...formObject, [name]: value });
   }
 
@@ -23,6 +27,7 @@ function Login() {
         password: formObject.password,
       })
         .then((res) => {
+          setSuccess(true);
           dispatch({
             type: "add",
             userName: res.data.userName,
@@ -30,7 +35,10 @@ function Login() {
             lastName: res.data.name.lastName,
           });
         })
-        .catch((err) => console.log(401));
+        .catch((err) => {
+          setSuccess(false);
+          console.log(401);
+        });
     }
   }
 
@@ -57,6 +65,7 @@ function Login() {
                 >
                   Log in
                 </FormBtn>
+                {!success && <div> Whoops! Please try again.</div>}
               </form>
             </Col>
           </Row>

@@ -31,10 +31,10 @@ function Dashboard() {
     <>
       {/* <Container> */}
       <Card>
-        <h1>
-          Test: My userName is {state[0].userName}, my first name is{" "}
-          {state[0].firstName}, my last name is {state[0].lastName}!
-        </h1>
+        <h3>
+          Welcome {state[0].userName}! Your full name is {state[0].firstName}{" "}
+          {state[0].lastName}!
+        </h3>
       </Card>
       <Card>
         <Row>

@@ -8,6 +8,24 @@ module.exports = {
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
+  fone: function (req, res) {
+    db.User.findOne({ userName: req.query.userName })
+      .then((dbModel) => {
+        dbModel.comparePassword(req.query.password, function (err, isMatch) {
+          console.log(err, isMatch);
+          if (err) res.status(422).json(err);
+          if (isMatch) {
+            res.json(dbModel);
+          } else {
+            res.status(401).json();
+          }
+        });
+        console.log(dbModel);
+      })
+
+      .catch((err) => res.status(422).json(err));
+  },
+
   findUserById: function (req, res) {
     db.User.findById(req.params.id)
       .then((dbModel) => res.json(dbModel))

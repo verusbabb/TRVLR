@@ -4,7 +4,8 @@ const usersController = require("../../controllers/usersController");
 // Matches with "/api/users"
 router
   .route("/")
-  .get(usersController.findAllUsers)
+  // .get(usersController.findAllUsers)
+  .get(usersController.fone)
   .post(usersController.createUser);
 
 // Matches with "/api/users/:id"

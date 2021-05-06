@@ -16,24 +16,12 @@ function Signup() {
     setTimeout(function () {
       window.location.href = "/login/";
     }, 2000);
-    return;
+    return () => {
+      clearTimeout();
+    };
   };
 
-  // useEffect(() => {
-  //   API.getUsers().then((users) => {
-  //     setUsers(users.data);
-  //     setUser(users.data[0]);
-  //     console.log(users.data);
-  //     let userArray = users.data;
-  //     function last(array, n) {
-  //       if (array == null) return void 0;
-  //       if (n == null) return array[array.length - 1];
-  //       return array.slice(Math.max(array.length - n, 0));
-  //     }
-  //     console.log(last(userArray));
-  //     console.log(last(userArray).name.firstName);
-  //   });
-  // }, []);
+  // useEffect(() => {}, []);
 
   function handleInputChange(event) {
     const { name, value } = event.target;
@@ -62,7 +50,7 @@ function Signup() {
         },
         password: formObject.password,
       })
-        .then((res) => validated())
+        .then((res) => validated()) //add dispatch inside here {type: "addUser",payload: formObject}
         .catch((err) => console.log(err));
     }
   }

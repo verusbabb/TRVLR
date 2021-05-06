@@ -19,6 +19,16 @@ export default {
     return axios.post("/api/users", userData);
   },
 
+  fone: function (userData) {
+    console.log(userData);
+    return axios.get("/api/users", {
+      params: {
+        userName: userData.userName,
+        password: userData.password,
+      },
+    });
+  },
+
   // Gets all trips
   getTrips: function () {
     return axios.get("/api/trips");

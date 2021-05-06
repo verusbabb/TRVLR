@@ -10,6 +10,7 @@ function Login() {
   const [formObject, setFormObject] = useState({});
   const [state, dispatch] = useUserContext();
   const [success, setSuccess] = useState(true);
+  const [fail, setFail] = useState(true);
   // const history = useHistory();
 
   function handleInputChange(event) {
@@ -28,6 +29,7 @@ function Login() {
       })
         .then((res) => {
           setSuccess(true);
+          setFail(false);
           dispatch({
             type: "add",
             userName: res.data.userName,
@@ -37,6 +39,7 @@ function Login() {
         })
         .catch((err) => {
           setSuccess(false);
+          setFail(true);
           console.log(401);
         });
     }
@@ -66,6 +69,7 @@ function Login() {
                   Log in
                 </FormBtn>
                 {!success && <div> Whoops! Please try again.</div>}
+                {!fail && <div> Success! You are now logged in.</div>}
               </form>
             </Col>
           </Row>

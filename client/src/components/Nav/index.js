@@ -8,6 +8,9 @@ function Nav() {
           <Link to="/">Trip Planner</Link>
           <ul id="nav-mobile" className="right hide-on-med-and-down">
             <li>
+              <Link to="/dashboard">Dashboard</Link>
+            </li>
+            <li>
               <Link to="/signup">Signup</Link>
             </li>
             <li>

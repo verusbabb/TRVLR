@@ -21,7 +21,7 @@ function Login() {
         userName: formObject.userName,
         password: formObject.password,
       })
-        .then((res) => console.log("success"))
+        .then((res) => (window.location.href = "/dashboard/"))
         .catch((err) => console.log(401));
     }
   }

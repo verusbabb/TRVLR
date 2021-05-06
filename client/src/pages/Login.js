@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Input, FormBtn } from "../components/SignUpForm";
 import { Col, Row, Container } from "../components/Grid";
 import Card from "../components/Card";
@@ -8,10 +8,17 @@ import { useHistory } from "react-router-dom";
 
 function Login() {
   const [formObject, setFormObject] = useState({});
-  const [state, dispatch] = useUserContext();
+  const [user, dispatch] = useUserContext(() => {
+    const localData = localStorage.getItem("user");
+    return localData ? JSON.parse(localData) : [];
+  });
   const [success, setSuccess] = useState(true);
   const [fail, setFail] = useState(true);
-  // const history = useHistory();
+  const history = useHistory();
+
+  useEffect(() => {
+    localStorage.setItem("user", JSON.stringify(user));
+  }, [user]);
 
   function handleInputChange(event) {
     const { name, value } = event.target;
@@ -30,12 +37,14 @@ function Login() {
         .then((res) => {
           setSuccess(true);
           setFail(false);
+
           dispatch({
             type: "add",
             userName: res.data.userName,
             firstName: res.data.name.firstName,
             lastName: res.data.name.lastName,
           });
+          history.push("/dashboard");
         })
         .catch((err) => {
           setSuccess(false);

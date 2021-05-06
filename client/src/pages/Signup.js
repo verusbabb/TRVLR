@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import API from "../utils/API";
 // import { Link } from "react-router-dom";
 import { Input, FormBtn } from "../components/SignUpForm";
+import { Col, Row, Container } from "../components/Grid";
+import Card from "../components/Card";
 
 function Signup() {
   const [user, setUser] = useState([]);
@@ -54,48 +56,50 @@ function Signup() {
   }
 
   return (
-    <div className="container">
-      <div className="row">
-        <div className="col lg 6">
-          <form>
-            <Input
-              onChange={handleInputChange}
-              name="userName"
-              placeholder="username (required)"
-            />
-            <Input
-              onChange={handleInputChange}
-              name="firstName"
-              placeholder="First Name (required)"
-            />
-            <Input
-              onChange={handleInputChange}
-              name="lastName"
-              placeholder="Last Name (required)"
-            />
-            <Input
-              onChange={handleInputChange}
-              name="password"
-              placeholder="Password (required)"
-            />
-            <FormBtn
-              disabled={
-                !(
-                  formObject.userName &&
-                  formObject.firstName &&
-                  formObject.lastName &&
-                  formObject.password
-                )
-              }
-              onClick={handleFormSubmit}
-            >
-              Submit User
-            </FormBtn>
-            {success && <div> Success! Redirecting to login page.</div>}
-          </form>
-        </div>
-      </div>
-    </div>
+    <Card>
+      <Container>
+        <Row>
+          <Col size="l6 s12">
+            <form>
+              <Input
+                onChange={handleInputChange}
+                name="userName"
+                placeholder="username (required)"
+              />
+              <Input
+                onChange={handleInputChange}
+                name="firstName"
+                placeholder="First Name (required)"
+              />
+              <Input
+                onChange={handleInputChange}
+                name="lastName"
+                placeholder="Last Name (required)"
+              />
+              <Input
+                onChange={handleInputChange}
+                name="password"
+                placeholder="Password (required)"
+              />
+              <FormBtn
+                disabled={
+                  !(
+                    formObject.userName &&
+                    formObject.firstName &&
+                    formObject.lastName &&
+                    formObject.password
+                  )
+                }
+                onClick={handleFormSubmit}
+              >
+                Submit User
+              </FormBtn>
+              {success && <div> Success! Redirecting to login page.</div>}
+            </form>
+          </Col>
+        </Row>
+      </Container>
+    </Card>
   );
 }
 

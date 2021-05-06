@@ -30,7 +30,7 @@ function Dashboard() {
 
     return (
         <>
-            <Container>
+            {/* <Container> */}
                 <Card>
                     {/* <h1>Welcome, {user.userName}</h1> */}
                     <h1>Welcome, George!</h1>
@@ -63,7 +63,7 @@ function Dashboard() {
                         <h2>Friends</h2>
                     </Row>
                 </Card>
-            </Container>
+            {/* </Container> */}
         </>
     )
 }

@@ -1,5 +1,6 @@
 import React from "react";
 import Dashboard from "./pages/Dashboard";
+import Trip from "./pages/Trip";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
@@ -20,6 +21,9 @@ function App() {
             </Route>
             <Route exact path="/dashboard">
               <Dashboard />
+            </Route>
+            <Route exact path="/trips/:id">
+              <Trip />
             </Route>
             <Route exact path="/signup">
               <Signup />

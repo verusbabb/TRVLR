@@ -11,14 +11,7 @@ function Login() {
   const [success, setSuccess] = useState(true);
   const [fail, setFail] = useState(true);
   const history = useHistory();
-  const [state, dispatch] = useUserContext(() => {
-    const localData = localStorage.getItem("user");
-    return localData ? JSON.parse(localData) : [];
-  });
-
-  useEffect(() => {
-    localStorage.setItem("user", JSON.stringify(state));
-  }, [state]);
+  const [state, dispatch] = useUserContext();
 
   function handleInputChange(event) {
     const { name, value } = event.target;
@@ -34,7 +27,7 @@ function Login() {
         userName: formObject.userName,
         password: formObject.password,
       })
-        .then((res) => {
+        .then(async (res) => {
           setSuccess(true);
           setFail(false);
 
@@ -44,6 +37,8 @@ function Login() {
             firstName: res.data.name.firstName,
             lastName: res.data.name.lastName,
           });
+          console.log(state);
+
           history.push("/dashboard");
         })
         .catch((err) => {

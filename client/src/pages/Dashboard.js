@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import Card from "../components/Card";
 import DeleteBtn from "../components/DeleteBtn";
@@ -26,13 +26,13 @@ function Dashboard() {
       .then((res) => loadTrips())
       .catch((err) => console.log(err));
   }
-
+  console.log(state);
   return (
     <>
       {/* <Container> */}
       <Card>
         <h3>
-          Welcome {state[0].firstName} {state[0].lastName}!
+          Welcome {state[0]?.firstName} {state[0]?.lastName}!
         </h3>
       </Card>
       <Card>

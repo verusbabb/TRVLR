@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Dashboard from "./pages/Dashboard";
 import Trip from "./pages/Trip";
 import Signup from "./pages/Signup";
@@ -8,8 +8,11 @@ import Home from "./pages/Home";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { useUserContext } from "./utils/userContext";
 
 function App() {
+  const [state, dispatch] = useUserContext();
+
   return (
     <Router>
       <div className="App">

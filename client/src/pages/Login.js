@@ -11,14 +11,14 @@ function Login() {
   const [success, setSuccess] = useState(true);
   const [fail, setFail] = useState(true);
   const history = useHistory();
-  const [user, dispatch] = useUserContext(() => {
+  const [state, dispatch] = useUserContext(() => {
     const localData = localStorage.getItem("user");
     return localData ? JSON.parse(localData) : [];
   });
 
   useEffect(() => {
-    localStorage.setItem("user", JSON.stringify(user));
-  }, [user]);
+    localStorage.setItem("user", JSON.stringify(state));
+  }, [state]);
 
   function handleInputChange(event) {
     const { name, value } = event.target;

@@ -8,13 +8,13 @@ import { useHistory } from "react-router-dom";
 
 function Login() {
   const [formObject, setFormObject] = useState({});
+  const [success, setSuccess] = useState(true);
+  const [fail, setFail] = useState(true);
+  const history = useHistory();
   const [user, dispatch] = useUserContext(() => {
     const localData = localStorage.getItem("user");
     return localData ? JSON.parse(localData) : [];
   });
-  const [success, setSuccess] = useState(true);
-  const [fail, setFail] = useState(true);
-  const history = useHistory();
 
   useEffect(() => {
     localStorage.setItem("user", JSON.stringify(user));

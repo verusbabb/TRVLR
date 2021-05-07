@@ -56,15 +56,16 @@ function Signup() {
   }
 
   return (
-    <Card>
+    
       <Container>
         <Row>
-          <Col size="l6 s12">
+          <Col size="l8 offset-l2 s12">
+          <Card>
             <form>
               <Input
                 onChange={handleInputChange}
                 name="userName"
-                placeholder="username (required)"
+                placeholder="Username (required)"
               />
               <Input
                 onChange={handleInputChange}
@@ -96,10 +97,11 @@ function Signup() {
               </FormBtn>
               {success && <div> Success! Redirecting to login page.</div>}
             </form>
+            </Card>
           </Col>
         </Row>
       </Container>
-    </Card>
+    
   );
 }
 

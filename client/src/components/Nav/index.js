@@ -4,22 +4,24 @@ import "./style.css";
 function Nav() {
   return (
     <>
-      <nav>
+    <header>
+      <nav className="transparentBG no-shadows">
         <div className="nav-wrapper">
-          <Link to="/">Trip Planner</Link>
+          <Link to="/" className="brand-logo center">Trip Planner</Link>
           <ul id="nav-mobile" className="right hide-on-med-and-down">
             <li>
-              <Link to="/dashboard">Dashboard</Link>
+              <Link to="/dashboard" className="btn black">Dashboard</Link>
             </li>
             <li>
-              <Link to="/signup">Signup</Link>
+              <Link to="/signup" className="btn black"> Signup</Link>
             </li>
             <li>
-              <Link to="/login">Login</Link>
+              <Link to="/login" className="btn black">Login</Link>
             </li>            
           </ul>
         </div>
       </nav>
+    </header>
     </>
   );
 }

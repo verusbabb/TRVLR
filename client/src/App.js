@@ -15,9 +15,9 @@ function App() {
 
   return (
     <Router>
-      <div className="App">
+     
         <Nav />
-        <main>
+        <main className="valign-wrapper">
           <Switch>
             <Route exact path="/">
               <Home />
@@ -41,7 +41,7 @@ function App() {
           </Switch>
         </main>
         <Footer />
-      </div>
+      
     </Router>
   );
 }

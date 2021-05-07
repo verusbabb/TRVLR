@@ -1,10 +1,47 @@
 .App {
   text-align: center;
+  min-width: 100vw;
+}
+
+body {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
+  background: black;
+  background-image: url("./assets/svg2.png");
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
 
 main {
   flex: 1 0 auto;
+  min-width: 100vw;
+}
+
+.transparentBG {
+  background-color: rgba(0,0,0,0) !important;
+}
+
+.no-shadows {
+  box-shadow: none !important;
+}
+
+.card {
+  background: rgba( 255, 255, 255, 0.65 );
+box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+backdrop-filter: blur( 4px );
+-webkit-backdrop-filter: blur( 4px );
+border-radius: 10px;
+border: 1px solid rgba( 255, 255, 255, 0.18 );
+}
+
+.form-control {
+  color: black;
+}
+
+::placeholder {
+  color: grey;
+  opacity: 1;
 }

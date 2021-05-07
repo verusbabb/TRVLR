@@ -3,7 +3,7 @@ import "./style.css";
 function Footer() {
     return (
         <>
-            <footer className="page-footer">
+            <footer className="page-footer transparentBG">
                 <div className="container">
                     <div className="row">
                         <div className="col l8 s12">
@@ -20,8 +20,6 @@ function Footer() {
                             </ul>
                         </div>
                     </div>
-                </div>
-                <div className="footer-copyright">
                 </div>
             </footer>
         </>

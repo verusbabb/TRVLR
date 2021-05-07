@@ -56,10 +56,11 @@ function Login() {
 
   return (
     <>
-      <Card>
+      
         <div className="container login-box">
           <Row>
-            <Col size="l8 offset-l2">
+            <Col size="l8 offset-l2 s12">
+            <Card>
               <form className="valign">
                 <Input
                   onChange={handleInputChange}
@@ -80,10 +81,11 @@ function Login() {
                 {!success && <div> Whoops! Please try again.</div>}
                 {!fail && <div> Success! You are now logged in.</div>}
               </form>
+              </Card>
             </Col>
           </Row>
         </div>
-      </Card>
+      
     </>
   );
 }

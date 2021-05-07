@@ -1,4 +1,11 @@
-nav {
-  margin-bottom: 1%;
-  background-color: #2196f3 ;
+.nav-wrapper {
+  width: 80vw !important;
+  margin: auto;
+  align-self:center;
+}
+
+
+
+.brand-logo {
+  color: white
 }

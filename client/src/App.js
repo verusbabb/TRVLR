@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
+import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
 import Trip from "./pages/Trip";
+import CreateTrip from "./pages/CreateTrip";
 import Schedule from "./pages/Schedule";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Signout from "./pages/Signout";
-import Home from "./pages/Home";
 // import NoMatch from "./pages/NoMatch";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
@@ -29,6 +30,9 @@ function App() {
             </Route>
             <Route exact path="/trips/:id">
               <Trip />
+            </Route>
+            <Route exact path="/createtrip">
+              <CreateTrip />
             </Route>
             <Route exact path="/schedule">
               <Schedule />

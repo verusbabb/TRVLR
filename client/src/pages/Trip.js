@@ -39,7 +39,16 @@ function Trip() {
                 <Row>
                     <Col size="m10">
                         <article>
-                            <h1>Collections</h1>
+                            <h2>Trip Members</h2>
+                        </article>
+                    </Col>
+                </Row>
+            </Card>
+            <Card>
+                <Row>
+                    <Col size="m10">
+                        <article>
+                            <h2>Collections</h2>
                             {/* {trip.collections.length ? (
                             <List>
                                 {trip.collections.map(collection => (

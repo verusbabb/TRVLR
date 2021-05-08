@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
+import AddBtn from "../components/AddBtn";
 import Card from "../components/Card";
 import DeleteBtn from "../components/DeleteBtn";
 import { Container, Row, Col } from "../components/Grid";
@@ -31,14 +32,15 @@ function Dashboard() {
     <>
       <Container>
       <Card>
-        <h3>
+        <h1>
           Welcome {state[0]?.firstName} {state[0]?.lastName}!
-        </h3>
+        </h1>
       </Card>
       <Card>
         <Row>
           <Col size="m12">
             <h2>My Trips</h2>
+            <Link to="/createtrip">+ Add a trip</Link>
             {trips.length ? (
               <List>
                 {trips.map((trip) => (
@@ -58,7 +60,8 @@ function Dashboard() {
       </Card>
       <Card>
         <Row>
-          <h2>Friends</h2>
+          <h2>My Friends</h2>
+          <p>Coming soon!</p>
         </Row>
       </Card>
       </Container>

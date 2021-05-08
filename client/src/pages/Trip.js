@@ -5,7 +5,7 @@ import Card from "../components/Card";
 import { List, ListItem } from "../components/List";
 import DeleteBtn from "../components/DeleteBtn";
 
-// import Jumbotron from "../components/Jumbotron";
+import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
 
 function Trip() {
@@ -26,12 +26,16 @@ function Trip() {
 
             <Card>
                 <Row>
-                    <Col size="m10">
-                        {/* <Jumbotron> */}
+                    <Col size="m12">
+                        <Jumbotron>
                         <h1>
                             {trip.tripName}
                         </h1>
-                        {/* </Jumbotron> */}
+                        </Jumbotron>
+                        {/* <h3>{trip.startDate} - {trip.endDate}</h3>
+                        <p>{trip.description}</p> */}
+                        <h3>May 28th, 2021 - June 1st, 2021</h3>
+                        <p>A brief description of your trip. Something, having a good time, catching up with pals, etc.</p>
                     </Col>
                 </Row>
             </Card>
@@ -72,7 +76,14 @@ function Trip() {
             <Card>
                 <Row>
                     <Col size="m6">
-                        <Link to="/schedule">Trip Schedule</Link>
+                        <Link to={"/trips/" + trip._id + "/schedule"}>Trip Schedule</Link>
+                    </Col>
+                </Row>
+            </Card>
+            <Card>
+                <Row>
+                    <Col size="m6">
+                        <Link to={"/trips/" + trip._id + "/expenses"}>Trip Expenses</Link>
                     </Col>
                 </Row>
             </Card>

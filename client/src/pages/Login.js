@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Input, FormBtn } from "../components/SignUpForm";
+import { Input, FormBtn } from "../components/Form";
 import { Col, Row, Container } from "../components/Grid";
 import Card from "../components/Card";
 import API from "../utils/API";

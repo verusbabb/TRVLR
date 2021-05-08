@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import API from "../utils/API";
 // import { Link } from "react-router-dom";
-import { Input, FormBtn } from "../components/SignUpForm";
+import { Input, FormBtn } from "../components/Form";
 import { Col, Row, Container } from "../components/Grid";
 import Card from "../components/Card";
 import { Link } from "react-router-dom";

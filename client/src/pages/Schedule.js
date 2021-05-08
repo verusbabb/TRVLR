@@ -1,33 +1,43 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Card from "../components/Card";
 import DeleteBtn from "../components/DeleteBtn";
 import { Container, Row, Col } from "../components/Grid";
+import Jumbotron from "../components/Jumbotron"
 import { List, ListItem } from "../components/List";
 import API from "../utils/API";
 import { useUserContext } from "../utils/userContext";
 
 function Schedule() {
 
-    const [sched, setSched] = useState({})
+    const [sched, setSched] = useState({});
+    const [trip, setTrip] = useState({});
+
+    const { id } = useParams()
+    useEffect(() => {
+        API.getTrip(id)
+            .then(res => setTrip(res.data))
+            .catch(err => console.log(err));
+    }, [])
 
     return (
         <Container fluid>
 
             <Card>
                 <Row>
-                    <Col size="m10">
-                        {/* <Jumbotron> */}
+                    <Col size="m12">
+                        <Jumbotron>
                         <h1>
-                            Schedule
+                            {trip.tripName}
                         </h1>
-                        {/* </Jumbotron> */}
+                        </Jumbotron>
                     </Col>
                 </Row>
             </Card>
             <Card>
                 <Row>
-                    <Col size="m10">
+                    <Col size="m12">
+                        <h1>Schedule</h1>
                         {/* map using schedule.days or something similar from a schedule object*/}
                             <h2>Day 1 - Thursday</h2>
                             <List>

@@ -4,6 +4,7 @@ import API from "../utils/API";
 import { Input, FormBtn } from "../components/SignUpForm";
 import { Col, Row, Container } from "../components/Grid";
 import Card from "../components/Card";
+import { Link } from "react-router-dom";
 
 function Signup() {
   const [user, setUser] = useState([]);
@@ -61,6 +62,9 @@ function Signup() {
         <Row>
           <Col size="l8 offset-l2 s12">
           <Card>
+          <Row>
+                <h3>Sign Up for a New Account</h3>
+              </Row>
             <form>
               <Input
                 onChange={handleInputChange}
@@ -95,6 +99,7 @@ function Signup() {
               >
                 Submit User
               </FormBtn>
+              <Link to="/login">Already have an account? Log in here</Link>
               {success && <div> Success! Redirecting to login page.</div>}
             </form>
             </Card>

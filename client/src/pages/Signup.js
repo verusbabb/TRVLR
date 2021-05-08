@@ -84,6 +84,7 @@ function Signup() {
               <Input
                 onChange={handleInputChange}
                 name="password"
+                type="password"
                 placeholder="Password (required)"
               />
               <FormBtn

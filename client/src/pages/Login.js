@@ -68,6 +68,7 @@ function Login() {
                 <Input
                   onChange={handleInputChange}
                   name="password"
+                  type="password"
                   placeholder="Password"
                 />
                 <FormBtn

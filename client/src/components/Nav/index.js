@@ -18,7 +18,7 @@ function Nav() {
             <Link to="/" className="brand-logo center">Trip Planner</Link>
             <ul id="nav-mobile" className="right hide-on-med-and-down">
               {navLinks.map(link => {
-                if (state && link.logged === "in")
+                if (state.length > 0 && link.logged === "in")
                   return (
                     <>
                       <li>
@@ -26,7 +26,7 @@ function Nav() {
                       </li>
                     </>
                   )
-                else if (!state && link.logged === "out")
+                else if (state.length === 0 && link.logged === "out")
                   return (
                     <>
                       <li>

@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
-// import { useUserContext } from "../../utils/userContext";
+import { useUserContext } from "../utils/userContext";
 import { Col, Row, Container } from "../components/Grid";
 import Card from "../components/Card";
 
 function Signout() {
 
-    // const [state] = useUserContext();
+    const [state] = useUserContext();
     // const [logout, setLogout] = useState([]);
     const [success, setSuccess] = useState(true);
 
     const validated = () => {
+        localStorage.clear();
         // setSuccess(true);
         setTimeout(function () {
           window.location.href = "/";
@@ -26,7 +27,7 @@ function Signout() {
             <Container>
                 <Card>
                     <p>
-                    {success && <div> Success! Redirecting to Home</div>}
+                    {success && <div> You have been signed out. Redirecting to Home...</div>}
                     </p>
                 </Card>
             </Container>

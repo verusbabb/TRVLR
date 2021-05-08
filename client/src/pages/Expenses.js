@@ -10,20 +10,32 @@ import { useUserContext } from "../utils/userContext";
 
 function Expenses() {
 
-    const [expense, setExpense] = useState({});
+    // const [expense, setExpense] = useState({});
     const [trip, setTrip] = useState({});
 
     const { id } = useParams()
-    useEffect(() => {
-        API.getTrip(id)
-            .then(res => setTrip(res.data))
-            .catch(err => console.log(err));
-    }, [])
+    
+    // useEffect(() => {
+    //     API.getTrip(id)
+    //         .then(res => setTrip(res.data))
+    //         .catch(err => console.log(err));
+    // }, [])
 
+    useEffect(() => {
+        loadTrip();
+    }, []);
+
+    function loadTrip() {
+        API.getTrip(id)
+            .then((res) => setTrip(res.data))
+            .catch((err) => console.log(err));
+    }
+
+    // console.log(trip)
+    // console.log(trip.expenses[0].description)
     // console.log(trip.expenses.length)
 
-
-    return (
+     return (
         <>
             <Container fluid>
 
@@ -44,22 +56,16 @@ function Expenses() {
                             <h1>Expenses</h1>
                             {/* map using Expenses.members or something similar from a Expenses object*/}
                             {/* {trip.expenses.length ? (
-
                                 <List>
                                     {trip.expenses.map((expense) => (
                                         <ListItem>
-                                            <p>Expense 1</p>
+                                            <p>{expense.description} - {expense.submitter}</p>
                                         </ListItem>
                                     ))}
                                 </List>
                             ) : (
                                 <h3>No Results to Display</h3>
-
                             )} */}
-                            {/* <ListItem> */}
-
-                                {/* {trip.expenses[0].submitter} - {trip.expenses[0].name} - {trip.expenses[0].cost} */}
-                            {/* </ListItem> */}
                         </Col>
                     </Row>
                 </Card>

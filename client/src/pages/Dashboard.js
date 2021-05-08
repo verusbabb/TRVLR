@@ -53,6 +53,7 @@ function Dashboard() {
                                                 <strong>{trip.tripName}</strong>
                                             </Link>
                                             <DeleteBtn onClick={() => removeTrip(trip._id)} />
+                                            <p>Dates: {trip.startDate} to {trip.endDate}</p>
                                         </ListItem>
                                     ))}
                                 </List>

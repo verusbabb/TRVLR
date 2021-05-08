@@ -29,7 +29,7 @@ function Dashboard() {
   console.log(state);
   return (
     <>
-      {/* <Container> */}
+      <Container>
       <Card>
         <h3>
           Welcome {state[0]?.firstName} {state[0]?.lastName}!
@@ -61,7 +61,7 @@ function Dashboard() {
           <h2>Friends</h2>
         </Row>
       </Card>
-      {/* </Container> */}
+      </Container>
     </>
   );
 }

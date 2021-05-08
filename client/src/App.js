@@ -3,6 +3,7 @@ import Dashboard from "./pages/Dashboard";
 import Trip from "./pages/Trip";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
+import Signout from "./pages/Signout";
 import Home from "./pages/Home";
 // import NoMatch from "./pages/NoMatch";
 import Nav from "./components/Nav";
@@ -30,10 +31,12 @@ function App() {
             </Route>
             <Route exact path="/signup">
               <Signup />
-            </Route>
-
+            </Route>            
             <Route exact path="/login">
               <Login />
+            </Route>
+            <Route exact path="/signout">
+              <Signout />
             </Route>
             {/* <Route>
             <NoMatch />

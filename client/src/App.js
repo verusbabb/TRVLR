@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import Dashboard from "./pages/Dashboard";
 import Trip from "./pages/Trip";
+import Schedule from "./pages/Schedule";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Signout from "./pages/Signout";
@@ -28,6 +29,9 @@ function App() {
             </Route>
             <Route exact path="/trips/:id">
               <Trip />
+            </Route>
+            <Route exact path="/schedule">
+              <Schedule />
             </Route>
             <Route exact path="/signup">
               <Signup />

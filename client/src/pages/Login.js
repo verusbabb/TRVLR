@@ -8,17 +8,10 @@ import { useHistory } from "react-router-dom";
 
 function Login() {
   const [formObject, setFormObject] = useState({});
-  const [user, dispatch] = useUserContext(() => {
-    const localData = localStorage.getItem("user");
-    return localData ? JSON.parse(localData) : [];
-  });
   const [success, setSuccess] = useState(true);
   const [fail, setFail] = useState(true);
   const history = useHistory();
-
-  useEffect(() => {
-    localStorage.setItem("user", JSON.stringify(user));
-  }, [user]);
+  const [state, dispatch] = useUserContext();
 
   function handleInputChange(event) {
     const { name, value } = event.target;
@@ -34,7 +27,7 @@ function Login() {
         userName: formObject.userName,
         password: formObject.password,
       })
-        .then((res) => {
+        .then(async (res) => {
           setSuccess(true);
           setFail(false);
 
@@ -44,6 +37,8 @@ function Login() {
             firstName: res.data.name.firstName,
             lastName: res.data.name.lastName,
           });
+          console.log(state);
+
           history.push("/dashboard");
         })
         .catch((err) => {
@@ -56,10 +51,11 @@ function Login() {
 
   return (
     <>
-      <Card>
+      
         <div className="container login-box">
           <Row>
-            <Col size="l8 offset-l2">
+            <Col size="l8 offset-l2 s12">
+            <Card>
               <form className="valign">
                 <Input
                   onChange={handleInputChange}
@@ -80,10 +76,11 @@ function Login() {
                 {!success && <div> Whoops! Please try again.</div>}
                 {!fail && <div> Success! You are now logged in.</div>}
               </form>
+              </Card>
             </Col>
           </Row>
         </div>
-      </Card>
+      
     </>
   );
 }

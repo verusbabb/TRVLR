@@ -1,25 +1,44 @@
 import { Link } from "react-router-dom";
 import "./style.css";
+import { useUserContext } from "../../utils/userContext";
+import React, { useState, useEffect, useContext } from "react";
+import navLinks from "../../utils/navlinks.json";
 
 function Nav() {
+
+  const [state] = useUserContext();
+
+  console.log(state);
+
   return (
     <>
-      <nav>
-        <div className="nav-wrapper">
-          <Link to="/">Trip Planner</Link>
-          <ul id="nav-mobile" className="right hide-on-med-and-down">
-            <li>
-              <Link to="/dashboard">Dashboard</Link>
-            </li>
-            <li>
-              <Link to="/signup">Signup</Link>
-            </li>
-            <li>
-              <Link to="/login">Login</Link>
-            </li>            
-          </ul>
-        </div>
-      </nav>
+      <header>
+        <nav className="transparentBG no-shadows">
+          <div className="nav-wrapper">
+            <Link to="/" className="brand-logo center">Trip Planner</Link>
+            <ul id="nav-mobile" className="right hide-on-med-and-down">
+              {navLinks.map(link => {
+                if (state.length > 0 && link.logged === "in")
+                  return (
+                    <>
+                      <li>
+                        <Link to={link.linkTo} className="btn black">{link.linkName}</Link>
+                      </li>
+                    </>
+                  )
+                else if (state.length === 0 && link.logged === "out")
+                  return (
+                    <>
+                      <li>
+                        <Link to={link.linkTo} className="btn black">{link.linkName}</Link>
+                      </li>
+                    </>
+                  )
+              })}
+            </ul>
+          </div>
+        </nav>
+      </header>
     </>
   );
 }

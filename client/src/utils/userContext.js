@@ -12,6 +12,18 @@ const { Provider } = UserContext;
 function reducer(state, action) {
   switch (action.type) {
     case "add":
+      localStorage.setItem(
+        "user",
+        JSON.stringify([
+          // ...state,
+          {
+            id: state.length * Math.random(),
+            userName: action.userName,
+            firstName: action.firstName,
+            lastName: action.lastName,
+          },
+        ])
+      );
       return [
         ...state,
         {
@@ -25,13 +37,18 @@ function reducer(state, action) {
       return state.filter((_, index) => {
         return index !== action.index;
       });
+    case "update":
+      return [...state];
     default:
       return state;
   }
 }
+const user = JSON.parse(localStorage.getItem("user"))
+  ? JSON.parse(localStorage.getItem("user"))
+  : [];
 
 function UserProvider({ value = [], ...props }) {
-  const [state, dispatch] = useReducer(reducer, []);
+  const [state, dispatch] = useReducer(reducer, user);
 
   return <Provider value={[state, dispatch]} {...props} />;
 }

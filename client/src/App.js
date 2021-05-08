@@ -1,20 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
+import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
 import Trip from "./pages/Trip";
+import CreateTrip from "./pages/CreateTrip";
+import Schedule from "./pages/Schedule";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
-import Home from "./pages/Home";
+import Signout from "./pages/Signout";
 // import NoMatch from "./pages/NoMatch";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { useUserContext } from "./utils/userContext";
 
 function App() {
+  const [state, dispatch] = useUserContext();
+
   return (
     <Router>
-      <div className="App">
+     
         <Nav />
-        <main>
+        <main className="valign-wrapper">
           <Switch>
             <Route exact path="/">
               <Home />
@@ -25,12 +31,20 @@ function App() {
             <Route exact path="/trips/:id">
               <Trip />
             </Route>
+            <Route exact path="/createtrip">
+              <CreateTrip />
+            </Route>
+            <Route exact path="/schedule">
+              <Schedule />
+            </Route>
             <Route exact path="/signup">
               <Signup />
-            </Route>
-
+            </Route>            
             <Route exact path="/login">
               <Login />
+            </Route>
+            <Route exact path="/signout">
+              <Signout />
             </Route>
             {/* <Route>
             <NoMatch />
@@ -38,7 +52,7 @@ function App() {
           </Switch>
         </main>
         <Footer />
-      </div>
+      
     </Router>
   );
 }

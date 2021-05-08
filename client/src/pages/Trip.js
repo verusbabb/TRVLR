@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Col, Row, Container } from "../components/Grid";
+import Card from "../components/Card";
 import { List, ListItem } from "../components/List";
 import DeleteBtn from "../components/DeleteBtn";
 
@@ -22,20 +23,33 @@ function Trip() {
 
     return (
         <Container fluid>
-            <Row>
-                <Col size="m10">
-                    {/* <Jumbotron> */}
-                    <h1>
-                        {trip.tripName}
-                    </h1>
-                    {/* </Jumbotron> */}
-                </Col>
-            </Row>
-            <Row>
-                <Col size="m10">
-                    <article>
-                        <h1>Collections</h1>
-                        {/* {trip.collections.length ? (
+
+            <Card>
+                <Row>
+                    <Col size="m10">
+                        {/* <Jumbotron> */}
+                        <h1>
+                            {trip.tripName}
+                        </h1>
+                        {/* </Jumbotron> */}
+                    </Col>
+                </Row>
+            </Card>
+            <Card>
+                <Row>
+                    <Col size="m10">
+                        <article>
+                            <h2>Trip Members</h2>
+                        </article>
+                    </Col>
+                </Row>
+            </Card>
+            <Card>
+                <Row>
+                    <Col size="m10">
+                        <article>
+                            <h2>Collections</h2>
+                            {/* {trip.collections.length ? (
                             <List>
                                 {trip.collections.map(collection => (
                                     <ListItem key={collection.name}>
@@ -51,14 +65,24 @@ function Trip() {
                         ) : (
                             <h3>No Results to Display</h3>
                         )} */}
-                    </article>
-                </Col>
-            </Row>
-            <Row>
-                <Col size="m2">
-                    <Link to="/dashboard">← Back to Dashboard</Link>
-                </Col>
-            </Row>
+                        </article>
+                    </Col>
+                </Row>
+            </Card>
+            <Card>
+                <Row>
+                    <Col size="m6">
+                        <Link to="/schedule">Trip Schedule</Link>
+                    </Col>
+                </Row>
+            </Card>
+            <Card>
+                <Row>
+                    <Col size="m6">
+                        <Link to="/dashboard">← Back to Dashboard</Link>
+                    </Col>
+                </Row>
+            </Card>
         </Container>
     );
 }

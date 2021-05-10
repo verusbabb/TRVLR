@@ -43,6 +43,7 @@ export default {
   },
   // Saves a trip to the database
   saveTrip: function (tripData) {
+    console.log(tripData);
     return axios.post("/api/trips", tripData);
   },
 };

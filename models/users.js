@@ -3,6 +3,8 @@ const mongoose = require("mongoose"),
   bcrypt = require("bcrypt"),
   SALT_WORK_FACTOR = 10;
 
+const Trip = require("./trips.js");
+
 const UserSchema = new Schema({
   created: {
     type: Date,
@@ -38,7 +40,7 @@ const UserSchema = new Schema({
   memberOf: [
     {
       type: Schema.Types.ObjectId,
-      ref: "Trip"
+      ref: "Trip",
     },
   ],
 });

@@ -23,7 +23,7 @@ function CreateTrip() {
     function handleFormSubmit(event) {
         event.preventDefault();
         if (formObject.tripName) {
-            API.createTrip({
+            API.saveTrip({
                 tripName: formObject.tripName,
                 startDate: formObject.startDate,
                 endDate: formObject.endDate,

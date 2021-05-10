@@ -1,5 +1,6 @@
 const express = require("express");
-
+const session = require('express-session');
+const passport = require('passport');
 const mongoose = require("mongoose");
 const routes = require("./routes");
 const app = express();
@@ -14,6 +15,17 @@ if (process.env.NODE_ENV === "production") {
 }
 // Add routes, both API and view
 app.use(routes);
+
+// Express Session
+app.use(session({
+  secret: 'secret',
+  saveUninitialized: true,
+  resave: true
+}));
+
+// Passport init
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Connect to the Mongo DB
 mongoose.connect(

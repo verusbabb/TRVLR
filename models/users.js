@@ -38,7 +38,7 @@ const UserSchema = new Schema({
   memberOf: [
     {
       type: Schema.Types.ObjectId,
-      ref: "Trip",
+      ref: "Trip"
     },
   ],
 });

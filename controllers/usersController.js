@@ -20,7 +20,10 @@ module.exports = {
             res.status(401).json();
           }
         });
-        console.log(dbModel);
+
+        req.user = dbModel
+        console.log(dbModel, "current user");
+
       })
 
       .catch((err) => res.status(422).json(err));

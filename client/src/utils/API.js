@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export default {
+const API = {
   // Gets all users
   getUsers: function () {
     return axios.get("/api/users");
@@ -8,6 +8,9 @@ export default {
   // Gets the user with the given id
   getUser: function (id) {
     return axios.get("/api/users/" + id);
+  },
+  getUserByUsername: function (username) {
+    return axios.get("/api/username/" + username);
   },
   // Deletes the user with the given id
   deleteUser: function (id) {
@@ -46,3 +49,5 @@ export default {
     return axios.post("/api/trips", tripData);
   },
 };
+
+export default API;

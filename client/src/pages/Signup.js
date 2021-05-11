@@ -56,9 +56,10 @@ function Signup() {
         .then((res) => {
           dispatch({
             type: "add",
+            id: res.data._id,
             userName: formObject.userName,
             firstName: formObject.firstName,
-            lastName: formObject.lastName
+            lastName: formObject.lastName,
           });
 
           validated();
@@ -68,14 +69,13 @@ function Signup() {
   }
 
   return (
-    
-      <Container>
-        <Row>
-          <Col size="l8 offset-l2 s12">
+    <Container>
+      <Row>
+        <Col size="l8 offset-l2 s12">
           <Card>
-          <Row>
-                <h3>Sign Up for a New Account</h3>
-              </Row>
+            <Row>
+              <h3>Sign Up for a New Account</h3>
+            </Row>
             <form>
               <Input
                 onChange={handleInputChange}
@@ -114,11 +114,10 @@ function Signup() {
               <Link to="/login">Already have an account? Log in here</Link>
               {success && <div> Success! Redirecting to Dashboard.</div>}
             </form>
-            </Card>
-          </Col>
-        </Row>
-      </Container>
-    
+          </Card>
+        </Col>
+      </Row>
+    </Container>
   );
 }
 

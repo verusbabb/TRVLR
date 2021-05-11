@@ -24,6 +24,7 @@ function CreateTrip() {
     event.preventDefault();
     if (formObject.tripName) {
       API.saveTrip({
+        tripOwner: state[0].id,
         tripName: formObject.tripName,
         startDate: formObject.startDate,
         endDate: formObject.endDate,

@@ -17,7 +17,7 @@ function reducer(state, action) {
         JSON.stringify([
           // ...state,
           {
-            id: state.length * Math.random(),
+            id: action.id,
             userName: action.userName,
             firstName: action.firstName,
             lastName: action.lastName,

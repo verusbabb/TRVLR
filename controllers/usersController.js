@@ -1,3 +1,4 @@
+const passport = require("passport");
 const db = require("../models");
 
 // Defining methods for the UsersController
@@ -11,29 +12,44 @@ module.exports = {
   findOneUser: function (req, res) {
     db.User.findOne({ userName: req.query.userName })
       .then((dbModel) => {
-        dbModel.comparePassword(req.query.password, function (err, isMatch) {
-          console.log(err, isMatch);
-          if (err) res.status(422).json(err);
-          if (isMatch) {
-            res.json(dbModel);
-          } else {
-            res.status(401).json();
-          }
-        });
-
-        req.user = dbModel
-        console.log(dbModel, "current user");
-
+        // dbModel.comparePassword(req.query.password, function (err, isMatch) {
+        //   console.log(err, isMatch);
+        //   if (err) res.status(422).json(err);
+        //   if (isMatch) {
+        //     res.json(dbModel);
+        //   } else {
+        //     res.status(401).json();
+        //   }
       })
-
       .catch((err) => res.status(422).json(err));
+    // req.user = dbModel
+    // console.log(dbModel, "current user");
   },
+
+  // .catch((err) => res.status(422).json(err));
 
   findUserById: function (req, res) {
     db.User.findById(req.params.id)
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
+
+  login: function (req, res) {
+    passport
+      .authenticate("local", function (err, user, info) {
+        if (err) {
+          return next(err);
+        }
+        if (!user) {
+          return res.redirect("/login");
+        }
+        db.User.findById(req.params.id);
+      })
+
+      .then((dbModel) => res.json(dbModel))
+      .catch((err) => res.status(422).json(err));
+  },
+
   createUser: function (req, res) {
     console.log(req.body);
     db.User.create(req.body)

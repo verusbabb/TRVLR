@@ -23,7 +23,7 @@ passport.use(
           });
         }
         // If there is a user with the given username, but the password the user gives us is incorrect
-        else if (!dbUser.validPassword(password)) {
+        else if (!dbUser.comparePassword(password)) {
           return done(null, false, {
             message: "Incorrect password.",
           });

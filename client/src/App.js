@@ -4,6 +4,7 @@ import Dashboard from "./pages/Dashboard";
 import Trip from "./pages/Trip";
 import CreateTrip from "./pages/CreateTrip";
 import Schedule from "./pages/Schedule";
+import Expenses from "./pages/Expenses";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Signout from "./pages/Signout";
@@ -34,8 +35,11 @@ function App() {
             <Route exact path="/createtrip">
               <CreateTrip />
             </Route>
-            <Route exact path="/schedule">
+            <Route exact path="/trips/:id/schedule">
               <Schedule />
+            </Route>
+            <Route exact path="/trips/:id/expenses">
+              <Expenses />
             </Route>
             <Route exact path="/signup">
               <Signup />

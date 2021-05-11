@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Input, FormBtn } from "../components/SignUpForm";
+import { Input, FormBtn } from "../components/Form";
 import { Col, Row, Container } from "../components/Grid";
 import Card from "../components/Card";
 import API from "../utils/API";
 import { useUserContext } from "../utils/userContext";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 
 function Login() {
   const [formObject, setFormObject] = useState({});
@@ -51,11 +51,14 @@ function Login() {
 
   return (
     <>
-      
-        <div className="container login-box">
-          <Row>
-            <Col size="l8 offset-l2 s12">
+
+      <div className="container login-box">
+        <Row>
+          <Col size="l8 offset-l2 s12">
             <Card>
+              <Row>
+                <h3>Log Into an Existing Account</h3>
+              </Row>
               <form className="valign">
                 <Input
                   onChange={handleInputChange}
@@ -65,6 +68,7 @@ function Login() {
                 <Input
                   onChange={handleInputChange}
                   name="password"
+                  type="password"
                   placeholder="Password"
                 />
                 <FormBtn
@@ -73,14 +77,15 @@ function Login() {
                 >
                   Log in
                 </FormBtn>
+                <Link to="/signup">Create a new account</Link>
                 {!success && <div> Whoops! Please try again.</div>}
                 {!fail && <div> Success! You are now logged in.</div>}
               </form>
-              </Card>
-            </Col>
-          </Row>
-        </div>
-      
+            </Card>
+          </Col>
+        </Row>
+      </div>
+
     </>
   );
 }

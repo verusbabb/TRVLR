@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 // import AddBtn from "../components/AddBtn";
 import Card from "../components/Card";
 import DeleteBtn from "../components/DeleteBtn";
+import Jumbotron from "../components/Jumbotron";
 import { Container, Row, Col } from "../components/Grid";
 import { List, ListItem } from "../components/List";
 import API from "../utils/API";
@@ -22,7 +23,10 @@ function Dashboard() {
 
   function loadTrips() {
     API.getTrips()
-      .then((res) => setTrips(res.data))
+      .then((res) => {
+        setTrips(res.data);
+        console.log(res.data);
+      })
       .catch((err) => console.log(err));
   }
 
@@ -51,55 +55,60 @@ function Dashboard() {
   return (
     <>
       <Container>
-      <Card>
-        <h1>
-          Welcome {state[0]?.firstName} {state[0]?.lastName}!
-        </h1>
-      </Card>
-      <Card>
-        <Row>
-          <Col size="m12">
-            <h2>My Trips</h2>
-            <Link to="/createtrip">+ Add a trip</Link>
-            {trips.length ? (
-              <List>
-                {trips.map((trip) => (
-                  <ListItem key={trip._id}>
-                    <Link to={"/trips/" + trip._id}>
-                      <strong>{trip.tripName}</strong>
-                    </Link>
-                    <DeleteBtn onClick={() => removeTrip(trip._id)} />
-                  </ListItem>
-                ))}
-              </List>
-            ) : (
-              <h3>No Results to Display</h3>
-            )}
-          </Col>
-        </Row>
-      </Card>
-      <Card>
-        <Row>
-          <Col size="m12">
-            <h2>My Friends</h2>
-            <SearchBar onChange={handleInputChange} />
-            <SubmitButton onClick={handleSubmit}/>
-            {foundFriends.length ? (
-              <List>
-                {foundFriends.map((friend, index) => (
-                  <ListItem key={index}>
-                    {friend.userName}
-                  </ListItem>
-                ))}
-              </List>
-            ) : (
-              ""
-            )}
-          </Col>
-          
-          {/* <p>Coming soon!</p> */}
-        </Row>
-      </Card>
+        <Card>
+          <Jumbotron>
+            <h1>
+              Welcome {state[0]?.firstName} {state[0]?.lastName}!
+          </h1>
+          </Jumbotron>
+        </Card>
+        <Card>
+          <Row>
+            <Col size="m12">
+              <h2>My Trips</h2>
+              <Link to="/createtrip">+ Add a trip</Link>
+              {trips.length ? (
+                <List>
+                  {trips.map((trip) => (
+                    <ListItem key={trip._id}>
+                      <Link to={"/trips/" + trip._id}>
+                        <strong>{trip.tripName}</strong>
+                      </Link>
+                      <DeleteBtn onClick={() => removeTrip(trip._id)} />
+                      <p>
+                        Dates: {trip.startDate} to {trip.endDate}
+                      </p>
+                    </ListItem>
+                  ))}
+                </List>
+              ) : (
+                <h3>No Results to Display</h3>
+              )}
+            </Col>
+          </Row>
+        </Card>
+        <Card>
+          <Row>
+            <Col size="m12">
+              <h2>My Friends</h2>
+              <SearchBar onChange={handleInputChange} />
+              <SubmitButton onClick={handleSubmit} />
+              {foundFriends.length ? (
+                <List>
+                  {foundFriends.map((friend, index) => (
+                    <ListItem key={index}>
+                      {friend.userName}
+                    </ListItem>
+                  ))}
+                </List>
+              ) : (
+                ""
+              )}
+            </Col>
+
+            {/* <p>Coming soon!</p> */}
+          </Row>
+        </Card>
       </Container>
     </>
   );

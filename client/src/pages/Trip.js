@@ -32,10 +32,8 @@ function Trip() {
                             {trip.tripName}
                         </h1>
                         </Jumbotron>
-                        {/* <h3>{trip.startDate} - {trip.endDate}</h3>
-                        <p>{trip.description}</p> */}
-                        <h3>May 28th, 2021 - June 1st, 2021</h3>
-                        <p>A brief description of your trip. Something, having a good time, catching up with pals, etc.</p>
+                        <h3>{trip.startDate} to {trip.endDate}</h3>
+                        <p>{trip.description}</p>
                     </Col>
                 </Row>
             </Card>

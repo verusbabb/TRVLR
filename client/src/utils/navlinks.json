@@ -1,0 +1,22 @@
+[
+    {
+        "linkName": "Sign Up",
+        "linkTo": "/signup",
+        "logged": "out"
+    },    
+    {
+        "linkName": "Log In",
+        "linkTo": "/login",
+        "logged": "out"
+    },
+    {
+        "linkName": "Dashboard",
+        "linkTo": "/dashboard",
+        "logged": "in"
+    },
+    {
+        "linkName": "Sign Out",
+        "linkTo": "/signout",
+        "logged": "in"
+    }
+]

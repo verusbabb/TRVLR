@@ -1,24 +1,63 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+import Home from "./pages/Home";
+import Dashboard from "./pages/Dashboard";
+import Trip from "./pages/Trip";
+import CreateTrip from "./pages/CreateTrip";
+import Schedule from "./pages/Schedule";
+import Expenses from "./pages/Expenses";
+import Signup from "./pages/Signup";
+import Login from "./pages/Login";
+import Signout from "./pages/Signout";
+// import NoMatch from "./pages/NoMatch";
+import Nav from "./components/Nav";
+import Footer from "./components/Footer";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { useUserContext } from "./utils/userContext";
 
 function App() {
+  const [state, dispatch] = useUserContext();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+     
+        <Nav />
+        <main className="valign-wrapper">
+          <Switch>
+            <Route exact path="/">
+              <Home />
+            </Route>
+            <Route exact path="/dashboard">
+              <Dashboard />
+            </Route>
+            <Route exact path="/trips/:id">
+              <Trip />
+            </Route>
+            <Route exact path="/createtrip">
+              <CreateTrip />
+            </Route>
+            <Route exact path="/trips/:id/schedule">
+              <Schedule />
+            </Route>
+            <Route exact path="/trips/:id/expenses">
+              <Expenses />
+            </Route>
+            <Route exact path="/signup">
+              <Signup />
+            </Route>            
+            <Route exact path="/login">
+              <Login />
+            </Route>
+            <Route exact path="/signout">
+              <Signout />
+            </Route>
+            {/* <Route>
+            <NoMatch />
+          </Route> */}
+          </Switch>
+        </main>
+        <Footer />
+      
+    </Router>
   );
 }
 

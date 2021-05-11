@@ -25,10 +25,12 @@ Link to Jira Roadmap
 
 https://project-3-trip-planner.atlassian.net/jira/software/projects/TP/boards/1/roadmap
 
+![Jira Board](client/public/assets/images/jira-board.png)
+
 ## Development Team Members
-* Steve Babb - MongoDB Database
-* Kolton Decker - Frontend Javascript & UI/UX
-* Carly Gouge - React Routes
+* Steve Babb - MongoDB Database, routes
+* Kolton Decker - React Routes, server
+* Carly Gouge - Frontend Javascript & UI/UX
 * Christina Moss - Components & UI/UX
 
 

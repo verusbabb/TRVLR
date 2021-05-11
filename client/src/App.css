@@ -1,38 +1,47 @@
 .App {
   text-align: center;
+  min-width: 100vw;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+body {
   display: flex;
+  min-height: 100vh;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  background: black;
+  background-image: url("./assets/svg2.png");
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
 
-.App-link {
-  color: #61dafb;
+main {
+  flex: 1 0 auto;
+  min-width: 100vw;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.transparentBG {
+  background-color: rgba(0,0,0,0) !important;
+}
+
+.no-shadows {
+  box-shadow: none !important;
+}
+
+.card {
+  background: rgba( 255, 255, 255, 0.65 );
+box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+backdrop-filter: blur( 4px );
+-webkit-backdrop-filter: blur( 4px );
+border-radius: 10px;
+border: 1px solid rgba( 255, 255, 255, 0.18 );
+}
+
+.form-control {
+  color: black;
+}
+
+::placeholder {
+  color: grey;
+  opacity: 1;
 }

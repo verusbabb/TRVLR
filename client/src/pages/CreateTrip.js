@@ -34,7 +34,7 @@ function CreateTrip() {
         .catch((err) => console.log(err));
     }
   }
-
+  console.log(state);
   return (
     <>
       <Container>

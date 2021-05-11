@@ -30,7 +30,7 @@ function Login() {
         .then(async (res) => {
           setSuccess(true);
           setFail(false);
-
+          console.log(res);
           dispatch({
             type: "add",
             id: res.data._id,

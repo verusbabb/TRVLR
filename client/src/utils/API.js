@@ -20,7 +20,7 @@ const API = {
   // UPDATED saveUser route that now includes authentication
   saveUser: function (userData) {
     console.log(userData);
-    return axios.post("/api/users", userData);
+    return axios.post("/api/users/signup", userData);
     // return axios.post("/api/login", passport.authenticate("local"), userData);
   },
 
@@ -32,11 +32,9 @@ const API = {
 
   findOneUser: function (userData) {
     console.log(userData);
-    return axios.get("/api/users", {
-      params: {
-        userName: userData.userName,
-        password: userData.password,
-      },
+    return axios.post("/api/users/login", {
+      username: userData.userName,
+      password: userData.password,
     });
   },
 

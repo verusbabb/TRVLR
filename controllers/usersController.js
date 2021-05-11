@@ -9,24 +9,31 @@ module.exports = {
       .catch((err) => res.status(422).json(err));
   },
   findOneUser: function (req, res) {
-    db.User.findOne({ userName: req.query.userName })
-      .then((dbModel) => {
-        dbModel.comparePassword(req.query.password, function (err, isMatch) {
-          console.log(err, isMatch);
-          if (err) res.status(422).json(err);
-          if (isMatch) {
-            res.json(dbModel);
-          } else {
-            res.status(401).json();
-          }
-        });
-
-        req.user = dbModel;
-        console.log(dbModel, "current user");
-      })
-
-      .catch((err) => res.status(422).json(err));
+    console.log(req.user);
+    if (req.user) {
+      res.json(req.user);
+    } else {
+      res.status(422).json(err);
+    }
   },
+
+  // db.User.findOne({ userName: req.query.userName })
+  //   .then((dbModel) => {
+  //     dbModel.comparePassword(req.query.password, function (err, isMatch) {
+  //       console.log(err, isMatch);
+  //       if (err) res.status(422).json(err);
+  //       if (isMatch) {
+  //         res.json(dbModel);
+  //       } else {
+  //         res.status(401).json();
+  //       }
+  //     });
+
+  //     req.user = dbModel;
+  //     console.log(dbModel, "current user");
+  //   })
+
+  //   .catch((err) => res.status(422).json(err));
 
   findUserById: function (req, res) {
     db.User.findById(req.params.id)
@@ -36,7 +43,9 @@ module.exports = {
   createUser: function (req, res) {
     console.log(req.body);
     db.User.create(req.body)
-      .then((dbModel) => res.json(dbModel))
+      .then((dbModel) => {
+        res.json(dbModel);
+      })
       .catch((err) => res.status(422).json(err));
   },
   updateUser: function (req, res) {
@@ -58,11 +67,11 @@ module.exports = {
   },
 
   addTrip: function (req, res) {
-    console.log(req.body);
+    console.log(req.body, req.user);
     db.Trip.create(req.body)
       .then(function (dbTrip) {
         return db.User.findOneAndUpdate(
-          { _id: req.body.id },
+          { _id: req.user._id },
           {
             $set: { memberOf: dbTrip.id },
           },

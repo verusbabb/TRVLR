@@ -22,6 +22,7 @@ function CreateTrip() {
 
   function handleFormSubmit(event) {
     event.preventDefault();
+    console.log(state[0]);
     if (formObject.tripName) {
       API.saveTrip({
         id: state[0].id,

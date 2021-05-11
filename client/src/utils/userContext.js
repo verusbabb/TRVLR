@@ -27,7 +27,7 @@ function reducer(state, action) {
       return [
         ...state,
         {
-          id: state.length * Math.random(),
+          id: action.id,
           userName: action.userName,
           firstName: action.firstName,
           lastName: action.lastName,

@@ -24,7 +24,7 @@ function CreateTrip() {
     event.preventDefault();
     if (formObject.tripName) {
       API.saveTrip({
-        tripOwner: state[0].id,
+        id: state[0].id,
         tripName: formObject.tripName,
         startDate: formObject.startDate,
         endDate: formObject.endDate,
@@ -34,7 +34,6 @@ function CreateTrip() {
         .catch((err) => console.log(err));
     }
   }
-  console.log(state);
   return (
     <>
       <Container>

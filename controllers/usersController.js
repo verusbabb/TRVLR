@@ -21,9 +21,8 @@ module.exports = {
           }
         });
 
-        req.user = dbModel
+        req.user = dbModel;
         console.log(dbModel, "current user");
-
       })
 
       .catch((err) => res.status(422).json(err));
@@ -34,9 +33,7 @@ module.exports = {
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
-  createUser: 
-  
-  function (req, res) {
+  createUser: function (req, res) {
     console.log(req.body);
     db.User.create(req.body)
       .then((dbModel) => res.json(dbModel))
@@ -55,8 +52,28 @@ module.exports = {
   },
 
   findUserByUsername: function (req, res) {
-    db.User.findOne({ userName: req.params.username})
+    db.User.findOne({ userName: req.params.username })
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
-  }
+  },
+
+  addTrip: function (req, res) {
+    console.log(req.body);
+    db.Trip.create(req.body)
+      .then(function (dbTrip) {
+        return db.User.findOneAndUpdate(
+          { _id: req.body.id },
+          {
+            $set: { memberOf: dbTrip.id },
+          },
+          { new: true, upsert: true }
+        );
+      })
+      .then(function (dbUser) {
+        res.json(dbUser);
+      })
+      .catch(function (err) {
+        res.json(err);
+      });
+  },
 };

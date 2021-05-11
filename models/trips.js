@@ -8,6 +8,10 @@ const TripSchema = new Schema({
     default: Date.now,
   },
 
+  tripId: {
+    type: String,
+  },
+
   tripName: {
     type: String,
     trim: true,

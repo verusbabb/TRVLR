@@ -11,6 +11,7 @@ router
 router
   .route("/:id")
   .get(usersController.findUserById)
+  .post(usersController.addTrip)
   .put(usersController.updateUser)
   .delete(usersController.removeUser);
 

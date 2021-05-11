@@ -1,4 +1,5 @@
 import axios from "axios";
+// const passport = require("../config/passport");
 
 const API = {
   // Gets all users
@@ -16,11 +17,18 @@ const API = {
   deleteUser: function (id) {
     return axios.delete("/api/users/" + id);
   },
-  // Saves a user to the database
+  // UPDATED saveUser route that now includes authentication
   saveUser: function (userData) {
     console.log(userData);
     return axios.post("/api/users", userData);
+    // return axios.post("/api/login", passport.authenticate("local"), userData);
   },
+
+  //NEW login API route
+  // loginUser: function (userData) {
+  //   console.log(userData);
+  //   return axios.post("/api/login", passport.authenticate("local"), userData);
+  // },
 
   findOneUser: function (userData) {
     console.log(userData);
@@ -47,7 +55,7 @@ const API = {
   // Saves a trip to the database
   saveTrip: function (tripData) {
     console.log(tripData);
-    return axios.post("/api/trips", tripData);
+    return axios.post("/api/users/:id", tripData);
   },
 };
 

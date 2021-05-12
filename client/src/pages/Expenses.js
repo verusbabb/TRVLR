@@ -11,12 +11,12 @@ import { useUserContext } from "../utils/userContext";
 
 function Expenses() {
 
-    // const [expense, setExpense] = useState({});
+    const [expense, setExpense] = useState({});
     const [trip, setTrip] = useState({});
     const [formObject, setFormObject] = useState({})
 
     const { id } = useParams()
-    
+
     // useEffect(() => {
     //     API.getTrip(id)
     //         .then(res => setTrip(res.data))
@@ -41,8 +41,11 @@ function Expenses() {
     function handleFormSubmit(event) {
         event.preventDefault();
         if (formObject.tripName) {
-            API.createTrip({
-                expenses: formObject.expenses,
+            API.saveTrip({
+                expenseDescription: formObject.expenseDescription,
+                expenseAmount: formObject.expenseAmount,
+                expenseSubmitter: formObject.expenseSubmitter,
+                expenseDate: formObject.expenseDate
             })
                 // .then(res => findAllTrips())
                 .catch(err => console.log(err));
@@ -53,10 +56,9 @@ function Expenses() {
     // console.log(trip.expenses[0].description)
     // console.log(trip.expenses.length)
 
-     return (
+    return (
         <>
             <Container fluid>
-
                 <Card>
                     <Row>
                         <Col size="m12">
@@ -74,21 +76,31 @@ function Expenses() {
                             <h1>Expenses</h1>
                             <form>
                                 <h3>
-                                Add an Expense
+                                    + Add an Expense
                                 </h3>
+                                <Input
+                                    onChange={handleInputChange}
+                                    name="expenseDescription"
+                                    placeholder="Brief description of the expense"
+                                />
                                 <Input 
                                     onChange={handleInputChange}
-                                    name="expenses"
-                                    placeholder="Add a New Expense"
-                                    />
-                                    <FormBtn
+                                    name="expenseAmount"
+                                    placeholder="Enter dollar amount here"
+                                />
+                                <Input 
+                                    onChange={handleInputChange}
+                                    name="expenseDate"
+                                    placeholder="When did you make the purchase?"
+                                />
+                                <FormBtn
                                     onClick={handleFormSubmit}
-                                    >Add</FormBtn>
+                                >Add</FormBtn>
                             </form>
                             {/* map using Expenses.members or something similar from a Expenses object*/}
-                            {trip.expenses ? (
+                            {trip.tripExpenses ? (
                                 <List>
-                                    {trip.expenses.map((expense) => (
+                                    {trip.tripExpenses.map((expense) => (
                                         <ListItem>
                                             <p>{expense.description} - {expense.submitter}</p>
                                         </ListItem>

@@ -73,7 +73,7 @@ module.exports = {
         return db.User.findOneAndUpdate(
           { _id: req.user._id },
           {
-            $set: { memberOf: dbTrip.id },
+            $addToSet: { memberOf: dbTrip.id },
           },
           { new: true, upsert: true }
         );

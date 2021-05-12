@@ -14,23 +14,23 @@ module.exports = {
       .catch((err) => res.status(422).json(err));
   },
   createTrip: function (req, res) {
-    console.log(req.body);
+    //   console.log(req.body);
+    //   db.Trip.create(req.body)
+    //     .then((dbModel) => res.json(dbModel))
+    //     .catch((err) => res.status(422).json(err));
+    // },
     db.Trip.create(req.body)
-      .then((dbModel) => res.json(dbModel))
+      .then((dbModel) => {
+        console.log(req.user, "current user 2");
+        db.User.findByIdAndUpdate(
+          { _id: req.body.id },
+          { $push: { memberOf: dbModel._id } }
+        ).then((res) => {
+          res.json(dbModel);
+        });
+      })
       .catch((err) => res.status(422).json(err));
   },
-  //   db.Trip.create(req.body)
-  //     .then((dbModel) => {
-  //       console.log(req.user, "current user 2");
-  //       db.User.findByIdAndUpdate(
-  //         { _id: req.user._id },
-  //         { $push: { memberOf: dbModel._id } }
-  //       ).then((res) => {
-  //         res.json(dbModel);
-  //       });
-  //     })
-  //     .catch((err) => res.status(422).json(err));
-  // },
   updateTrip: function (req, res) {
     db.Trip.findOneAndUpdate({ _id: req.params.id }, req.body)
       .then((dbModel) => res.json(dbModel))

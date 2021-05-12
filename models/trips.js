@@ -8,6 +8,10 @@ const TripSchema = new Schema({
     default: Date.now,
   },
 
+  tripId: {
+    type: String,
+  },
+
   tripName: {
     type: String,
     trim: true,
@@ -24,8 +28,8 @@ const TripSchema = new Schema({
     type: String,
   },
   tripOwner: {
-    type: Schema.Types.ObjectId,
-    ref: "User",
+    type: String,
+    // ref: "User",
     // required: true,
   },
   tripCollections: {

@@ -30,9 +30,10 @@ function Login() {
         .then(async (res) => {
           setSuccess(true);
           setFail(false);
-
+          console.log(res);
           dispatch({
             type: "add",
+            id: res.data._id,
             userName: res.data.userName,
             firstName: res.data.name.firstName,
             lastName: res.data.name.lastName,
@@ -51,7 +52,6 @@ function Login() {
 
   return (
     <>
-
       <div className="container login-box">
         <Row>
           <Col size="l8 offset-l2 s12">
@@ -85,7 +85,6 @@ function Login() {
           </Col>
         </Row>
       </div>
-
     </>
   );
 }

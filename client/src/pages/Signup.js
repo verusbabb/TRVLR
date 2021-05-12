@@ -4,7 +4,7 @@ import API from "../utils/API";
 import { Input, FormBtn } from "../components/Form";
 import { Col, Row, Container } from "../components/Grid";
 import Card from "../components/Card";
-import { Link } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { useUserContext } from "../utils/userContext";
 
 function Signup() {
@@ -54,12 +54,30 @@ function Signup() {
         password: formObject.password,
       })
         .then((res) => {
-          dispatch({
-            type: "add",
+          API.findOneUser({
             userName: formObject.userName,
-            firstName: formObject.firstName,
-            lastName: formObject.lastName
-          });
+            password: formObject.password,
+          })
+            .then(async (res) => {
+              // setSuccess(true);
+              // setFail(false);
+              console.log(res);
+              dispatch({
+                type: "add",
+                id: res.data._id,
+                userName: res.data.userName,
+                firstName: res.data.name.firstName,
+                lastName: res.data.name.lastName,
+              });
+              console.log(state);
+
+              // history.push("/dashboard");
+            })
+            .catch((err) => {
+              // setSuccess(false);
+              // setFail(true);
+              console.log(401);
+            });
 
           validated();
         }) //add dispatch inside here {type: "addUser",payload: formObject}
@@ -68,14 +86,13 @@ function Signup() {
   }
 
   return (
-    
-      <Container>
-        <Row>
-          <Col size="l8 offset-l2 s12">
+    <Container>
+      <Row>
+        <Col size="l8 offset-l2 s12">
           <Card>
-          <Row>
-                <h3>Sign Up for a New Account</h3>
-              </Row>
+            <Row>
+              <h3>Sign Up for a New Account</h3>
+            </Row>
             <form>
               <Input
                 onChange={handleInputChange}
@@ -114,11 +131,10 @@ function Signup() {
               <Link to="/login">Already have an account? Log in here</Link>
               {success && <div> Success! Redirecting to Dashboard.</div>}
             </form>
-            </Card>
-          </Col>
-        </Row>
-      </Container>
-    
+          </Card>
+        </Col>
+      </Row>
+    </Container>
   );
 }
 

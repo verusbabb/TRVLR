@@ -1,6 +1,9 @@
 import axios from "axios";
+// const passport = require("../config/passport");
 
-export default {
+const API = {
+  //USER ROUTES
+
   // Gets all users
   getUsers: function () {
     return axios.get("/api/users");
@@ -9,25 +12,33 @@ export default {
   getUser: function (id) {
     return axios.get("/api/users/" + id);
   },
+  getUserByUsername: function (username) {
+    return axios.get("/api/username/" + username);
+  },
   // Deletes the user with the given id
   deleteUser: function (id) {
     return axios.delete("/api/users/" + id);
   },
-  // Saves a user to the database
+  // UPDATED saveUser route that now includes authentication
   saveUser: function (userData) {
     console.log(userData);
-    return axios.post("/api/users", userData);
+    return axios.post("/api/users/signup", userData);
+  },
+  // Saves a trip to the database
+  saveTrip: function (tripData) {
+    console.log(tripData);
+    return axios.post("/api/users/:id", tripData);
   },
 
   findOneUser: function (userData) {
     console.log(userData);
-    return axios.get("/api/users", {
-      params: {
-        userName: userData.userName,
-        password: userData.password,
-      },
+    return axios.post("/api/users/login", {
+      username: userData.userName,
+      password: userData.password,
     });
   },
+
+  //TRIP ROUTES
 
   // Gets all trips
   getTrips: function () {
@@ -41,9 +52,6 @@ export default {
   deleteTrip: function (id) {
     return axios.delete("/api/trips/" + id);
   },
-  // Saves a trip to the database
-  saveTrip: function (tripData) {
-    console.log(tripData);
-    return axios.post("/api/trips", tripData);
-  },
 };
+
+export default API;

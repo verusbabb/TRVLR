@@ -13,7 +13,7 @@ import Jumbotron from "../components/Jumbotron";
 function CreateTrip() {
   const [trips, setTrips] = useState([]);
   const [formObject, setFormObject] = useState({});
-  const [state] = useUserContext();
+  const [state, dispatch] = useUserContext();
 
   function handleInputChange(event) {
     const { name, value } = event.target;
@@ -31,10 +31,18 @@ function CreateTrip() {
         endDate: formObject.endDate,
         description: formObject.description,
       })
+        .then(async (res) => {
+          console.log(res);
+          dispatch({
+            type: "update",
+            memberOf: res.data.memberOf,
+          });
+        })
         // .then(res => findAllTrips())
         .catch((err) => console.log(err));
     }
   }
+  console.log(state.memberOf);
   return (
     <>
       <Container>

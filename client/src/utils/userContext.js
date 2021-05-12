@@ -38,7 +38,7 @@ function reducer(state, action) {
         return index !== action.index;
       });
     case "update":
-      return [...state];
+      return { ...state, memberOf: action.memberOf };
     default:
       return state;
   }

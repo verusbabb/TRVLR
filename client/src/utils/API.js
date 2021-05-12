@@ -2,6 +2,8 @@ import axios from "axios";
 // const passport = require("../config/passport");
 
 const API = {
+  //USER ROUTES
+
   // Gets all users
   getUsers: function () {
     return axios.get("/api/users");
@@ -21,14 +23,12 @@ const API = {
   saveUser: function (userData) {
     console.log(userData);
     return axios.post("/api/users/signup", userData);
-    // return axios.post("/api/login", passport.authenticate("local"), userData);
   },
-
-  //NEW login API route
-  // loginUser: function (userData) {
-  //   console.log(userData);
-  //   return axios.post("/api/login", passport.authenticate("local"), userData);
-  // },
+  // Saves a trip to the database
+  saveTrip: function (tripData) {
+    console.log(tripData);
+    return axios.post("/api/users/:id", tripData);
+  },
 
   findOneUser: function (userData) {
     console.log(userData);
@@ -37,6 +37,8 @@ const API = {
       password: userData.password,
     });
   },
+
+  //TRIP ROUTES
 
   // Gets all trips
   getTrips: function () {
@@ -49,11 +51,6 @@ const API = {
   // Deletes the trip with the given id
   deleteTrip: function (id) {
     return axios.delete("/api/trips/" + id);
-  },
-  // Saves a trip to the database
-  saveTrip: function (tripData) {
-    console.log(tripData);
-    return axios.post("/api/users/:id", tripData);
   },
 };
 

@@ -32,6 +32,21 @@ const TripSchema = new Schema({
     // ref: "User",
     // required: true,
   },
+  members: [
+    {
+      userName: {
+        type: String,
+      },
+      name: {
+        firstName: {
+          type: String,
+        },
+        lastName: {
+          type: String,
+        }
+      }
+    }
+  ],
   tripCollections: {
     type: Schema.Types.ObjectId,
     ref: "CollectionsSchema",

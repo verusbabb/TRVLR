@@ -31,7 +31,7 @@ function Dashboard() {
   }
 
   function removeTrip(id) {
-    API.removeTrip(id)
+    API.deleteTrip(id)
       .then(() => loadTrips())
       .catch((err) => console.log(err));
   }

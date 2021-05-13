@@ -18,11 +18,11 @@ function Nav() {
               Trip Planner
             </Link>
             <ul id="nav-mobile" className="right hide-on-med-and-down">
-              {navLinks.map((link) => {
+              {navLinks.map((link, index) => {
                 if (state.userName && link.logged === "in")
                   return (
                     <>
-                      <li>
+                      <li key={index}>
                         <Link to={link.linkTo} className="btn black">
                           {link.linkName}
                         </Link>
@@ -32,7 +32,7 @@ function Nav() {
                 else if (!state.userName && link.logged === "out")
                   return (
                     <>
-                      <li>
+                      <li key={index}>
                         <Link to={link.linkTo} className="btn black">
                           {link.linkName}
                         </Link>

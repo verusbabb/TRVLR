@@ -14,6 +14,7 @@ function Expenses() {
     const [expense, setExpense] = useState({});
     const [trip, setTrip] = useState({});
     const [formObject, setFormObject] = useState({})
+    const {state} = useUserContext();
 
     const { id } = useParams()
 
@@ -39,12 +40,13 @@ function Expenses() {
     };
 
     function handleFormSubmit(event) {
+        console.log(state)
         event.preventDefault();
-        if (formObject.tripName) {
-            API.saveTrip({
+        if (formObject.expenseAmount) {
+            API.createExpense(id, {
                 expenseDescription: formObject.expenseDescription,
                 expenseAmount: formObject.expenseAmount,
-                expenseSubmitter: formObject.expenseSubmitter,
+                expenseSubmitter: state.firstName,
                 expenseDate: formObject.expenseDate
             })
                 // .then(res => findAllTrips())
@@ -98,9 +100,9 @@ function Expenses() {
                                 >Add</FormBtn>
                             </form>
                             {/* map using Expenses.members or something similar from a Expenses object*/}
-                            {trip.tripExpenses ? (
+                            {/* {expense ? (
                                 <List>
-                                    {trip.tripExpenses.map((expense) => (
+                                    {expense.map((expense) => (
                                         <ListItem>
                                             <p>{expense.description} - {expense.submitter}</p>
                                         </ListItem>
@@ -108,7 +110,7 @@ function Expenses() {
                                 </List>
                             ) : (
                                 <h3>No Results to Display</h3>
-                            )}
+                            )} */}
                         </Col>
                     </Row>
                 </Card>

@@ -12,6 +12,7 @@ router
   .route("/:id")
   .get(tripsController.findTripById)
   .put(tripsController.updateTrip)
-  .delete(tripsController.removeTrip);
+  .delete(tripsController.removeTrip)
+  .post(tripsController.createExpense);
 
 module.exports = router;

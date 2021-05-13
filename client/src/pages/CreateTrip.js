@@ -16,7 +16,7 @@ function CreateTrip() {
     const [formObject, setFormObject] = useState({});
     const [success, setSuccess] = useState(true);
     const [fail, setFail] = useState(true);
-    const [state, dispatch] = useUserContext();
+    const {state, dispatch} = useUserContext();
     const history = useHistory();
 
     function handleInputChange(event) {
@@ -26,10 +26,10 @@ function CreateTrip() {
 
     function handleFormSubmit(event) {
         event.preventDefault();
-        console.log(state[0]);
+        console.log(state);
         if (formObject.tripName) {
             API.saveTrip({
-                id: state[0].id,
+                id: state.id,
                 tripName: formObject.tripName,
                 startDate: document.getElementById("startDate").value,
                 endDate: document.getElementById("endDate").value,

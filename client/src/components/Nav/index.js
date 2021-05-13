@@ -5,8 +5,7 @@ import React, { useState, useEffect, useContext } from "react";
 import navLinks from "../../utils/navlinks.json";
 
 function Nav() {
-
-  const [state] = useUserContext();
+  const { state } = useUserContext();
 
   console.log(state);
 
@@ -15,25 +14,31 @@ function Nav() {
       <header>
         <nav className="transparentBG no-shadows">
           <div className="nav-wrapper">
-            <Link to="/" className="brand-logo center">Trip Planner</Link>
+            <Link to="/" className="brand-logo center">
+              Trip Planner
+            </Link>
             <ul id="nav-mobile" className="right hide-on-med-and-down">
-              {navLinks.map(link => {
-                if (state.length > 0 && link.logged === "in")
+              {navLinks.map((link) => {
+                if (state.userName && link.logged === "in")
                   return (
                     <>
                       <li>
-                        <Link to={link.linkTo} className="btn black">{link.linkName}</Link>
+                        <Link to={link.linkTo} className="btn black">
+                          {link.linkName}
+                        </Link>
                       </li>
                     </>
-                  )
-                else if (state.length === 0 && link.logged === "out")
+                  );
+                else if (!state.userName && link.logged === "out")
                   return (
                     <>
                       <li>
-                        <Link to={link.linkTo} className="btn black">{link.linkName}</Link>
+                        <Link to={link.linkTo} className="btn black">
+                          {link.linkName}
+                        </Link>
                       </li>
                     </>
-                  )
+                  );
               })}
             </ul>
           </div>

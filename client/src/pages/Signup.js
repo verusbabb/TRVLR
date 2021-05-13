@@ -12,7 +12,7 @@ function Signup() {
   const [users, setUsers] = useState([]);
   const [formObject, setFormObject] = useState({});
   const [success, setSuccess] = useState(false);
-  const [state, dispatch] = useUserContext();
+  const { state, dispatch } = useUserContext();
 
   const validated = () => {
     setSuccess(true);

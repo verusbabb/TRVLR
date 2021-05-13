@@ -13,7 +13,7 @@ import SubmitButton from "../components/SubmitButton";
 
 function Dashboard() {
   const [trips, setTrips] = useState([]);
-  const [state] = useUserContext();
+  const { state } = useUserContext();
   const [friendUsername, setFriendUsername] = useState("");
   const [foundFriends, setFoundFriends] = useState([]);
 
@@ -58,8 +58,8 @@ function Dashboard() {
         <Card>
           <Jumbotron>
             <h1>
-              Welcome {state[0]?.firstName} {state[0]?.lastName}!
-          </h1>
+              Welcome {state?.firstName} {state?.lastName}!
+            </h1>
           </Jumbotron>
         </Card>
         <Card>
@@ -96,9 +96,7 @@ function Dashboard() {
               {foundFriends.length ? (
                 <List>
                   {foundFriends.map((friend, index) => (
-                    <ListItem key={index}>
-                      {friend.userName}
-                    </ListItem>
+                    <ListItem key={index}>{friend.userName}</ListItem>
                   ))}
                 </List>
               ) : (

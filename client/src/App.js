@@ -15,48 +15,46 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { useUserContext } from "./utils/userContext";
 
 function App() {
-  const [state, dispatch] = useUserContext();
+  const { state, dispatch } = useUserContext();
 
   return (
     <Router>
-     
-        <Nav />
-        <main className="valign-wrapper">
-          <Switch>
-            <Route exact path="/">
-              <Home />
-            </Route>
-            <Route exact path="/dashboard">
-              <Dashboard />
-            </Route>
-            <Route exact path="/trips/:id">
-              <Trip />
-            </Route>
-            <Route exact path="/createtrip">
-              <CreateTrip />
-            </Route>
-            <Route exact path="/trips/:id/schedule">
-              <Schedule />
-            </Route>
-            <Route exact path="/trips/:id/expenses">
-              <Expenses />
-            </Route>
-            <Route exact path="/signup">
-              <Signup />
-            </Route>            
-            <Route exact path="/login">
-              <Login />
-            </Route>
-            <Route exact path="/signout">
-              <Signout />
-            </Route>
-            {/* <Route>
+      <Nav />
+      <main className="valign-wrapper">
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <Route exact path="/dashboard">
+            <Dashboard />
+          </Route>
+          <Route exact path="/trips/:id">
+            <Trip />
+          </Route>
+          <Route exact path="/createtrip">
+            <CreateTrip />
+          </Route>
+          <Route exact path="/trips/:id/schedule">
+            <Schedule />
+          </Route>
+          <Route exact path="/trips/:id/expenses">
+            <Expenses />
+          </Route>
+          <Route exact path="/signup">
+            <Signup />
+          </Route>
+          <Route exact path="/login">
+            <Login />
+          </Route>
+          <Route exact path="/signout">
+            <Signout />
+          </Route>
+          {/* <Route>
             <NoMatch />
           </Route> */}
-          </Switch>
-        </main>
-        <Footer />
-      
+        </Switch>
+      </main>
+      <Footer />
     </Router>
   );
 }

@@ -1,4 +1,5 @@
 const db = require("../models");
+// const passport = require("..");
 
 // Defining methods for the UsersController
 module.exports = {
@@ -85,4 +86,10 @@ module.exports = {
         res.json(err);
       });
   },
+
+  signOut: function (req, res) {
+    console.log("sign me out?");
+    req.logout();
+    res.redirect("/signout");
+  }
 };

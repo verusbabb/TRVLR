@@ -70,7 +70,7 @@ function Dashboard() {
               {trips.length ? (
                 <List>
                   {trips.map((trip) => (
-                    <ListItem key={trip._id}>
+                    <Card key={trip._id}>
                       <Link to={"/trips/" + trip._id}>
                         <strong>{trip.tripName}</strong>
                       </Link>
@@ -78,7 +78,7 @@ function Dashboard() {
                       <p>
                         Dates: {trip.startDate} to {trip.endDate}
                       </p>
-                    </ListItem>
+                    </Card>
                   ))}
                 </List>
               ) : (

@@ -27,11 +27,6 @@ const TripSchema = new Schema({
   description: {
     type: String,
   },
-  tripOwner: {
-    type: String,
-    // ref: "User",
-    // required: true,
-  },
   tripCollections: {
     type: Schema.Types.ObjectId,
     ref: "CollectionsSchema",
@@ -60,31 +55,8 @@ const CollectionsSchema = new Schema({
   ],
 });
 
-const ExpensesSchema = new Schema({
-  expenses: [
-    {
-      expenseDescription: {
-        type: String,
-        trim: true,
-        required: true,
-      },
-      expenseAmount: {
-        type: Number,
-        required: true,
-      },
-      expenseSubmitter: {
-        type: String,
-        trim: true,
-        required: true,
-      },
-      expenseDate: {
-        type: String,
-        required: true,
-      },
-    },
-  ],
-});
 
 const Trip = mongoose.model("Trip", TripSchema);
+const Collection = mongoose.model("Collection", CollectionsSchema);
 
 module.exports = Trip;

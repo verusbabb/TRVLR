@@ -1,4 +1,4 @@
-import Container from 
+import Container from "../Grid"
 
 function Table(props) {
     return (

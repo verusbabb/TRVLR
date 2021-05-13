@@ -27,7 +27,10 @@ function reducer(state, action) {
         return index !== action.index;
       });
     case "update":
+      const updateData = { ...state, memberOf: action.memberOf };
+      localStorage.setItem("user", JSON.stringify(updateData));
       return { ...state, memberOf: action.memberOf };
+
     default:
       return state;
   }

@@ -13,7 +13,7 @@ import Jumbotron from "../components/Jumbotron";
 function CreateTrip() {
   const [trips, setTrips] = useState([]);
   const [formObject, setFormObject] = useState({});
-  const [state, dispatch] = useUserContext();
+  const { state, dispatch } = useUserContext();
 
   function handleInputChange(event) {
     const { name, value } = event.target;
@@ -22,10 +22,10 @@ function CreateTrip() {
 
   function handleFormSubmit(event) {
     event.preventDefault();
-    console.log(state[0]);
+    console.log(state);
     if (formObject.tripName) {
       API.saveTrip({
-        id: state[0].id,
+        id: state.id,
         tripName: formObject.tripName,
         startDate: formObject.startDate,
         endDate: formObject.endDate,

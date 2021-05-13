@@ -11,7 +11,7 @@ function Login() {
   const [success, setSuccess] = useState(true);
   const [fail, setFail] = useState(true);
   const history = useHistory();
-  const [state, dispatch] = useUserContext();
+  const { state, dispatch } = useUserContext();
 
   function handleInputChange(event) {
     const { name, value } = event.target;

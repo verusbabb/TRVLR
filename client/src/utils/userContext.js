@@ -12,27 +12,16 @@ const { Provider } = UserContext;
 function reducer(state, action) {
   switch (action.type) {
     case "add":
-      localStorage.setItem(
-        "user",
-        JSON.stringify([
-          // ...state,
-          {
-            id: action.id,
-            userName: action.userName,
-            firstName: action.firstName,
-            lastName: action.lastName,
-          },
-        ])
-      );
-      return [
+      const userData = {
         ...state,
-        {
-          id: action.id,
-          userName: action.userName,
-          firstName: action.firstName,
-          lastName: action.lastName,
-        },
-      ];
+        id: action.id,
+        userName: action.userName,
+        firstName: action.firstName,
+        lastName: action.lastName,
+        memberOf: [],
+      };
+      localStorage.setItem("user", JSON.stringify(userData));
+      return userData;
     case "remove":
       return state.filter((_, index) => {
         return index !== action.index;
@@ -47,10 +36,10 @@ const user = JSON.parse(localStorage.getItem("user"))
   ? JSON.parse(localStorage.getItem("user"))
   : [];
 
-function UserProvider({ value = [], ...props }) {
+function UserProvider({ value = {}, ...props }) {
   const [state, dispatch] = useReducer(reducer, user);
 
-  return <Provider value={[state, dispatch]} {...props} />;
+  return <Provider value={{ state, dispatch }} {...props} />;
 }
 
 function useUserContext() {

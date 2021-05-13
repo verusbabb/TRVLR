@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useUserContext } from "../utils/userContext";
 import { Col, Row, Container } from "../components/Grid";
 import Card from "../components/Card";
+import API from "../utils/API";
 
 function Signout() {
   const { state } = useUserContext();
@@ -9,6 +10,10 @@ function Signout() {
   const [success, setSuccess] = useState(true);
 
   const validated = () => {
+    API.signOut()
+    .then(res => {
+      console.log("signout")
+    });
     localStorage.clear();
     // setSuccess(true);
     setTimeout(function () {

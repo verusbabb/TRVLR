@@ -38,6 +38,11 @@ const API = {
     });
   },
 
+  signOut: function () {
+    console.log("signing out");
+    return axios.get("/api/users/signout")
+  },
+
   //TRIP ROUTES
 
   // Gets all trips
@@ -49,7 +54,7 @@ const API = {
     return axios.get("/api/trips/" + id);
   },
   // Deletes the trip with the given id
-  deleteTrip: function (id) {
+  removeTrip: function (id) {
     return axios.delete("/api/trips/" + id);
   },
 };

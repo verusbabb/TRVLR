@@ -53,10 +53,19 @@ const API = {
   getTrip: function (id) {
     return axios.get("/api/trips/" + id);
   },
+  updateTrip: function (id, tripData) {
+    return axios.put("/api/trips/" + id, {
+      members: tripData.members
+    });
+  },
   // Deletes the trip with the given id
-  removeTrip: function (id) {
+  deleteTrip: function (id) {
     return axios.delete("/api/trips/" + id);
   },
+
+  createExpense: function(id, expenseData) {
+    return axios.post(`/api/trips/${id}`, expenseData);
+  }
 };
 
 export default API;

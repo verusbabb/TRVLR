@@ -10,6 +10,8 @@ module.exports = {
   },
   findTripById: function (req, res) {
     db.Trip.findById(req.params.id)
+      // .populate("tripExpenses")
+      // .exec()
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
@@ -21,7 +23,6 @@ module.exports = {
     // },
     db.Trip.create(req.body)
       .then((dbModel) => {
-        console.log(req.user, "current user 2");
         db.User.findByIdAndUpdate(
           { _id: req.body.id },
           { $push: { memberOf: dbModel._id } }
@@ -31,7 +32,21 @@ module.exports = {
       })
       .catch((err) => res.status(422).json(err));
   },
+
+  createExpense: function (req, res) {
+     db.Expense.create(req.body)
+      .then((dbTrip) => {
+        db.Trip.findByIdAndUpdate(
+          { _id: req.params.id },
+          { $push: { tripExpenses: dbTrip._id } }
+        ).then((res) => {
+          res.json(dbTrip);
+        });
+      })
+      .catch((err) => res.status(422).json(err));
+  },
   updateTrip: function (req, res) {
+    console.log(req.body);
     db.Trip.findOneAndUpdate({ _id: req.params.id }, req.body)
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));

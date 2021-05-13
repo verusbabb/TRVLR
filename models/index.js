@@ -3,4 +3,5 @@
 module.exports = {
   User: require("./users"),
   Trip: require("./trips"),
+  Expense: require("./expenses")
 };

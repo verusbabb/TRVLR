@@ -18,5 +18,10 @@
         "linkName": "Sign Out",
         "linkTo": "/signout",
         "logged": "in"
+    },
+    {
+        "linkName": "Create a Trip",
+        "linkTo": "/createtrip",
+        "logged": "in"
     }
 ]

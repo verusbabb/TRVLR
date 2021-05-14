@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const Trip = require("./trips")
 
 const ExpensesSchema = new Schema({
         expenseDescription: {
@@ -20,6 +21,10 @@ const ExpensesSchema = new Schema({
           type: String,
           required: true,
         },
+        tripRef: {
+            type: Schema.Types.ObjectId,
+            ref: "TripSchema"
+        }
       },
   );
 

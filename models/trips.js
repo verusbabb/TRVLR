@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const User = require("./users.js");
+const Expense = require("./expenses.js")
 
 const TripSchema = new Schema({
   created: {

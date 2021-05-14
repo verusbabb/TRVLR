@@ -1,6 +1,9 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const User = require("./users.js");
+const Expense = require("./expenses.js");
+const Collection = require("./collections.js");
+const Schedule = require("./schedule.js");
 
 const TripSchema = new Schema({
   created: {
@@ -32,51 +35,24 @@ const TripSchema = new Schema({
     // ref: "User",
     // required: true,
   },
-  members: [
-    {
-      userName: {
-        type: String,
-      },
-      name: {
-        firstName: {
-          type: String,
-        },
-        lastName: {
-          type: String,
-        }
-      }
-    }
-  ],
-  tripCollections: {
+  members: [{
     type: Schema.Types.ObjectId,
-    ref: "CollectionsSchema",
-  },
-  tripExpenses: {
+    ref: "User",
+  }],
+  tripCollections: [{
     type: Schema.Types.ObjectId,
-    ref: "ExpensesSchema",
-  },
+    ref: "Collection",
+  }],
+  tripExpenses: [{
+    type: Schema.Types.ObjectId,
+    ref: "Expense",
+  }],
+  tripSchedule: [{
+    type: Schema.Types.ObjectId,
+    ref: "Schedule",
+  }]
 });
-
-const CollectionsSchema = new Schema({
-  collections: [
-    {
-      collectionName: {
-        type: String,
-        trim: true,
-        required: true,
-      },
-      collectionDescription: {
-        type: String,
-      },
-      collectionUrl: {
-        type: String,
-      },
-    },
-  ],
-});
-
 
 const Trip = mongoose.model("Trip", TripSchema);
-const Collection = mongoose.model("Collection", CollectionsSchema);
 
 module.exports = Trip;

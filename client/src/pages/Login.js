@@ -39,7 +39,7 @@ function Login() {
             lastName: res.data.name.lastName,
             memberOf: res.data.memberOf,
           });
-
+          // test
           history.push("/dashboard");
         })
         .catch((err) => {

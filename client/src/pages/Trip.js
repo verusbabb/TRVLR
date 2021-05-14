@@ -4,22 +4,65 @@ import { Col, Row, Container } from "../components/Grid";
 import Card from "../components/Card";
 import { List, ListItem } from "../components/List";
 import DeleteBtn from "../components/DeleteBtn";
+import SearchBar from "../components/SearchBar";
+import SubmitButton from "../components/SubmitButton";
 
 import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
 
 function Trip() {
 
-    const [trip, setTrip] = useState({})
+    const [trip, setTrip] = useState({ members: [] })
+    const [friendUsername, setFriendUsername] = useState("");
+    const [friendData, setFriendData] = useState({});
 
     // When this component mounts, grab the trip with the _id of props.match.params.id
     // e.g. localhost:3000/trips/599dcb67f0f16317844583fc
     const { id } = useParams()
+    
     useEffect(() => {
         API.getTrip(id)
-            .then(res => setTrip(res.data))
+            .then(res => {
+                setTrip(res.data);
+            })
             .catch(err => console.log(err));
-    }, [])
+    }, [friendData])
+
+    function handleInputChange(e) {
+        const username = e.target.value;
+    
+        setFriendUsername(username);
+    }
+
+    function handleSubmit(e) {
+        e.preventDefault();
+    
+        API.getUserByUsername(friendUsername)
+          .then((res) => {
+            setFriendData(res.data);
+
+            if (trip.members.some(e => e.userName === friendUsername)) {
+                return;
+            }
+            console.log(friendData)
+            API.updateTrip(id,
+                {
+                    members: [...trip.members,
+                        {
+                            userName: friendData.userName,
+                            name: {
+                                firstName: friendData.name.firstName,
+                                lastName: friendData.name.lastName
+                            }
+                        }
+                    ]
+                }
+            )
+            .then((res) => setTrip(res.data))
+            .catch(err => console.log(err));
+          })
+          .catch((err) => console.log(err));
+    }
 
     return (
         <Container fluid>
@@ -28,9 +71,9 @@ function Trip() {
                 <Row>
                     <Col size="m12">
                         <Jumbotron>
-                        <h1>
-                            {trip.tripName}
-                        </h1>
+                            <h1>
+                                {trip.tripName}
+                            </h1>
                         </Jumbotron>
                         <h3>{trip.startDate} to {trip.endDate}</h3>
                         <p>{trip.description}</p>
@@ -42,6 +85,26 @@ function Trip() {
                     <Col size="m10">
                         <article>
                             <h2>Trip Members</h2>
+                            <SearchBar onChange={handleInputChange} />
+                            <SubmitButton onClick={handleSubmit} />
+                            {trip.members.length ? (
+                                <div>
+                                    {trip.members.map((friend, index) => (
+                                        <Card key={index}> 
+                                            <List>
+                                                <ListItem>
+                                                    Username: {friend.userName}
+                                                </ListItem>
+                                                <ListItem>
+                                                    {friend.name.firstName + " " + friend.name.lastName}
+                                                </ListItem>
+                                            </List>
+                                        </Card>
+                                    ))}
+                                </div>
+                            ) : (
+                                ""
+                            )}
                         </article>
                     </Col>
                 </Row>

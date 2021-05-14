@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import Card from "../components/Card";
 import { Input, TextArea, FormBtn } from "../components/Form";
-import DeleteBtn from "../components/DeleteBtn";
+// import DeleteBtn from "../components/DeleteBtn";
 import { Container, Row, Col } from "../components/Grid";
 import Jumbotron from "../components/Jumbotron"
 import { List, ListItem } from "../components/List";
@@ -11,7 +11,7 @@ import { useUserContext } from "../utils/userContext";
 
 function Expenses() {
 
-    const [expense, setExpense] = useState({});
+    const [tripExpense, setTripExpense] = useState({});
     const [trip, setTrip] = useState({});
     const [formObject, setFormObject] = useState({})
     const {state} = useUserContext();
@@ -25,13 +25,25 @@ function Expenses() {
     // }, [])
 
     useEffect(() => {
-        loadTrip();
-    }, []);
+        loadTrip()
+      }, [id]);
 
     function loadTrip() {
         API.getTrip(id)
-            .then((res) => setTrip(res.data))
+            .then((res) => {
+                setTrip(res.data);
+                // setTripExpense(trip.tripExpenses);
+                // console.log(trip.tripExpenses, "expense test1");
+                // setExpense()
+            })
             .catch((err) => console.log(err));
+    }
+
+    function setExpense() {
+        // console.log(trip, "expense test");
+
+        // setExpenses(trip.tripExpenses);
+        // console.log(expenses, "expenses 2")
     }
 
     function handleInputChange(event) {
@@ -54,6 +66,8 @@ function Expenses() {
         }
     };
 
+    
+
     // console.log(trip)
     // console.log(trip.expenses[0].description)
     // console.log(trip.expenses.length)
@@ -67,6 +81,7 @@ function Expenses() {
                             <Jumbotron>
                                 <h1>
                                     {trip.tripName}
+                                    
                                 </h1>
                             </Jumbotron>
                         </Col>
@@ -100,17 +115,17 @@ function Expenses() {
                                 >Add</FormBtn>
                             </form>
                             {/* map using Expenses.members or something similar from a Expenses object*/}
-                            {/* {expense ? (
+                            {tripExpense.length ? (
                                 <List>
-                                    {expense.map((expense) => (
+                                    {tripExpense.map((expense) => (
                                         <ListItem>
-                                            <p>{expense.description} - {expense.submitter}</p>
+                                            <p>{expense.expenseDescription} - {expense.expenseSubmitter}</p>
                                         </ListItem>
                                     ))}
                                 </List>
                             ) : (
                                 <h3>No Results to Display</h3>
-                            )} */}
+                            )}
                         </Col>
                     </Row>
                 </Card>

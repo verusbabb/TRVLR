@@ -52,10 +52,10 @@ const TripSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "CollectionsSchema",
   },
-  tripExpenses: {
+  tripExpenses: [{
     type: Schema.Types.ObjectId,
-    ref: "ExpensesSchema",
-  },
+    ref: "Expense",
+  }],
 });
 
 const CollectionsSchema = new Schema({

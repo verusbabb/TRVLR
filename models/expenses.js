@@ -23,7 +23,7 @@ const ExpensesSchema = new Schema({
         },
         tripRef: {
             type: Schema.Types.ObjectId,
-            ref: "TripSchema"
+            ref: "Trip"
         }
       },
   );

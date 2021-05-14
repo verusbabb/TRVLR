@@ -5,7 +5,7 @@ function Card(props) {
     return (
         <>
             <Container>
-                <div className="card row">
+                <div className="card row no-shadows">
                     <div className="card-content">
                         {props.children}
                     </div>

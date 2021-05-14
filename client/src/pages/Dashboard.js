@@ -13,6 +13,7 @@ import SubmitButton from "../components/SubmitButton";
 
 function Dashboard() {
   const [trips, setTrips] = useState([]);
+  const [user, setUser] = useState([]);
   const { state } = useUserContext();
   const [friendUsername, setFriendUsername] = useState("");
   const [foundFriends, setFoundFriends] = useState([]);
@@ -22,11 +23,15 @@ function Dashboard() {
   }, []);
 
   function loadTrips() {
+    // API.getUser(state.id)
+    //   .then((res) => {
+    //     setUser(res.data);
+    //     console.log(state, "user data");
     API.getTrips()
-      .then((res) => {
-        setTrips(res.data);
-        console.log(res.data);
-      })
+        .then((res) => {
+            setTrips(res.data);
+            console.log(res.data);
+        })
       .catch((err) => console.log(err));
   }
 

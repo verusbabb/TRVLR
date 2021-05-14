@@ -8,7 +8,7 @@ router.route("/").get(usersController.findAllUsers);
 router
   .route("/login")
   .post(passport.authenticate("local"), usersController.findOneUser);
-router.route("/signout").get(function(req, res, next) {
+router.route("/signout").get(function (req, res, next) {
   console.log(req.user, "req.user");
   res.json(req.user);
 });

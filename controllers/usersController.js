@@ -18,25 +18,8 @@ module.exports = {
     }
   },
 
-  // db.User.findOne({ userName: req.query.userName })
-  //   .then((dbModel) => {
-  //     dbModel.comparePassword(req.query.password, function (err, isMatch) {
-  //       console.log(err, isMatch);
-  //       if (err) res.status(422).json(err);
-  //       if (isMatch) {
-  //         res.json(dbModel);
-  //       } else {
-  //         res.status(401).json();
-  //       }
-  //     });
-
-  //     req.user = dbModel;
-  //     console.log(dbModel, "current user");
-  //   })
-
-  //   .catch((err) => res.status(422).json(err));
-
   findUserById: function (req, res) {
+    console.log(req.body);
     db.User.findById(req.params.id)
       .populate("memberOf")
       .exec()
@@ -93,5 +76,5 @@ module.exports = {
     console.log("sign me out?");
     req.logout();
     res.redirect("/signout");
-  }
+  },
 };

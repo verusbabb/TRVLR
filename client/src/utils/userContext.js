@@ -18,7 +18,7 @@ function reducer(state, action) {
         userName: action.userName,
         firstName: action.firstName,
         lastName: action.lastName,
-        memberOf: [],
+        memberOf: action.memberOf,
       };
       localStorage.setItem("user", JSON.stringify(userData));
       return userData;

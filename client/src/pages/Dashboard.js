@@ -23,15 +23,15 @@ function Dashboard() {
   }, []);
 
   function loadTrips() {
-    // API.getUser(state.id)
-    //   .then((res) => {
-    //     setUser(res.data);
-    //     console.log(state, "user data");
-    API.getTrips()
-        .then((res) => {
-            setTrips(res.data);
-            console.log(res.data);
-        })
+    API.getUser(state.id)
+      .then((res) => {
+        setUser(res.data);
+        console.log(user, "user data");
+        // API.getTrips()
+        //     .then((res) => {
+        //         setTrips(res.data);
+        //         console.log(res.data);
+      })
       .catch((err) => console.log(err));
   }
 
@@ -72,11 +72,11 @@ function Dashboard() {
             <Col size="m12">
               <h2>My Trips</h2>
               <Link to="/createtrip">+ Add a trip</Link>
-              {trips.length ? (
+              {user.memberOf ? (
                 <List>
-                  {trips.map((trip) => (
-                    <Card key={trip._id}>
-                      <Link to={"/trips/" + trip._id}>
+                  {user.memberOf.map((trip, index) => (
+                    <Card key={index}>
+                      <Link to={"/trips/" + trip.id}>
                         <strong>{trip.tripName}</strong>
                       </Link>
                       <DeleteBtn onClick={() => removeTrip(trip._id)} />

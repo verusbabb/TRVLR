@@ -68,6 +68,7 @@ function Signup() {
                 userName: res.data.userName,
                 firstName: res.data.name.firstName,
                 lastName: res.data.name.lastName,
+                memberOf: res.data.memberOf,
               });
               console.log(state);
 

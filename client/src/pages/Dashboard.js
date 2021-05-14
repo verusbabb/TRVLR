@@ -76,7 +76,7 @@ function Dashboard() {
                 <List>
                   {user.memberOf.map((trip, index) => (
                     <Card key={index}>
-                      <Link to={"/trips/" + trip._Id}>
+                      <Link to={"/trips/" + trip._id}>
                         <strong>{trip.tripName}</strong>
                       </Link>
                       <DeleteBtn onClick={() => removeTrip(trip._id)} />

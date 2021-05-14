@@ -1,11 +1,23 @@
-.nav-wrapper {
-  width: 80vw !important;
-  margin: auto;
-  align-self:center;
-}
-
-
 
 .brand-logo {
   color: white
+}
+
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 770px) {
+.brand-logo {
+  display:none !important;
+}
+
+ .sidenav, .nav-wrapper{
+  overflow: none;
+
+} 
+
+.sidenav {
+  float:none !important;
+  background-color: lightgrey;
+}
+
 }

@@ -25,7 +25,7 @@ function Nav() {
                   return (
                     <>
                       <li key={index}>
-                        <Link to={link.linkTo} className="btn black">
+                        <Link to={link.linkTo} className="btn transparentBG">
                           {link.linkName}
                         </Link>
                       </li>
@@ -35,7 +35,7 @@ function Nav() {
                   return (
                     <>
                       <li key={index}>
-                        <Link to={link.linkTo} className="btn black">
+                        <Link to={link.linkTo} className="btn transparentBG">
                           {link.linkName}
                         </Link>
                       </li>

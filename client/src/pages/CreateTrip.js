@@ -24,56 +24,115 @@ function CreateTrip() {
     setFormObject({ ...formObject, [name]: value });
   }
 
-  function handleFormSubmit(event) {
-    event.preventDefault();
-    console.log(state);
-    if (formObject.tripName) {
-      API.saveTrip({
-        id: state.id,
-        tripName: formObject.tripName,
-        startDate: document.getElementById("startDate").value,
-        endDate: document.getElementById("endDate").value,
-        description: formObject.description,
-        members: [state.id],
-      })
-        .then(async (res) => {
-          console.log(res);
-          dispatch({
-            type: "update",
-            memberOf: res.data.memberOf,
-          });
+    const randomID = () => {
+        return Math.random().toString(36).substr(2, 9).toUpperCase();
+    };
 
-          history.push("/dashboard");
-        })
-        // .then(res => findAllTrips())
-        .catch((err) => {
-          setSuccess(false);
-          setFail(true);
-          console.log(err);
-        });
+    function handleFormSubmit(event) {
+        event.preventDefault();
+        console.log(state);
+        if (formObject.tripName) {
+            API.saveTrip({
+                id: state.id,
+                tripId: randomID(),
+                tripName: formObject.tripName,
+                startDate: document.getElementById("startDate").value,
+                endDate: document.getElementById("endDate").value,
+                description: formObject.description,
+                members: [state.id]
+            })
+                .then(async (res) => {
+                    console.log(res);
+                    dispatch({
+                        type: "update",
+                        memberOf: res.data.memberOf,
+                    });
+    
+                    history.push("/dashboard");
+                })
+                // .then(res => findAllTrips())
+                .catch((err) => {
+                    setSuccess(false);
+                    setFail(true);
+                    console.log(err)
+                });
+        }
     }
-  }
 
-  return (
-    <>
-      <Container>
-        <Card>
-          <Jumbotron>
-            <h1>Create a New Trip</h1>
-          </Jumbotron>
-          <form>
-            <h3>Trip Name</h3>
-            <Input
-              onChange={handleInputChange}
-              name="tripName"
-              placeholder="Where are you going?"
-            />
-            <h3>Trip Dates</h3>
-            <DatePicker
-              id="startDate"
-              name="startDate"
-              placeholder="Start Date"
-            />
+    function handleIdSubmit(event) {
+        event.preventDefault();
+        if(formObject.tripId) {
+            API.findTripByTripId(
+                {
+                    tripId: formObject.tripId
+                }
+            )
+            .then((res) => {
+                console.log(res.data)
+                API.updateTrip(
+                    res.data._id,
+                    {
+                        members: [...res.data.members, state.id]
+                    }
+                )
+                .then(async (res) => {
+                    console.log(res.data, "line 80 createtrip")
+                    dispatch({
+                        type: "update",
+                        memberOf: res.data.memberOf,
+                    });
+    
+                    history.push("/dashboard");
+                })
+                .catch((err) =>{
+                    setSuccess(false);
+                    setFail(true);
+                    console.log(err);
+                });
+            })
+            .catch((err) => {
+                setSuccess(false);
+                setFail(true);
+                console.log(err);
+            })
+        }
+    }
+
+    return (
+        <>
+            <Container>
+                <Card>
+                    <Jumbotron>
+                        <h1>Find An Existing Trip</h1>
+                    </Jumbotron>
+                    <form>
+                        <Input
+                            onChange={handleInputChange}
+                            name="tripId"
+                            placeholder="Insert 9 Character ID Here"
+                        />
+                        <FormBtn disabled={!formObject.tripId} onClick={handleIdSubmit}>
+                            Add
+                        </FormBtn>
+                    </form>
+                </Card>
+                <Card>
+                    <Jumbotron>
+                        <h1>Create a New Trip</h1>
+                    </Jumbotron>
+                    <form>
+                        <h3>Trip Name</h3>
+                        <Input
+                            onChange={handleInputChange}
+                            name="tripName"
+                            placeholder="Where are you going?"
+                        />
+                        <h3>Trip Dates</h3>
+                        <DatePicker
+                            id="startDate"
+                            name="startDate"
+                            placeholder="Start Date"
+                        />
 
             <DatePicker id="endDate" name="endDate" placeholder="End Date" />
             <TextArea

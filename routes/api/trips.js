@@ -18,5 +18,10 @@ router
 router
   .route("/schedule/:id")
   .post(tripsController.createSchedule)
+  
+// Matches with "/api/trips/tripId"
+router
+  .route("/tripId/:tripId")
+  .get(tripsController.findTripByTripId);
 
 module.exports = router;

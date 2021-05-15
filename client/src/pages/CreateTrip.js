@@ -12,88 +12,84 @@ import Jumbotron from "../components/Jumbotron";
 import { DatePicker } from "react-materialize";
 
 function CreateTrip() {
-    const [trips, setTrips] = useState([]);
-    const [formObject, setFormObject] = useState({});
-    const [success, setSuccess] = useState(true);
-    const [fail, setFail] = useState(true);
-    const {state, dispatch} = useUserContext();
-    const history = useHistory();
+  const [trips, setTrips] = useState([]);
+  const [formObject, setFormObject] = useState({});
+  const [success, setSuccess] = useState(true);
+  const [fail, setFail] = useState(true);
+  const { state, dispatch } = useUserContext();
+  const history = useHistory();
 
-    function handleInputChange(event) {
-        const { name, value } = event.target;
-        setFormObject({ ...formObject, [name]: value });
+  function handleInputChange(event) {
+    const { name, value } = event.target;
+    setFormObject({ ...formObject, [name]: value });
+  }
+
+  function handleFormSubmit(event) {
+    event.preventDefault();
+    console.log(state);
+    if (formObject.tripName) {
+      API.saveTrip({
+        id: state.id,
+        tripName: formObject.tripName,
+        startDate: document.getElementById("startDate").value,
+        endDate: document.getElementById("endDate").value,
+        description: formObject.description,
+      })
+        .then(async (res) => {
+          console.log(res.data.tripName);
+          dispatch({
+            type: "update",
+            memberOf: res.data.memberOf,
+          });
+
+          history.push("/dashboard");
+        })
+        // .then(res => findAllTrips())
+        .catch((err) => {
+          setSuccess(false);
+          setFail(true);
+          console.log(err);
+        });
     }
+  }
 
-    function handleFormSubmit(event) {
-        event.preventDefault();
-        console.log(state);
-        if (formObject.tripName) {
-            API.saveTrip({
-                id: state.id,
-                tripName: formObject.tripName,
-                startDate: document.getElementById("startDate").value,
-                endDate: document.getElementById("endDate").value,
-                description: formObject.description,
-            })
-                .then(async (res) => {
-                    console.log(res);
-                    dispatch({
-                        type: "update",
-                        memberOf: res.data.memberOf,
-                    });
+  return (
+    <>
+      <Container>
+        <Card>
+          <Jumbotron>
+            <h1>Create a New Trip</h1>
+          </Jumbotron>
+          <form>
+            <h3>Trip Name</h3>
+            <Input
+              onChange={handleInputChange}
+              name="tripName"
+              placeholder="Where are you going?"
+            />
+            <h3>Trip Dates</h3>
+            <DatePicker
+              id="startDate"
+              name="startDate"
+              placeholder="Start Date"
+            />
 
-                    history.push("/dashboard");
-                })
-                // .then(res => findAllTrips())
-                .catch((err) => {
-                    setSuccess(false);
-                    setFail(true);
-                    console.log(err)
-                });
-        }
-    }
-
-    return (
-        <>
-            <Container>
-                <Card>
-                    <Jumbotron>
-                        <h1>Create a New Trip</h1>
-                    </Jumbotron>
-                    <form>
-                        <h3>Trip Name</h3>
-                        <Input
-                            onChange={handleInputChange}
-                            name="tripName"
-                            placeholder="Where are you going?"
-                        />
-                        <h3>Trip Dates</h3>
-                        <DatePicker
-                            id="startDate"
-                            name="startDate"
-                            placeholder="Start Date"
-                        />
-
-                        <DatePicker
-                            id="endDate"
-                            name="endDate"
-                            placeholder="End Date"
-                        />
-                        <TextArea
-                            onChange={handleInputChange}
-                            name="description"
-                            placeholder="(Optional) What kind of trip is this, what are your hopes and dreams? Are you looking to accomplish anything specific?"
-                        />
-                        <FormBtn disabled={!formObject.tripName} onClick={handleFormSubmit}>
-                            Create
+            <DatePicker id="endDate" name="endDate" placeholder="End Date" />
+            <TextArea
+              onChange={handleInputChange}
+              name="description"
+              placeholder="(Optional) What kind of trip is this, what are your hopes and dreams? Are you looking to accomplish anything specific?"
+            />
+            <FormBtn disabled={!formObject.tripName} onClick={handleFormSubmit}>
+              Create
             </FormBtn>
-                        {!success && <div> Whoops! Please try again.</div>}
-                        {!fail && <div> Success! Your trip was created.</div>}
-                    </form>
-                </Card>
-            </Container>
-        </>
-    );
+            {!success && <div> Whoops! Please try again.</div>}
+            {!fail && <div> Success! Your trip was created.</div>}
+          </form>
+        </Card>
+      </Container>
+    </>
+  );
 }
 
 export default CreateTrip;

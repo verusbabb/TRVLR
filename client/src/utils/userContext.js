@@ -5,7 +5,29 @@ const UserContext = createContext({
   userName: "",
   firstName: "",
   lastName: "",
-  memberOf: [],
+  memberOf: [
+    {
+      tripName: "",
+      startDate: "",
+      endDate: "",
+      expenses: [
+        {
+          description: "",
+          amount: "",
+          submitter: "",
+          date: "",
+        },
+      ],
+      collections: [
+        {
+          collectionName: "",
+          description: "",
+          url: "",
+          submitter: "",
+        },
+      ],
+    },
+  ],
 });
 const { Provider } = UserContext;
 

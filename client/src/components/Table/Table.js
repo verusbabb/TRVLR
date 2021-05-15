@@ -5,7 +5,7 @@ export function Table(props) {
     return (
         <>
             <Container>
-                <table className="responsive-table">
+                <table>
                     {props.children}
                 </table>
             </Container>

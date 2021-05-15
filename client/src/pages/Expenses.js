@@ -83,7 +83,7 @@ function Expenses() {
       <Container fluid>
         <Card>
           <Row>
-            <Col size="m12">
+            <Col size="m12 s12">
               <Jumbotron>
                 <h1>{trip.tripName}</h1>
               </Jumbotron>
@@ -92,7 +92,7 @@ function Expenses() {
         </Card>
         <Card>
           <Row>
-            <Col size="m12">
+            <Col size="m12 s12">
               <h1>Expenses</h1>
               <form>
                 <h3>+ Add an Expense</h3>
@@ -118,7 +118,7 @@ function Expenses() {
         </Card>
         <Card>
           <Row>
-            <Col size="m12">
+            <Col size="m12 s12">
               {tripExpense.length ? (
                 <Table>
                   <TableHead>

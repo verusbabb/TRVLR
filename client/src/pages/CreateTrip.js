@@ -34,6 +34,7 @@ function CreateTrip() {
                 startDate: document.getElementById("startDate").value,
                 endDate: document.getElementById("endDate").value,
                 description: formObject.description,
+                members: [state.id]
             })
                 .then(async (res) => {
                     console.log(res);

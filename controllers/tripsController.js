@@ -36,13 +36,16 @@ module.exports = {
   },
 
   createExpense: function (req, res) {
-     db.Expense.create(req.body)
-      .then((dbTrip) => {
-        db.Trip.findByIdAndUpdate(
-          { _id: req.params.id },
-          { $push: { tripExpenses: dbTrip._id } }
-        ).then((res) => {
-          res.json(dbTrip);
+    console.log(req.params);
+    db.Expense.create(req.body)
+      .then((dbExpense) => {
+        return db.Trip.findByIdAndUpdate(
+          req.params.id,
+          { $addToSet: { tripExpenses: dbExpense.id } },
+          { new: true, upsert: true }
+        ).then((expenseData) => {
+          console.log(expenseData);
+          res.json(expenseData);
         });
       })
       .catch((err) => res.status(422).json(err));

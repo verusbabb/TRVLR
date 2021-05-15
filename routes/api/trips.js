@@ -15,4 +15,8 @@ router
   .delete(tripsController.removeTrip)
   .post(tripsController.createExpense);
 
+router
+  .route("/schedule/:id")
+  .post(tripsController.createSchedule)
+
 module.exports = router;

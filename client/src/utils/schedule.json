@@ -1,0 +1,47 @@
+[
+    {
+        "activityName": "Leave for Trip",
+        "activityDescription": "Driving to STL",
+        "activityDate": "2021-05-28",
+        "startTime": "8:00 am",
+        "endTime": "12:00 pm",
+        "activitySubmitter": "Christina",
+        "tripRef": "Chicago"
+    },
+    {
+        "activityName": "Lunch",
+        "activityDescription": "Find a cool restaurant",
+        "activityDate": "2021-05-28",
+        "startTime": "12:00 pm",
+        "endTime": "1:00 pm",
+        "activitySubmitter": "Christina",
+        "tripRef": "Chicago"
+    },
+    {
+        "activityName": "Leave Hotel",
+        "activityDescription": "Driving to Chicago",
+        "activityDate": "2021-05-29",
+        "startTime": "8:00 am",
+        "endTime": "12:00 pm",
+        "activitySubmitter": "Christina",
+        "tripRef": "Chicago"
+    },
+    {
+        "activityName": "Lunch Day 2",
+        "activityDescription": "Find a cool restaurant",
+        "activityDate": "2021-05-29",
+        "startTime": "12:00 pm",
+        "endTime": "1:00 pm",
+        "activitySubmitter": "Christina",
+        "tripRef": "Chicago"
+    },
+    {
+        "activityName": "Check into Hotel",
+        "activityDescription": "Along the way",
+        "activityDate": "2021-05-28",
+        "startTime": "3:00 pm",
+        "endTime": "4:00 pm",
+        "activitySubmitter": "Christina",
+        "tripRef": "Chicago"
+    }
+]

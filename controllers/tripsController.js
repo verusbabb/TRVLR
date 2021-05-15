@@ -47,6 +47,19 @@ module.exports = {
       })
       .catch((err) => res.status(422).json(err));
   },
+  createSchedule: function (req, res) {
+    console.log(req.body, "schedule test2")
+    db.Schedule.create(req.body)
+     .then((dbTrip) => {
+       db.Trip.findByIdAndUpdate(
+         { _id: req.params.id },
+         { $push: { tripSchedule: dbTrip._id } }
+       ).then((res) => {
+         res.json(dbTrip);
+       });
+     })
+     .catch((err) => res.status(422).json(err));
+ },
   updateTrip: function (req, res) {
     console.log(req.body);
     db.Trip.findOneAndUpdate({ _id: req.params.id }, req.body)

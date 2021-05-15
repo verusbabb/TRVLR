@@ -4,7 +4,8 @@ import Card from "../components/Card";
 import { Input, TextArea, FormBtn } from "../components/Form";
 // import DeleteBtn from "../components/DeleteBtn";
 import { Container, Row, Col } from "../components/Grid";
-import Jumbotron from "../components/Jumbotron"
+import Jumbotron from "../components/Jumbotron";
+import { Table, TableHead, TableBody} from "../components/Table";
 import { List, ListItem } from "../components/List";
 import API from "../utils/API";
 import { useUserContext } from "../utils/userContext";
@@ -26,7 +27,7 @@ function Expenses() {
 
     useEffect(() => {
         loadTrip()
-      }, [id]);
+      }, []);
 
     function loadTrip() {
         API.getTrip(id)
@@ -115,17 +116,41 @@ function Expenses() {
                                 >Add</FormBtn>
                             </form>
                             {/* map using Expenses.members or something similar from a Expenses object*/}
-                            {tripExpense.length ? (
+                            {/* {trip.tripExpenses ? (
                                 <List>
-                                    {tripExpense.map((expense) => (
+                                    {trip.tripExpense.map((expense) => (
+                                        <Card>
                                         <ListItem>
                                             <p>{expense.expenseDescription} - {expense.expenseSubmitter}</p>
                                         </ListItem>
+                                        </Card>
                                     ))}
                                 </List>
                             ) : (
                                 <h3>No Results to Display</h3>
-                            )}
+                            )} */}
+                        </Col>
+                    </Row>
+                </Card>
+                <Card>
+                    <Row>
+                        <Col size="m12">
+                            <Table >
+                                <TableHead>
+                                    <th>Person</th>
+                                    <th>Expense</th>
+                                    <th>Cost</th>
+                                    <th>Date</th>
+                                </TableHead>
+                                <TableBody>
+                                    <tr>
+                                        <td>Person 1</td>
+                                        <td>Expense 1</td>
+                                        <td>Cost 1</td>
+                                        <td>Date 1</td>
+                                    </tr>
+                                </TableBody>
+                            </Table>
                         </Col>
                     </Row>
                 </Card>

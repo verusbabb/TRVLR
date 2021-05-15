@@ -32,7 +32,7 @@ function Signout() {
         <Card>
           <p>
             {success && (
-              <div> You have been signed out. Redirecting to Home...</div>
+               <span>You have been signed out. Redirecting to Home...</span>
             )}
           </p>
         </Card>

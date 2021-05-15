@@ -12,18 +12,17 @@ import Jumbotron from "../components/Jumbotron";
 import { DatePicker } from "react-materialize";
 
 function CreateTrip() {
-    const [trips, setTrips] = useState([]);
-    // const [tripIdObject, setTripIdObject] = useState("");
-    const [formObject, setFormObject] = useState({});
-    const [success, setSuccess] = useState(true);
-    const [fail, setFail] = useState(true);
-    const {state, dispatch} = useUserContext();
-    const history = useHistory();
+  const [trips, setTrips] = useState([]);
+  const [formObject, setFormObject] = useState({});
+  const [success, setSuccess] = useState(true);
+  const [fail, setFail] = useState(true);
+  const { state, dispatch } = useUserContext();
+  const history = useHistory();
 
-    function handleInputChange(event) {
-        const { name, value } = event.target;
-        setFormObject({ ...formObject, [name]: value });
-    }
+  function handleInputChange(event) {
+    const { name, value } = event.target;
+    setFormObject({ ...formObject, [name]: value });
+  }
 
     const randomID = () => {
         return Math.random().toString(36).substr(2, 9).toUpperCase();
@@ -135,26 +134,22 @@ function CreateTrip() {
                             placeholder="Start Date"
                         />
 
-                        <DatePicker
-                            id="endDate"
-                            name="endDate"
-                            placeholder="End Date"
-                        />
-                        <TextArea
-                            onChange={handleInputChange}
-                            name="description"
-                            placeholder="(Optional) What kind of trip is this, what are your hopes and dreams? Are you looking to accomplish anything specific?"
-                        />
-                        <FormBtn disabled={!formObject.tripName} onClick={handleFormSubmit}>
-                            Create
+            <DatePicker id="endDate" name="endDate" placeholder="End Date" />
+            <TextArea
+              onChange={handleInputChange}
+              name="description"
+              placeholder="(Optional) What kind of trip is this, what are your hopes and dreams? Are you looking to accomplish anything specific?"
+            />
+            <FormBtn disabled={!formObject.tripName} onClick={handleFormSubmit}>
+              Create
             </FormBtn>
-                        {!success && <div> Whoops! Please try again.</div>}
-                        {!fail && <div> Success! Your trip was created.</div>}
-                    </form>
-                </Card>
-            </Container>
-        </>
-    );
+            {!success && <div> Whoops! Please try again.</div>}
+            {!fail && <div> Success! Your trip was created.</div>}
+          </form>
+        </Card>
+      </Container>
+    </>
+  );
 }
 
 export default CreateTrip;

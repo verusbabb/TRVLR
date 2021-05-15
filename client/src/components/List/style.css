@@ -1,7 +1,7 @@
 .list-overflow-container {
   max-height: 545px;
   border-radius: 4px;
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
 }
 
@@ -29,4 +29,25 @@
 
 .list-overflow-container li:last-child {
   border-bottom: none;
+}
+
+html {
+  --scrollbarBG: #969696;
+  --thumbBG: #3a3a3a;
+}
+::-webkit-scrollbar {
+  width: 11px;
+}
+body {
+  scrollbar-width: thin;
+  scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+}
+::-webkit-scrollbar-track {
+  background: var(--scrollbarBG);
+  border-radius: 20px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--thumbBG) ;
+  border-radius: 20px;
+  border: 0px solid var(--scrollbarBG);
 }

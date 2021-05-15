@@ -3,9 +3,16 @@
   color: white
 }
 
-@media only screen 
+header {
+  width: 100vw;
+
+}
+
+
+
+@media screen 
   and (min-device-width: 320px) 
-  and (max-device-width: 770px) {
+  and (max-device-width: 992px) {
 .brand-logo {
   display:none !important;
 }
@@ -18,6 +25,10 @@
 .sidenav {
   float:none !important;
   background-color: lightgrey;
+}
+
+.btn {
+  background-color: black !important;
 }
 
 }

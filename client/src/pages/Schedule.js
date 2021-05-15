@@ -5,6 +5,7 @@ import DeleteBtn from "../components/DeleteBtn";
 import { Container, Row, Col } from "../components/Grid";
 import Jumbotron from "../components/Jumbotron"
 import { List, ListItem } from "../components/List";
+import { Table, TableHead, TableBody} from "../components/Table";
 import API from "../utils/API";
 import { useUserContext } from "../utils/userContext";
 
@@ -40,14 +41,22 @@ function Schedule() {
                         <h1>Schedule</h1>
                         {/* map using schedule.days or something similar from a schedule object*/}
                             <h2>Day 1 - Thursday</h2>
-                            <List>
-                                <ListItem>
-                                    8:00am - Leave for Trip
-                                </ListItem>
-                                <ListItem>
-                                    12:00pm - Lunch
-                                </ListItem>
-                            </List>
+                            <Table >
+                                <TableHead>
+                                    <th>Time</th>
+                                    <th>Activity</th>
+                                </TableHead>
+                                <TableBody>
+                                    <tr>
+                                        <td>8:00 am</td>
+                                        <td>Leave for Trip</td>
+                                    </tr>
+                                    <tr>
+                                        <td>12:00 pm - 1:00 pm</td>
+                                        <td>Lunch</td>
+                                    </tr>
+                                </TableBody>
+                            </Table>
                     </Col>
                 </Row>
             </Card>

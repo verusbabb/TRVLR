@@ -24,6 +24,7 @@ const TripSchema = new Schema({
   startDate: {
     type: String,
   },
+  
   endDate: {
     type: String,
   },

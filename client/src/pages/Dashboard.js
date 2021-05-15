@@ -69,7 +69,7 @@ function Dashboard() {
         </Card>
         <Card>
           <Row>
-            <Col size="m12">
+            <Col size="m12 s12">
               <h2>My Trips</h2>
               <Link to="/createtrip">+ Add a trip</Link>
               {user.memberOf ? (

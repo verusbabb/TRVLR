@@ -8,8 +8,8 @@ import { Container, Row, Col } from "../components/Grid";
 import { List, ListItem } from "../components/List";
 import API from "../utils/API";
 import { useUserContext } from "../utils/userContext";
-import SearchBar from "../components/SearchBar";
-import SubmitButton from "../components/SubmitButton";
+// import SearchBar from "../components/SearchBar";
+// import SubmitButton from "../components/SubmitButton";
 
 function Dashboard() {
   const [trips, setTrips] = useState([]);
@@ -83,6 +83,9 @@ function Dashboard() {
                       <p>
                         Dates: {trip.startDate} to {trip.endDate}
                       </p>
+                      <p>
+                        Trip ID: {trip.tripId}
+                      </p>
                     </Card>
                   ))}
                 </List>
@@ -92,7 +95,7 @@ function Dashboard() {
             </Col>
           </Row>
         </Card>
-        <Card>
+        {/* <Card>
           <Row>
             <Col size="m12">
               <h2>My Friends</h2>
@@ -108,10 +111,8 @@ function Dashboard() {
                 ""
               )}
             </Col>
-
-            {/* <p>Coming soon!</p> */}
           </Row>
-        </Card>
+        </Card> */}
       </Container>
     </>
   );

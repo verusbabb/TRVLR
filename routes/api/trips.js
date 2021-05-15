@@ -15,4 +15,9 @@ router
   .delete(tripsController.removeTrip)
   .post(tripsController.createExpense);
 
+// Matches with "/api/trips/tripId"
+router
+  .route("/tripId/:tripId")
+  .get(tripsController.findTripByTripId);
+
 module.exports = router;

@@ -17,6 +17,15 @@ module.exports = {
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
+  findTripByTripId: function (req, res) {
+    console.log(req.params.tripId)
+    db.Trip.findOne(
+      {
+        tripId: req.params.tripId
+      })
+      .then((dbModel) => res.json(dbModel))
+      .catch((err) => res.status(422).json(err));
+  },
   createTrip: function (req, res) {
     //   console.log(req.body);
     //   db.Trip.create(req.body)
@@ -49,7 +58,17 @@ module.exports = {
   },
   updateTrip: function (req, res) {
     console.log(req.body);
-    db.Trip.findOneAndUpdate({ _id: req.params.id }, req.body)
+    db.Trip.findByIdAndUpdate({ _id: req.params.id }, req.body)
+    .then(function (dbTrip) {
+      console.log(dbTrip);
+      return db.User.findByIdAndUpdate(
+        req.user._id,
+        {
+          $addToSet: { memberOf: dbTrip.id },
+        },
+        { new: true, upsert: true }
+      );
+    })
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },

@@ -53,6 +53,9 @@ const API = {
   getTrip: function (id) {
     return axios.get("/api/trips/" + id);
   },
+  findTripByTripId: function (tripId) {
+    return axios.get("/api/trips/tripId/" + tripId.tripId);
+  },
   updateTrip: function (id, tripData) {
     return axios.put("/api/trips/" + id, {
       members: tripData.members

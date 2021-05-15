@@ -13,6 +13,7 @@ import { DatePicker } from "react-materialize";
 
 function CreateTrip() {
     const [trips, setTrips] = useState([]);
+    // const [tripIdObject, setTripIdObject] = useState("");
     const [formObject, setFormObject] = useState({});
     const [success, setSuccess] = useState(true);
     const [fail, setFail] = useState(true);
@@ -24,12 +25,17 @@ function CreateTrip() {
         setFormObject({ ...formObject, [name]: value });
     }
 
+    const randomID = () => {
+        return Math.random().toString(36).substr(2, 9).toUpperCase();
+    };
+
     function handleFormSubmit(event) {
         event.preventDefault();
         console.log(state);
         if (formObject.tripName) {
             API.saveTrip({
                 id: state.id,
+                tripId: randomID(),
                 tripName: formObject.tripName,
                 startDate: document.getElementById("startDate").value,
                 endDate: document.getElementById("endDate").value,
@@ -42,7 +48,7 @@ function CreateTrip() {
                         type: "update",
                         memberOf: res.data.memberOf,
                     });
-
+    
                     history.push("/dashboard");
                 })
                 // .then(res => findAllTrips())
@@ -54,9 +60,63 @@ function CreateTrip() {
         }
     }
 
+    function handleIdSubmit(event) {
+        event.preventDefault();
+        if(formObject.tripId) {
+            API.findTripByTripId(
+                {
+                    tripId: formObject.tripId
+                }
+            )
+            .then((res) => {
+                console.log(res.data)
+                API.updateTrip(
+                    res.data._id,
+                    {
+                        members: [...res.data.members, state.id]
+                    }
+                )
+                .then(async (res) => {
+                    console.log(res.data, "line 80 createtrip")
+                    dispatch({
+                        type: "update",
+                        memberOf: res.data.memberOf,
+                    });
+    
+                    history.push("/dashboard");
+                })
+                .catch((err) =>{
+                    setSuccess(false);
+                    setFail(true);
+                    console.log(err);
+                });
+            })
+            .catch((err) => {
+                setSuccess(false);
+                setFail(true);
+                console.log(err);
+            })
+        }
+    }
+
     return (
         <>
             <Container>
+                <Card>
+                    <Jumbotron>
+                        <h1>Find An Existing Trip</h1>
+                    </Jumbotron>
+                    <form>
+                        <Input
+                            onChange={handleInputChange}
+                            name="tripId"
+                            placeholder="Insert 9 Character ID Here"
+                        />
+                        <FormBtn disabled={!formObject.tripId} onClick={handleIdSubmit}>
+                            Add
+                        </FormBtn>
+                    </form>
+                </Card>
                 <Card>
                     <Jumbotron>
                         <h1>Create a New Trip</h1>

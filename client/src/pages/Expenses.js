@@ -132,7 +132,7 @@ function Expenses() {
                       <tr key={index}>
                         <td>{expense.expenseSubmitter}</td>
                         <td>{expense.expenseDescription}</td>
-                        <td>{expense.expenseAmount}</td>
+                        <td>${expense.expenseAmount}</td>
                         <td>{expense.expenseDate}</td>
                       </tr>
                     ))}

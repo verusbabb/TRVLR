@@ -60,7 +60,7 @@ function Expenses() {
                 expenseDescription: formObject.expenseDescription,
                 expenseAmount: formObject.expenseAmount,
                 expenseSubmitter: state.firstName,
-                expenseDate: formObject.expenseDate,
+                expenseDate: document.getElementById("expenseDate").value,
             })
                 .then((res) => {
                     console.log(res);
@@ -128,8 +128,8 @@ function Expenses() {
                                         name="expenseAmount"
                                         placeholder="Enter dollar amount here"
                                     />
-                                    <Input
-                                        onChange={handleInputChange}
+                                    <DatePicker
+                                        id="expenseDate"
                                         name="expenseDate"
                                         placeholder="When did you make the purchase?"
                                     />

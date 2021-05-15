@@ -59,6 +59,7 @@ module.exports = {
       })
       .catch((err) => res.status(422).json(err));
   },
+
   createSchedule: function (req, res) {
     console.log(req.body, "schedule test2")
     db.Schedule.create(req.body)
@@ -72,6 +73,7 @@ module.exports = {
      })
      .catch((err) => res.status(422).json(err));
  },
+ 
   updateTrip: function (req, res) {
     console.log(req.body);
     db.Trip.findByIdAndUpdate({ _id: req.params.id }, req.body)

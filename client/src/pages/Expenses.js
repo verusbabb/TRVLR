@@ -5,6 +5,7 @@ import { Input, TextArea, FormBtn } from "../components/Form";
 // import DeleteBtn from "../components/DeleteBtn";
 import { Container, Row, Col } from "../components/Grid";
 import Jumbotron from "../components/Jumbotron";
+import { Table, TableHead, TableBody } from "../components/Table";
 import { List, ListItem } from "../components/List";
 import API from "../utils/API";
 import { useUserContext } from "../utils/userContext";
@@ -112,20 +113,31 @@ function Expenses() {
                 />
                 <FormBtn onClick={handleFormSubmit}>Add</FormBtn>
               </form>
-              {/* map using Expenses.members or something similar from a Expenses object*/}
+            </Col>
+          </Row>
+        </Card>
+        <Card>
+          <Row>
+            <Col size="m12">
               {tripExpense.length ? (
-                <List>
-                  {tripExpense.map((expense, index) => (
-                    <ListItem key={index}>
-                      <p>
-                        {expense.expenseDescription}
-                        {expense.expenseAmount}
-                        {expense.expenseDate}
-                        {expense.expenseSubmitter}
-                      </p>
-                    </ListItem>
-                  ))}
-                </List>
+                <Table>
+                  <TableHead>
+                    <th>Person</th>
+                    <th>Expense</th>
+                    <th>Cost</th>
+                    <th>Date</th>
+                  </TableHead>
+                  <TableBody>
+                    {tripExpense.map((expense, index) => (
+                      <tr key={index}>
+                        <td>{expense.expenseSubmitter}</td>
+                        <td>{expense.expenseDescription}</td>
+                        <td>{expense.expenseAmount}</td>
+                        <td>{expense.expenseDate}</td>
+                      </tr>
+                    ))}
+                  </TableBody>
+                </Table>
               ) : (
                 <h3>No Results to Display</h3>
               )}

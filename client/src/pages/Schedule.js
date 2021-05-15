@@ -21,7 +21,7 @@ function Schedule() {
     const sortedSchedule = schedule.sort((a, b) => b.activityDate - a.activityDate)
 
     const { id } = useParams();
-    
+
     useEffect(() => {
         API.getTrip(id)
             .then(res => setTrip(res.data))
@@ -112,20 +112,6 @@ function Schedule() {
                                 onClick={handleFormSubmit}
                             >Add</FormBtn>
                         </form>
-                        {/* map using Expenses.members or something similar from a Expenses object*/}
-                        {/* {trip.tripExpenses ? (
-                                <List>
-                                    {trip.tripExpense.map((expense) => (
-                                        <Card>
-                                        <ListItem>
-                                            <p>{expense.expenseDescription} - {expense.expenseSubmitter}</p>
-                                        </ListItem>
-                                        </Card>
-                                    ))}
-                                </List>
-                            ) : (
-                                <h3>No Results to Display</h3>
-                            )} */}
                     </Col>
                 </Row>
             </Card>

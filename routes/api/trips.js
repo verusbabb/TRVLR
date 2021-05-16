@@ -15,13 +15,11 @@ router
   .delete(tripsController.removeTrip)
   .post(tripsController.createExpense);
 
-router
-  .route("/schedule/:id")
-  .post(tripsController.createSchedule)
-  
+router.route("/schedule/:id").post(tripsController.createSchedule);
+
 // Matches with "/api/trips/tripId"
-router
-  .route("/tripId/:tripId")
-  .get(tripsController.findTripByTripId);
+router.route("/tripId/:tripId").get(tripsController.findTripByTripId);
+
+router.route("/sum/:id").get(tripsController.sumExpenses);
 
 module.exports = router;

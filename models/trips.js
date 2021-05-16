@@ -24,7 +24,7 @@ const TripSchema = new Schema({
   startDate: {
     type: String,
   },
-  
+
   endDate: {
     type: String,
   },
@@ -36,22 +36,30 @@ const TripSchema = new Schema({
     // ref: "User",
     // required: true,
   },
-  members: [{
-    type: Schema.Types.ObjectId,
-    ref: "User",
-  }],
-  tripCollections: [{
-    type: Schema.Types.ObjectId,
-    ref: "Collection",
-  }],
-  tripExpenses: [{
-    type: Schema.Types.ObjectId,
-    ref: "Expense",
-  }],
-  tripSchedule: [{
-    type: Schema.Types.ObjectId,
-    ref: "Schedule",
-  }]
+  members: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
+  ],
+  tripCollections: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Collection",
+    },
+  ],
+  tripExpenses: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Expense",
+    },
+  ],
+  tripSchedule: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Schedule",
+    },
+  ],
 });
 
 const Trip = mongoose.model("Trip", TripSchema);

@@ -40,7 +40,7 @@ const API = {
 
   signOut: function () {
     console.log("signing out");
-    return axios.get("/api/users/signout")
+    return axios.get("/api/users/signout");
   },
 
   //TRIP ROUTES
@@ -58,7 +58,7 @@ const API = {
   },
   updateTrip: function (id, tripData) {
     return axios.put("/api/trips/" + id, {
-      members: tripData.members
+      members: tripData.members,
     });
   },
   // Deletes the trip with the given id
@@ -66,13 +66,17 @@ const API = {
     return axios.delete("/api/trips/" + id);
   },
 
-  createExpense: function(id, expenseData) {
+  createExpense: function (id, expenseData) {
     return axios.post(`/api/trips/${id}`, expenseData);
   },
 
-  createSchedule: function(id, scheduleData) {
+  createSchedule: function (id, scheduleData) {
     return axios.post(`/api/trips/schedule/${id}`, scheduleData);
-  }
+  },
+
+  sumExpenses: function (id) {
+    return axios.get("/api/trips/sum/" + id);
+  },
 };
 
 export default API;

@@ -19,11 +19,10 @@ module.exports = {
       .catch((err) => res.status(422).json(err));
   },
   findTripByTripId: function (req, res) {
-    console.log(req.params.tripId)
-    db.Trip.findOne(
-      {
-        tripId: req.params.tripId
-      })
+    console.log(req.params.tripId);
+    db.Trip.findOne({
+      tripId: req.params.tripId,
+    })
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
@@ -64,30 +63,29 @@ module.exports = {
   createSchedule: function (req, res) {
     console.log(req.body, "schedule test2");
     db.Schedule.create(req.body)
-     .then((dbTrip) => {
-       db.Trip.findByIdAndUpdate(
-         req.params.id,
-         { $addToSet: { tripSchedule: dbTrip._id } }
-       ).then((dbSchedule) => {
-         res.json(dbSchedule);
-       });
-     })
-     .catch((err) => res.status(422).json(err));
- },
- 
+      .then((dbTrip) => {
+        db.Trip.findByIdAndUpdate(req.params.id, {
+          $addToSet: { tripSchedule: dbTrip._id },
+        }).then((dbSchedule) => {
+          res.json(dbSchedule);
+        });
+      })
+      .catch((err) => res.status(422).json(err));
+  },
+
   updateTrip: function (req, res) {
     console.log(req.body);
     db.Trip.findByIdAndUpdate({ _id: req.params.id }, req.body)
-    .then(function (dbTrip) {
-      console.log(dbTrip);
-      return db.User.findByIdAndUpdate(
-        req.user._id,
-        {
-          $addToSet: { memberOf: dbTrip.id },
-        },
-        { new: true, upsert: true }
-      );
-    })
+      .then(function (dbTrip) {
+        console.log(dbTrip);
+        return db.User.findByIdAndUpdate(
+          req.user._id,
+          {
+            $addToSet: { memberOf: dbTrip.id },
+          },
+          { new: true, upsert: true }
+        );
+      })
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
@@ -96,5 +94,47 @@ module.exports = {
       .then((dbModel) => dbModel.remove())
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
+  },
+
+  sumExpenses: function (req, res) {
+    console.log("hi");
+    db.Trip.aggregate([
+      {
+        $unwind: "$tripExpenses",
+      },
+      {
+        $group: {
+          _id: "$tripExpenses",
+          total: {
+            $sum: "$expenseAmount",
+          },
+        },
+      },
+    ])
+      .exec(function (err, result) {
+        if (err) {
+          res.send(err);
+        } else {
+          res.json(result);
+        }
+      })
+      .then((res) => console.log(res));
+    //   db.Trip.findOne({ _id: req.params.id })
+    //     .populate({ path: "tripExpenses", model: "Expense" })
+    //     .aggregate([
+    //       {
+    //         total: {
+    //           $sum: "$expenseAmount",
+    //         },
+    //       },
+    //     ])
+    //     .exec(function (err, result) {
+    // if (err) {
+    //   res.send(err);
+    // } else {
+    //   res.json(result);
+    // }
+    //     })
+    //     .then((res) => console.log(res));
   },
 };

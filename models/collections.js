@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+require('mongoose-type-url');
 const Schema = mongoose.Schema;
 const Trip = require("./trips");
 
@@ -11,14 +12,27 @@ const CollectionsSchema = new Schema({
     collectionDescription: {
         type: String,
     },
-    collectionUrl: {
-        type: String,
-    },
-    collectionSubmitter: {
-        type: String,
-        trim: true,
-        required: true,
-    },
+    collectionItems: [
+        {
+            itemName: {
+                type: String,
+                trim: true,
+                required: true,
+            },
+            itemUrl: {
+                work: {type: mongoose.SchemaTypes.Url, required: true},
+                profile: {type: mongoose.SchemaTypes.Url, required: true},
+            },
+            itemDescription: {
+                type: String 
+            },
+            itemSubmitter: {
+                type: String,
+                trim: true,
+                required: true,
+            }
+        }
+    ],
     tripRef: {
         type: Schema.Types.ObjectId,
         ref: "Trip"

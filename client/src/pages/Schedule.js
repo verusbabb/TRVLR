@@ -57,11 +57,12 @@ function Schedule() {
                 startTime: document.getElementById("startTime").value,
                 endTime: document.getElementById("endTime").value
             })
-            .then((res) => {
-                console.log(res, "schedule test")
-                setSched(res.data.tripSchedule);
-            }
-            )
+                .then((res) => {
+                    console.log(res, "schedule test");
+                    setSched(res.data.tripSchedule);
+                    sortSched(res.data.tripSchedule);
+                }
+                )
                 // .then(res => findAllTrips())
                 .catch(err => console.log(err));
         }
@@ -97,6 +98,9 @@ function Schedule() {
                                 id="activityDate"
                                 name="activityDate"
                                 placeholder="Date"
+                                options={{
+                                    container: "body"
+                                }}
                             />
                             <TimePicker
                                 id="startTime"
@@ -128,30 +132,35 @@ function Schedule() {
                         {/* {schedule.map((schedule, index))} */}
                         {sched.length ? (
                             <Table >
-                            <TableHead>
-                                <th>Date</th>
-                                <th>Activity</th>
-                                <th>Time</th>
-                            </TableHead>
-                            <TableBody>
-                                {sched.map((schedule, index) => (
-                                    <tr key={index}>
-                                        <td>{schedule.activityDate}</td>
-                                        <td>{schedule.activityName}</td>
-                                        <td>{schedule.startTime}</td>
-                                    </tr>
-                                ))}
-                            </TableBody>
-                        </Table>
+                                <TableHead>
+                                    <th>Date</th>
+                                    <th>Activity</th>
+                                    <th>Time</th>
+                                </TableHead>
+                                <TableBody>
+                                    {sched.map((schedule, index) => (
+                                        <tr key={index}>
+                                            <td>{schedule.activityDate}</td>
+                                            <td>{schedule.activityName}</td>
+                                            <td>{schedule.startTime}</td>
+                                        </tr>
+                                    ))}
+                                </TableBody>
+                            </Table>
                         ) : (
-                                <h3>No Results to Display</h3>
+                            <h3>No Results to Display</h3>
                         )}
                     </Col>
                 </Row>
             </Card>
             <Card>
                 <Row>
-                    <Col size="m6">
+                    <Col size="m12">
+                        <Link to={"/trips/" + id}>← Back to Trip</Link>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col size="m12">
                         <Link to="/dashboard">← Back to Dashboard</Link>
                     </Col>
                 </Row>

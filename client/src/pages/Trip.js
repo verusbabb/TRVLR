@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { Col, Row, Container } from "../components/Grid";
 import Card from "../components/Card";
 import { List, ListItem } from "../components/List";
+import { Collection, CollectionItem } from "react-materialize";
 import DeleteBtn from "../components/DeleteBtn";
 import SearchBar from "../components/SearchBar";
 import SubmitButton from "../components/SubmitButton";
@@ -80,24 +81,24 @@ function Trip() {
       </Card>
       <Card>
         <Row>
-          <Col size="m10">
+          <Col size="m12 s12">
             <article>
               <h2>Trip Members</h2>
               <SearchBar onChange={handleInputChange} />
               <SubmitButton onClick={handleSubmit} />
               {trip.members.length ? (
-                <div>
-                  {trip.members.map((friend, index) => (
-                    <Card key={index}>
-                      <List>
-                        <ListItem>Username: {friend.userName}</ListItem>
-                        <ListItem>
-                          {friend.name.firstName + " " + friend.name.lastName}
-                        </ListItem>
-                      </List>
-                    </Card>
-                  ))}
-                </div>
+                <Collection>
+                {trip.members.map((friend, index) => (
+                  
+                      <CollectionItem key={index}><span>Username: {friend.userName}</span>
+                      <br />
+                      
+                        {friend.name.firstName + " " + friend.name.lastName}
+                      </CollectionItem>
+               
+                 
+                ))}
+              </Collection>
               ) : (
                 ""
               )}

@@ -53,12 +53,12 @@ function Login() {
     <>
       <div className="container login-box">
         <Row>
-          <Col size="l8 offset-l2 s12">
+          <Col size="m12 s12">
             <Card>
               <Row>
                 <h3>Log Into an Existing Account</h3>
               </Row>
-              <form className="valign">
+              <form>
                 <Input
                   onChange={handleInputChange}
                   name="userName"

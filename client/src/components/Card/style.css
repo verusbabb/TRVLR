@@ -9,6 +9,6 @@ a {
   and (max-device-width: 992px) {
 .card {
     max-width: 90%;
-    margin: 2% auto;
+    margin: 3% auto;
 }
   }

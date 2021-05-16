@@ -12,6 +12,7 @@ module.exports = {
   findTripById: function (req, res) {
     db.Trip.findById(req.params.id)
       .populate("tripExpenses")
+      .populate("tripSchedule")
       .populate("members")
       .exec()
       .then((dbModel) => res.json(dbModel))

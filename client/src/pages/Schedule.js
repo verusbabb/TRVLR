@@ -1,16 +1,16 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import Card from "../components/Card";
-import DeleteBtn from "../components/DeleteBtn";
+// import DeleteBtn from "../components/DeleteBtn";
 import { Container, Row, Col } from "../components/Grid";
 import { Input, TextArea, FormBtn } from "../components/Form";
 import Jumbotron from "../components/Jumbotron"
-import { List, ListItem } from "../components/List";
 import { Table, TableHead, TableBody } from "../components/Table";
 import API from "../utils/API";
 import { useUserContext } from "../utils/userContext";
-import schedule from "../utils/schedule.json";
+// import schedule from "../utils/schedule.json";
 import { DatePicker, TimePicker } from "react-materialize";
+import moment from "moment";
 
 function Schedule() {
 
@@ -18,24 +18,28 @@ function Schedule() {
     const [trip, setTrip] = useState({});
     const { state } = useUserContext();
     const [formObject, setFormObject] = useState({})
-    const sortedSchedule = schedule.sort((a, b) => b.activityDate - a.activityDate)
 
     const { id } = useParams();
 
     useEffect(() => {
         API.getTrip(id)
-            .then(res => setTrip(res.data))
+            .then(res => {
+                setTrip(res.data);
+                // setSched(res.data.tripSchedule);
+                sortSched(res.data.tripSchedule);
+            })
             .catch(err => console.log(err));
-    }, [])
+        // sortSched();
+    }, [id])
 
-    function sortSched() {
-        // schedule.sort(function (a, b) {
-        //     return a.activityDate - b.activityDate
-        // });
-        console.log(sortedSchedule)
+    function sortSched(unsortedSchedule) {
+        let sortedSchedule = unsortedSchedule.sort((a, b) => {
+            return moment(a.activityDate + ", " + a.startTime).valueOf() - moment(b.activityDate + ", " + b.startTime).valueOf();
+        });
+        setSched(sortedSchedule);
     }
 
-    sortSched();
+    // sortSched();
 
     function handleInputChange(event) {
         const { name, value } = event.target;
@@ -55,6 +59,7 @@ function Schedule() {
             })
             .then((res) => {
                 console.log(res, "schedule test")
+                setSched(res.data.tripSchedule);
             }
             )
                 // .then(res => findAllTrips())
@@ -121,23 +126,26 @@ function Schedule() {
                         <h1>Schedule</h1>
                         {/* map using schedule.days or something similar from a schedule object*/}
                         {/* {schedule.map((schedule, index))} */}
-                        <h2>Day 1 - Thursday</h2>
-                        <Table >
+                        {sched.length ? (
+                            <Table >
                             <TableHead>
-                                <th>Time</th>
+                                <th>Date</th>
                                 <th>Activity</th>
+                                <th>Time</th>
                             </TableHead>
                             <TableBody>
-                                <tr>
-                                    <td>8:00 am</td>
-                                    <td>Leave for Trip</td>
-                                </tr>
-                                <tr>
-                                    <td>12:00 pm - 1:00 pm</td>
-                                    <td>Lunch</td>
-                                </tr>
+                                {sched.map((schedule, index) => (
+                                    <tr key={index}>
+                                        <td>{schedule.activityDate}</td>
+                                        <td>{schedule.activityName}</td>
+                                        <td>{schedule.startTime}</td>
+                                    </tr>
+                                ))}
                             </TableBody>
                         </Table>
+                        ) : (
+                                <h3>No Results to Display</h3>
+                        )}
                     </Col>
                 </Row>
             </Card>

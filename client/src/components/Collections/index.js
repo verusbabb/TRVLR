@@ -7,6 +7,7 @@ import { Table, TableHead, TableBody } from "../Table";
 import API from "../../utils/API";
 import { Modal, Button, Collapsible, CollapsibleItem } from "react-materialize";
 import { Link, useParams } from "react-router-dom";
+import { M } from "materialize-css";
 
 function Collections() {
 
@@ -17,10 +18,9 @@ function Collections() {
 
     const { id } = useParams();
 
-
     useEffect(() => {
         loadTrip();
-    }, [id, collection]);
+    }, [id]);
 
     function loadTrip() {
         API.getTrip(id)
@@ -57,7 +57,8 @@ function Collections() {
             })
                 .then((res) => {
                     console.log(res);
-                    setCollection(res.data.tripCollections);
+                    // setCollection(res.data.tripCollections);
+                    loadTrip();
                     // console.log(user, "user data");
                     // API.getTrips()
                     //     .then((res) => {
@@ -117,8 +118,7 @@ function Collections() {
                     <Col size="m12">
                         {collection.length ? (
                             <Collapsible accordion={false}>
-                                {collection.map((collect, index) => {
-
+                                {collection.map((collect, index) => (
                                     <CollapsibleItem
                                         key={index}
                                         expanded={false}
@@ -128,7 +128,7 @@ function Collections() {
                                     >
                                         {collect.collectionDescription}
                                     </CollapsibleItem>
-                                })}
+                                ))}
                             </Collapsible>
                         ) : (
                             <h3>No Results to Display</h3>

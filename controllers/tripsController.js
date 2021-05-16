@@ -61,14 +61,14 @@ module.exports = {
   },
 
   createSchedule: function (req, res) {
-    console.log(req.body, "schedule test2")
+    console.log(req.body, "schedule test2");
     db.Schedule.create(req.body)
      .then((dbTrip) => {
        db.Trip.findByIdAndUpdate(
-         { _id: req.params.id },
-         { $push: { tripSchedule: dbTrip._id } }
-       ).then((res) => {
-         res.json(dbTrip);
+         req.params.id,
+         { $addToSet: { tripSchedule: dbTrip._id } }
+       ).then((dbSchedule) => {
+         res.json(dbSchedule);
        });
      })
      .catch((err) => res.status(422).json(err));

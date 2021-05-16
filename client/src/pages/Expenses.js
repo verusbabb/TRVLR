@@ -136,7 +136,7 @@ function Expenses() {
                                         placeholder="When did you make the purchase?"
                                         options={{
                                             autoClose: false,
-                                            container: "body",
+                                            // container: "body",
                                         }}
                                     />
                                     <FormBtn onClick={handleFormSubmit}>Add</FormBtn>

@@ -13,6 +13,7 @@ module.exports = {
     db.Trip.findById(req.params.id)
       .populate("tripExpenses")
       .populate("tripSchedule")
+      .populate("tripCollections")
       .populate("members")
       .sort({ "tripSchedule.activityName": -1 })
       .exec()
@@ -85,7 +86,7 @@ module.exports = {
    .then((dbTrip) => {
      db.Trip.findByIdAndUpdate(
        req.params.id,
-       { $addToSet: { tripCollection: dbTrip._id } }
+       { $addToSet: { tripCollections: dbTrip._id } }
      ).then((dbCollection) => {
        res.json(dbCollection);
      });

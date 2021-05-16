@@ -12,17 +12,17 @@ import Jumbotron from "../components/Jumbotron";
 import { DatePicker } from "react-materialize";
 
 function CreateTrip() {
-  const [trips, setTrips] = useState([]);
-  const [formObject, setFormObject] = useState({});
-  const [success, setSuccess] = useState(true);
-  const [fail, setFail] = useState(true);
-  const { state, dispatch } = useUserContext();
-  const history = useHistory();
+    const [trips, setTrips] = useState([]);
+    const [formObject, setFormObject] = useState({});
+    const [success, setSuccess] = useState(true);
+    const [fail, setFail] = useState(true);
+    const { state, dispatch } = useUserContext();
+    const history = useHistory();
 
-  function handleInputChange(event) {
-    const { name, value } = event.target;
-    setFormObject({ ...formObject, [name]: value });
-  }
+    function handleInputChange(event) {
+        const { name, value } = event.target;
+        setFormObject({ ...formObject, [name]: value });
+    }
 
     const randomID = () => {
         return Math.random().toString(36).substr(2, 9).toUpperCase();
@@ -47,7 +47,7 @@ function CreateTrip() {
                         type: "update",
                         memberOf: res.data.memberOf,
                     });
-    
+
                     history.push("/dashboard");
                 })
                 // .then(res => findAllTrips())
@@ -61,40 +61,40 @@ function CreateTrip() {
 
     function handleIdSubmit(event) {
         event.preventDefault();
-        if(formObject.tripId) {
+        if (formObject.tripId) {
             API.findTripByTripId(
                 {
                     tripId: formObject.tripId
                 }
             )
-            .then((res) => {
-                console.log(res.data)
-                API.updateTrip(
-                    res.data._id,
-                    {
-                        members: [...res.data.members, state.id]
-                    }
-                )
-                .then(async (res) => {
-                    console.log(res.data, "line 80 createtrip")
-                    dispatch({
-                        type: "update",
-                        memberOf: res.data.memberOf,
-                    });
-    
-                    history.push("/dashboard");
+                .then((res) => {
+                    console.log(res.data)
+                    API.updateTrip(
+                        res.data._id,
+                        {
+                            members: [...res.data.members, state.id]
+                        }
+                    )
+                        .then(async (res) => {
+                            console.log(res.data, "line 80 createtrip")
+                            dispatch({
+                                type: "update",
+                                memberOf: res.data.memberOf,
+                            });
+
+                            history.push("/dashboard");
+                        })
+                        .catch((err) => {
+                            setSuccess(false);
+                            setFail(true);
+                            console.log(err);
+                        });
                 })
-                .catch((err) =>{
+                .catch((err) => {
                     setSuccess(false);
                     setFail(true);
                     console.log(err);
-                });
-            })
-            .catch((err) => {
-                setSuccess(false);
-                setFail(true);
-                console.log(err);
-            })
+                })
         }
     }
 
@@ -132,24 +132,33 @@ function CreateTrip() {
                             id="startDate"
                             name="startDate"
                             placeholder="Start Date"
+                            options={{
+                                container: "body"
+                            }}
                         />
-
-            <DatePicker id="endDate" name="endDate" placeholder="End Date" />
-            <TextArea
-              onChange={handleInputChange}
-              name="description"
-              placeholder="(Optional) What kind of trip is this, what are your hopes and dreams? Are you looking to accomplish anything specific?"
-            />
-            <FormBtn disabled={!formObject.tripName} onClick={handleFormSubmit}>
-              Create
+                        <DatePicker
+                            id="endDate"
+                            name="endDate"
+                            placeholder="End Date"
+                            options={{
+                                container: "body"
+                            }}
+                        />
+                        <TextArea
+                            onChange={handleInputChange}
+                            name="description"
+                            placeholder="(Optional) What kind of trip is this, what are your hopes and dreams? Are you looking to accomplish anything specific?"
+                        />
+                        <FormBtn disabled={!formObject.tripName} onClick={handleFormSubmit}>
+                            Create
             </FormBtn>
-            {!success && <div> Whoops! Please try again.</div>}
-            {!fail && <div> Success! Your trip was created.</div>}
-          </form>
-        </Card>
-      </Container>
-    </>
-  );
+                        {!success && <div> Whoops! Please try again.</div>}
+                        {!fail && <div> Success! Your trip was created.</div>}
+                    </form>
+                </Card>
+            </Container>
+        </>
+    );
 }
 
 export default CreateTrip;

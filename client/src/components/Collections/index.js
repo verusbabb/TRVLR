@@ -5,15 +5,15 @@ import { Container, Row, Col } from "../Grid";
 import { Input, TextArea, FormBtn } from "../Form";
 import { Table, TableHead, TableBody } from "../Table";
 import API from "../../utils/API";
-import { Modal, Button } from "react-materialize";
+import { Modal, Button, Collapsible, CollapsibleItem } from "react-materialize";
 import { Link, useParams } from "react-router-dom";
 
 function Collections() {
 
     const [collection, setCollection] = useState({});
-    const { state } = useUserContext();
-    const [trip, setTrip] = useState({ members: [] });
+    const [trip, setTrip] = useState();
     const [formObject, setFormObject] = useState({});
+    const { state } = useUserContext();
 
     const { id } = useParams();
 
@@ -111,6 +111,28 @@ function Collections() {
                                 <FormBtn onClick={handleFormSubmit}>Add</FormBtn>
                             </form>
                         </Modal>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col size="m12">
+                        {collection.length ? (
+                            <Collapsible accordion={false}>
+                                {collection.map((collect, index) => {
+
+                                    <CollapsibleItem
+                                        key={index}
+                                        expanded={false}
+                                        header={collect.collectionName}
+                                        // icon={<Icon>filter_drama</Icon>}
+                                        node="div"
+                                    >
+                                        {collect.collectionDescription}
+                                    </CollapsibleItem>
+                                })}
+                            </Collapsible>
+                        ) : (
+                            <h3>No Results to Display</h3>
+                        )}
                     </Col>
                 </Row>
             </Card>

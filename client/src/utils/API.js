@@ -72,6 +72,10 @@ const API = {
 
   createSchedule: function(id, scheduleData) {
     return axios.post(`/api/trips/schedule/${id}`, scheduleData);
+  },
+
+  createCollection: function(id, collectionData) {
+    return axios.post(`/api/trips/collection/${id}`, collectionData);
   }
 };
 

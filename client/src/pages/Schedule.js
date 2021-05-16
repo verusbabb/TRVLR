@@ -107,6 +107,9 @@ function Schedule() {
                                 name="activityDate"
                                 value={formObject.activityDate}
                                 placeholder="Date"
+                                options={{
+                                    container: "body"
+                                }}
                             />
                             <TimePicker
                                 id="startTime"
@@ -141,30 +144,35 @@ function Schedule() {
                         {/* {schedule.map((schedule, index))} */}
                         {sched.length ? (
                             <Table >
-                            <TableHead>
-                                <th>Date</th>
-                                <th>Activity</th>
-                                <th>Time</th>
-                            </TableHead>
-                            <TableBody>
-                                {sched.map((schedule, index) => (
-                                    <tr key={index}>
-                                        <td>{schedule.activityDate}</td>
-                                        <td>{schedule.activityName}</td>
-                                        <td>{schedule.startTime}</td>
-                                    </tr>
-                                ))}
-                            </TableBody>
-                        </Table>
+                                <TableHead>
+                                    <th>Date</th>
+                                    <th>Activity</th>
+                                    <th>Time</th>
+                                </TableHead>
+                                <TableBody>
+                                    {sched.map((schedule, index) => (
+                                        <tr key={index}>
+                                            <td>{schedule.activityDate}</td>
+                                            <td>{schedule.activityName}</td>
+                                            <td>{schedule.startTime}</td>
+                                        </tr>
+                                    ))}
+                                </TableBody>
+                            </Table>
                         ) : (
-                                <h3>No Results to Display</h3>
+                            <h3>No Results to Display</h3>
                         )}
                     </Col>
                 </Row>
             </Card>
             <Card>
                 <Row>
-                    <Col size="m6">
+                    <Col size="m12">
+                        <Link to={"/trips/" + id}>← Back to Trip</Link>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col size="m12">
                         <Link to="/dashboard">← Back to Dashboard</Link>
                     </Col>
                 </Row>

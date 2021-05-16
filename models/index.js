@@ -4,5 +4,6 @@ module.exports = {
   User: require("./users"),
   Trip: require("./trips"),
   Expense: require("./expenses"),
-  Schedule: require("./schedule")
+  Schedule: require("./schedule"),
+  Collection: require("./collections")
 };

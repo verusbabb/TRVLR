@@ -18,7 +18,11 @@ router
 router
   .route("/schedule/:id")
   .post(tripsController.createSchedule)
-  
+
+router
+  .route("/collection/:id")
+  .post(tripsController.createCollection)
+
 // Matches with "/api/trips/tripId"
 router
   .route("/tripId/:tripId")

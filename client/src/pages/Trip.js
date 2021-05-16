@@ -10,150 +10,127 @@ import SubmitButton from "../components/SubmitButton";
 import { useUserContext } from "../utils/userContext";
 import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
+import Collections from "../components/Collections";
 
 function Trip() {
-  const [trip, setTrip] = useState({ members: [] });
-  const [friendUsername, setFriendUsername] = useState("");
-  const [friendData, setFriendData] = useState({});
-  const { state } = useUserContext();
+    const [trip, setTrip] = useState({ members: [] });
+    const [friendUsername, setFriendUsername] = useState("");
+    const [friendData, setFriendData] = useState({});
+    const { state } = useUserContext();
 
-  // When this component mounts, grab the trip with the _id of props.match.params.id
-  // e.g. localhost:3000/trips/599dcb67f0f16317844583fc
-  const { id } = useParams();
+    // When this component mounts, grab the trip with the _id of props.match.params.id
+    // e.g. localhost:3000/trips/599dcb67f0f16317844583fc
+    const { id } = useParams();
 
-  useEffect(() => {
-    API.getTrip(id)
-      .then((res) => {
-        setTrip(res.data);
-      })
-      .catch((err) => console.log(err));
-  }, [friendData]);
+    useEffect(() => {
+        API.getTrip(id)
+            .then((res) => {
+                setTrip(res.data);
+            })
+            .catch((err) => console.log(err));
+    }, [friendData]);
 
-  function handleInputChange(e) {
-    const username = e.target.value;
+    function handleInputChange(e) {
+        const username = e.target.value;
 
-    setFriendUsername(username);
-  }
+        setFriendUsername(username);
+    }
 
-  function handleSubmit(e) {
-    e.preventDefault();
+    function handleSubmit(e) {
+        e.preventDefault();
 
-    API.getUserByUsername(friendUsername)
-      .then((res) => {
-        setFriendData(res.data);
+        API.getUserByUsername(friendUsername)
+            .then((res) => {
+                setFriendData(res.data);
 
-        if (trip.members.some((e) => e.userName === friendUsername)) {
-          return;
-        }
-        console.log(friendData);
-        API.updateTrip(id, {
-          members: [
-            ...trip.members,
-            {
-              userName: friendData.userName,
-              name: {
-                firstName: friendData.name.firstName,
-                lastName: friendData.name.lastName,
-              },
-            },
-          ],
-        })
-          .then((res) => setTrip(res.data))
-          .catch((err) => console.log(err));
-      })
-      .catch((err) => console.log(err));
-  }
+                if (trip.members.some((e) => e.userName === friendUsername)) {
+                    return;
+                }
+                console.log(friendData);
+                API.updateTrip(id, {
+                    members: [
+                        ...trip.members,
+                        {
+                            userName: friendData.userName,
+                            name: {
+                                firstName: friendData.name.firstName,
+                                lastName: friendData.name.lastName,
+                            },
+                        },
+                    ],
+                })
+                    .then((res) => setTrip(res.data))
+                    .catch((err) => console.log(err));
+            })
+            .catch((err) => console.log(err));
+    }
 
-  return (
-    <Container fluid>
-      <Card>
-        <Row>
-          <Col size="m12">
-            <Jumbotron>
-              <h1>{trip.tripName}</h1>
-            </Jumbotron>
-            <h3>
-              {trip.startDate} to {trip.endDate}
-            </h3>
-            <p>{trip.description}</p>
-          </Col>
-        </Row>
-      </Card>
-      <Card>
-        <Row>
-          <Col size="m12 s12">
-            <article>
-              <h2>Trip Members</h2>
-              <SearchBar onChange={handleInputChange} />
-              <SubmitButton onClick={handleSubmit} />
-              {trip.members.length ? (
-                <Collection>
-                {trip.members.map((friend, index) => (
-                  
-                      <CollectionItem key={index}><span>Username: {friend.userName}</span>
-                      <br />
-                      
-                        {friend.name.firstName + " " + friend.name.lastName}
-                      </CollectionItem>
-               
-                 
-                ))}
-              </Collection>
-              ) : (
-                ""
-              )}
-            </article>
-          </Col>
-        </Row>
-      </Card>
-      <Card>
-        <Row>
-          <Col size="m10">
-            <article>
-              <h2>Collections</h2>
-              {/* {trip.collections.length ? (
-                            <List>
-                                {trip.collections.map(collection => (
-                                    <ListItem key={collection.name}>
-                                        <Link to={"/trips/" + trip._id}>
-                                            <strong>
-                                                {collection.name}
-                                            </strong>
-                                        </Link>
-                                        <DeleteBtn onClick={() => removeTrip(trip._id)} />
-                                    </ListItem>
-                                ))}
-                            </List>
-                        ) : (
-                            <h3>No Results to Display</h3>
-                        )} */}
-            </article>
-          </Col>
-        </Row>
-      </Card>
-      <Card>
-        <Row>
-          <Col size="m6">
-            <Link to={"/trips/" + trip._id + "/schedule"}>Trip Schedule</Link>
-          </Col>
-        </Row>
-      </Card>
-      <Card>
-        <Row>
-          <Col size="m6">
-            <Link to={"/trips/" + trip._id + "/expenses"}>Trip Expenses</Link>
-          </Col>
-        </Row>
-      </Card>
-      <Card>
-        <Row>
-          <Col size="m6">
-            <Link to="/dashboard">← Back to Dashboard</Link>
-          </Col>
-        </Row>
-      </Card>
-    </Container>
-  );
+    return (
+        <Container fluid>
+            <Card>
+                <Row>
+                    <Col size="m12">
+                        <Jumbotron>
+                            <h1>{trip.tripName}</h1>
+                        </Jumbotron>
+                        <h3>
+                            {trip.startDate} to {trip.endDate}
+                        </h3>
+                        <p>{trip.description}</p>
+                    </Col>
+                </Row>
+            </Card>
+            <Card>
+                <Row>
+                    <Col size="m12 s12">
+                        <article>
+                            <h2>Trip Members</h2>
+                            <SearchBar onChange={handleInputChange} />
+                            <SubmitButton onClick={handleSubmit} />
+                            {trip.members.length ? (
+                                <Collection>
+                                    {trip.members.map((friend, index) => (
+
+                                        <CollectionItem key={index}><span>Username: {friend.userName}</span>
+                                            <br />
+
+                                            {friend.name.firstName + " " + friend.name.lastName}
+                                        </CollectionItem>
+
+
+                                    ))}
+                                </Collection>
+                            ) : (
+                                ""
+                            )}
+                        </article>
+                    </Col>
+                </Row>
+            </Card>
+            <Collections />
+            <Card>
+                <Row>
+                    <Col size="m12">
+                        <Link to={"/trips/" + trip._id + "/schedule"}>Trip Schedule</Link>
+                    </Col>
+                </Row>
+            </Card>
+            <Card>
+                <Row>
+                    <Col size="m12">
+                        <Link to={"/trips/" + trip._id + "/expenses"}>Trip Expenses</Link>
+                    </Col>
+                </Row>
+            </Card>
+            <Card>
+                <Row>
+                    <Col size="m12">
+                        <Link to="/dashboard">← Back to Dashboard</Link>
+                    </Col>
+                </Row>
+            </Card>
+        </Container>
+    );
 }
 
 export default Trip;

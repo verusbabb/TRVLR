@@ -13,6 +13,7 @@ module.exports = {
     db.Trip.findById(req.params.id)
       .populate("tripExpenses")
       .populate("tripSchedule")
+      .populate("tripCollections")
       .populate("members")
       .sort({ "tripSchedule.activityName": -1 })
       .exec()
@@ -79,7 +80,20 @@ module.exports = {
      })
      .catch((err) => res.status(422).json(err));
  },
- 
+
+ createCollection: function (req, res) {
+  db.Collection.create(req.body)
+   .then((dbTrip) => {
+     db.Trip.findByIdAndUpdate(
+       req.params.id,
+       { $addToSet: { tripCollections: dbTrip._id } }
+     ).then((dbCollection) => {
+       res.json(dbCollection);
+     });
+   })
+   .catch((err) => res.status(422).json(err));
+},
+
   updateTrip: function (req, res) {
     console.log(req.body);
     db.Trip.findByIdAndUpdate({ _id: req.params.id }, req.body)

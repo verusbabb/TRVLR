@@ -104,8 +104,10 @@ function Expenses() {
                                 fixedFooter={false}
                                 header="Add an Expense"
                                 id="Modal-0"
+                                className="modal"
                                 open={false}
                                 options={{
+                                    container: "body",
                                     dismissible: true,
                                     endingTop: '10%',
                                     inDuration: 250,
@@ -132,6 +134,10 @@ function Expenses() {
                                         id="expenseDate"
                                         name="expenseDate"
                                         placeholder="When did you make the purchase?"
+                                        options={{
+                                            autoClose: false,
+                                            // container: "body",
+                                        }}
                                     />
                                     <FormBtn onClick={handleFormSubmit}>Add</FormBtn>
                                 </form>
@@ -168,7 +174,12 @@ function Expenses() {
                 </Card>
                 <Card>
                     <Row>
-                        <Col size="m6">
+                        <Col size="m12">
+                            <Link to={"/trips/" + id}>← Back to Trip</Link>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col size="m12">
                             <Link to="/dashboard">← Back to Dashboard</Link>
                         </Col>
                     </Row>

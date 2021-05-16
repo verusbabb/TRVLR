@@ -18,6 +18,7 @@ body {
 main {
   flex: 1 0 auto;
   min-width: 80vw;
+  min-height: 100%;
 }
 
 .transparentBG {
@@ -46,3 +47,6 @@ border: 1px solid rgba( 255, 255, 255, 0.18 );
   opacity: 1;
 }
 
+textarea{
+  height: 10vh;
+}

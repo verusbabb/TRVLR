@@ -22,20 +22,25 @@ function Schedule() {
     const { id } = useParams();
 
     useEffect(() => {
+        loadTrip();
+    }, [id])
+
+    function loadTrip() {
         API.getTrip(id)
             .then(res => {
                 setTrip(res.data);
-                // setSched(res.data.tripSchedule);
+                console.log(res.data);
                 sortSched(res.data.tripSchedule);
             })
             .catch(err => console.log(err));
-        // sortSched();
-    }, [id])
+    }
 
     function sortSched(unsortedSchedule) {
+        console.log(unsortedSchedule, "unsorted");
         let sortedSchedule = unsortedSchedule.sort((a, b) => {
             return moment(a.activityDate + ", " + a.startTime).valueOf() - moment(b.activityDate + ", " + b.startTime).valueOf();
         });
+        console.log(sortedSchedule, "sorted")
         setSched(sortedSchedule);
     }
 
@@ -49,6 +54,7 @@ function Schedule() {
     function handleFormSubmit(event) {
         console.log(state)
         event.preventDefault();
+
         if (formObject.activityName) {
             API.createSchedule(id, {
                 activityName: formObject.activityName,
@@ -57,12 +63,12 @@ function Schedule() {
                 startTime: document.getElementById("startTime").value,
                 endTime: document.getElementById("endTime").value
             })
-                .then((res) => {
-                    console.log(res, "schedule test");
-                    setSched(res.data.tripSchedule);
-                    sortSched(res.data.tripSchedule);
-                }
-                )
+            .then((res) => {
+                console.log(res.data.tripSchedule, "schedule test")
+
+                loadTrip();
+            }
+            )
                 // .then(res => findAllTrips())
                 .catch(err => console.log(err));
         }

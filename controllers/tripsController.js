@@ -14,6 +14,7 @@ module.exports = {
       .populate("tripExpenses")
       .populate("tripSchedule")
       .populate("members")
+      .sort({ "tripSchedule.activityName": -1 })
       .exec()
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
@@ -38,7 +39,8 @@ module.exports = {
         db.User.findByIdAndUpdate(
           { _id: req.body.id },
           { $push: { memberOf: dbModel._id } }
-        ).then((res) => {
+        )
+        .then((res) => {
           res.json(dbModel);
         });
       })
@@ -68,7 +70,10 @@ module.exports = {
        db.Trip.findByIdAndUpdate(
          req.params.id,
          { $addToSet: { tripSchedule: dbTrip._id } }
-       ).then((dbSchedule) => {
+       )
+       .populate("tripSchedule")
+       .exec()
+       .then((dbSchedule) => {
          res.json(dbSchedule);
        });
      })

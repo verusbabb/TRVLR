@@ -79,7 +79,7 @@ function Collections() {
     <>
       <Card>
         <Row>
-          <Col size="m12">
+          <Col size="m12 s12">
             <h1>Collections</h1>
             <br></br>
             <Modal

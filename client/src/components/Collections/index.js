@@ -7,7 +7,7 @@ import { Table, TableHead, TableBody } from "../Table";
 import API from "../../utils/API";
 import { Modal, Button, Collapsible, CollapsibleItem } from "react-materialize";
 import { Link, useParams } from "react-router-dom";
-import { M } from "materialize-css";
+
 
 function Collections() {
 
@@ -27,18 +27,9 @@ function Collections() {
             .then((res) => {
                 setTrip(res.data);
                 setCollection(res.data.tripCollections);
-                // setCollection(trip.tripCollections);
-                // console.log(trip.tripCollections, "expense test1");
-                // setExpense()
             })
             .catch((err) => console.log(err));
     }
-
-    //   function setExpense() {
-    //     // console.log(trip, "expense test");
-    //     setCollection(trip.tripCollections);
-    //     // console.log(expenses, "expenses 2")
-    //   }
 
     function handleInputChange(event) {
         const { name, value } = event.target;
@@ -66,6 +57,24 @@ function Collections() {
                     //         console.log(res.data);
                 })
                 .catch((err) => console.log(err));
+        }
+    }
+
+    const handleItemEntry = (collectionId) => {
+        // event.preventDefault();
+        if (formObject.itemName) {
+            console.log(formObject, collectionId)
+            API.createCollectionItem(collectionId, {
+                itemName: formObject.itemName,
+                itemUrl: formObject.itemUrl,
+                itemDescription: formObject.itemDescription,
+                itemSubmitter: state.firstName
+            }
+            )
+                .then((res) => {
+                    loadTrip();
+                })
+                .catch((err) => console.log(err))
         }
     }
 
@@ -127,6 +136,74 @@ function Collections() {
                                         node="div"
                                     >
                                         {collect.collectionDescription}
+                                        <br></br>
+                                        <br></br>
+                                        <Modal
+                                            actions={[
+                                                <Button flat modal="close" node="button" waves="green">Close</Button>
+                                            ]}
+                                            bottomSheet={false}
+                                            fixedFooter={false}
+                                            header="Add an Item"
+                                            id="collectionItem"
+                                            className="modal"
+                                            open={false}
+                                            options={{
+                                                container: "body",
+                                                dismissible: true,
+                                                endingTop: '10%',
+                                                inDuration: 250,
+                                                opacity: 0.5,
+                                                outDuration: 250,
+                                                preventScrolling: true,
+                                                startingTop: '4%'
+                                            }}
+                                            trigger={<Link node="button">+ Add an Item to this Collection</Link>}
+                                        >
+                                            {/* <form> */}
+                                            <Input
+                                                onChange={handleInputChange}
+                                                name="itemName"
+                                                value={formObject.itemName}
+                                                placeholder="Item Name"
+                                            />
+                                            <Input
+                                                onChange={handleInputChange}
+                                                name="itemUrl"
+                                                value={formObject.itemUrl}
+                                                placeholder="(Optional) Enter a link"
+                                            />
+                                            <TextArea
+                                                onChange={handleInputChange}
+                                                name="itemDescription"
+                                                value={formObject.itemDescription}
+                                                placeholder="(Optional) Add a description"
+                                            >
+                                            </TextArea>
+                                            <FormBtn onClick={() => handleItemEntry(collect._id)}>Add</FormBtn>
+                                            {/* </form> */}
+                                        </Modal>
+                                        
+                                        {collect.collectionItems.length ? (
+                                            <Table>
+                                                <TableHead>
+                                                    <th>{collect.collectionName}</th>
+                                                    <th>Url</th>
+                                                    <th>Suggested By</th>
+                                                </TableHead>
+                                                <TableBody>
+                                                    {collect.collectionItems.map((item, index) => (
+                                                        <tr key={index}>
+                                                            <td>{item.itemName}</td>
+                                                            <td>{item.itemUrl}</td>
+                                                            <td>{item.itemSubmitter}</td>
+                                                        </tr>
+                                                    ))}
+                                                </TableBody>
+                                            </Table>
+                                        ) : (
+                                            <p>No Results to Display</p>
+                                        )}
                                     </CollapsibleItem>
                                 ))}
                             </Collapsible>

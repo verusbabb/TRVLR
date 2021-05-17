@@ -20,8 +20,9 @@ const CollectionsSchema = new Schema({
                 required: true,
             },
             itemUrl: {
-                work: {type: mongoose.SchemaTypes.Url, required: true},
-                profile: {type: mongoose.SchemaTypes.Url, required: true},
+                type: String,
+                // work: {type: mongoose.SchemaTypes.Url, required: true},
+                // profile: {type: mongoose.SchemaTypes.Url, required: true},
             },
             itemDescription: {
                 type: String 

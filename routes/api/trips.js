@@ -22,6 +22,7 @@ router
 router
   .route("/collection/:id")
   .post(tripsController.createCollection)
+  .put(tripsController.createCollectionItem)
 
 // Matches with "/api/trips/tripId"
 router

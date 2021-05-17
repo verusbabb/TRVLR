@@ -76,6 +76,10 @@ const API = {
 
   createCollection: function(id, collectionData) {
     return axios.post(`/api/trips/collection/${id}`, collectionData);
+  },
+
+  createCollectionItem: function(id, collectionData) {
+    return axios.put(`/api/trips/collection/${id}`, collectionData)
   }
 };
 

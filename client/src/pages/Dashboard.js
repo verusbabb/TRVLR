@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 // import AddBtn from "../components/AddBtn";
 import Card from "../components/Card";
 import DeleteBtn from "../components/DeleteBtn";
@@ -83,9 +83,7 @@ function Dashboard() {
                       <p>
                         Dates: {trip.startDate} to {trip.endDate}
                       </p>
-                      <p>
-                        Trip ID: {trip.tripId}
-                      </p>
+                      <p>Trip ID: {trip.tripId}</p>
                     </Card>
                   ))}
                 </List>

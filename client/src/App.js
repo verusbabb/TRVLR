@@ -13,6 +13,7 @@ import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { useUserContext } from "./utils/userContext";
+import { ProtectedRoute } from "./components/protectedRoutes";
 
 function App() {
   const { state, dispatch } = useUserContext();
@@ -25,21 +26,19 @@ function App() {
           <Route exact path="/">
             <Home />
           </Route>
-          <Route exact path="/dashboard">
-            <Dashboard />
-          </Route>
-          <Route exact path="/trips/:id">
-            <Trip />
-          </Route>
-          <Route exact path="/createtrip">
-            <CreateTrip />
-          </Route>
-          <Route exact path="/trips/:id/schedule">
-            <Schedule />
-          </Route>
-          <Route exact path="/trips/:id/expenses">
-            <Expenses />
-          </Route>
+          <ProtectedRoute exact path="/dashboard" component={Dashboard} />
+          <ProtectedRoute exact path="/trips/:id" component={Trip} />
+          <ProtectedRoute exact path="/createtrip" component={CreateTrip} />
+          <ProtectedRoute
+            exact
+            path="/trips/:id/schedule"
+            component={Schedule}
+          />
+          <ProtectedRoute
+            exact
+            path="/trips/:id/expenses"
+            component={Expenses}
+          />
           <Route exact path="/signup">
             <Signup />
           </Route>

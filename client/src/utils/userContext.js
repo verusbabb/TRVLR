@@ -5,29 +5,8 @@ const UserContext = createContext({
   userName: "",
   firstName: "",
   lastName: "",
-  memberOf: [
-    {
-      tripName: "",
-      startDate: "",
-      endDate: "",
-      expenses: [
-        {
-          description: "",
-          amount: "",
-          submitter: "",
-          date: "",
-        },
-      ],
-      collections: [
-        {
-          collectionName: "",
-          description: "",
-          url: "",
-          submitter: "",
-        },
-      ],
-    },
-  ],
+  isAuthenticated: "false",
+  memberOf: [],
 });
 const { Provider } = UserContext;
 
@@ -41,6 +20,7 @@ function reducer(state, action) {
         firstName: action.firstName,
         lastName: action.lastName,
         memberOf: action.memberOf,
+        isAuthenticated: action.isAuthenticated,
       };
       localStorage.setItem("user", JSON.stringify(userData));
       return userData;

@@ -9,7 +9,7 @@ import { Input, TextArea, FormBtn } from "../components/Form";
 import API from "../utils/API";
 import { useUserContext } from "../utils/userContext";
 import Jumbotron from "../components/Jumbotron";
-import { DatePicker } from "react-materialize";
+import { Button, DatePicker } from "react-materialize";
 
 function CreateTrip() {
     const [trips, setTrips] = useState([]);
@@ -111,9 +111,9 @@ function CreateTrip() {
                             name="tripId"
                             placeholder="Insert 9 Character ID Here"
                         />
-                        <FormBtn disabled={!formObject.tripId} onClick={handleIdSubmit}>
+                        <Button disabled={!formObject.tripId} onClick={handleIdSubmit}>
                             Add
-                        </FormBtn>
+                        </Button>
                     </form>
                 </Card>
                 <Card>
@@ -149,9 +149,9 @@ function CreateTrip() {
                             name="description"
                             placeholder="(Optional) What kind of trip is this, what are your hopes and dreams? Are you looking to accomplish anything specific?"
                         />
-                        <FormBtn disabled={!formObject.tripName} onClick={handleFormSubmit}>
+                        <Button disabled={!formObject.tripName} onClick={handleFormSubmit}>
                             Create
-            </FormBtn>
+            </Button>
                         {!success && <div> Whoops! Please try again.</div>}
                         {!fail && <div> Success! Your trip was created.</div>}
                     </form>

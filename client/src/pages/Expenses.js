@@ -97,6 +97,7 @@ function Expenses() {
                   <Button flat modal="close" node="button" waves="green">
                     Close
                   </Button>,
+                  <FormBtn onClick={handleFormSubmit}>Add</FormBtn>
                 ]}
                 bottomSheet={false}
                 fixedFooter={false}
@@ -136,7 +137,7 @@ function Expenses() {
                       container: "body",
                     }}
                   />
-                  <FormBtn onClick={handleFormSubmit}>Add</FormBtn>
+                  
                 </form>
               </Modal>
             </Col>

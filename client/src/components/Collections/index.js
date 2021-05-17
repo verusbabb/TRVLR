@@ -142,6 +142,9 @@ function Collections() {
                         <Button flat modal="close" node="button" waves="green">
                           Close
                         </Button>,
+                        <FormBtn onClick={() => handleItemEntry(collect._id)}>
+                        Add
+                      </FormBtn>
                       ]}
                       bottomSheet={false}
                       fixedFooter={false}
@@ -184,9 +187,7 @@ function Collections() {
                         value={formObject.itemDescription}
                         placeholder="(Optional) Add a description"
                       ></TextArea>
-                      <FormBtn onClick={() => handleItemEntry(collect._id)}>
-                        Add
-                      </FormBtn>
+                      
                       {/* </form> */}
                     </Modal>
 

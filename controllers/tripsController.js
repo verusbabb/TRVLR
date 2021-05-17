@@ -41,9 +41,9 @@ module.exports = {
           { _id: req.body.id },
           { $push: { memberOf: dbModel._id } }
         )
-        .then((res) => {
-          res.json(dbModel);
-        });
+          .then((res) => {
+            res.json(dbModel);
+          });
       })
       .catch((err) => res.status(422).json(err));
   },
@@ -67,46 +67,56 @@ module.exports = {
   createSchedule: function (req, res) {
     console.log(req.body, "schedule test2");
     db.Schedule.create(req.body)
-     .then((dbTrip) => {
-       db.Trip.findByIdAndUpdate(
-         req.params.id,
-         { $addToSet: { tripSchedule: dbTrip._id } }
-       )
-       .populate("tripSchedule")
-       .exec()
-       .then((dbSchedule) => {
-         res.json(dbSchedule);
-       });
-     })
-     .catch((err) => res.status(422).json(err));
- },
+      .then((dbTrip) => {
+        db.Trip.findByIdAndUpdate(
+          req.params.id,
+          { $addToSet: { tripSchedule: dbTrip._id } }
+        )
+          .populate("tripSchedule")
+          .exec()
+          .then((dbSchedule) => {
+            res.json(dbSchedule);
+          });
+      })
+      .catch((err) => res.status(422).json(err));
+  },
 
- createCollection: function (req, res) {
-  db.Collection.create(req.body)
-   .then((dbTrip) => {
-     db.Trip.findByIdAndUpdate(
-       req.params.id,
-       { $addToSet: { tripCollections: dbTrip._id } }
-     ).then((dbCollection) => {
-       res.json(dbCollection);
-     });
-   })
-   .catch((err) => res.status(422).json(err));
-},
+  createCollection: function (req, res) {
+    db.Collection.create(req.body)
+      .then((dbTrip) => {
+        db.Trip.findByIdAndUpdate(
+          req.params.id,
+          { $addToSet: { tripCollections: dbTrip._id } }
+        ).then((dbCollection) => {
+          res.json(dbCollection);
+        });
+      })
+      .catch((err) => res.status(422).json(err));
+  },
+
+  createCollectionItem: function (req, res) {
+    db.Collection.findByIdAndUpdate(
+      { _id: req.params.id },
+      { $addToSet: { collectionItems: req.body } })
+      .then((dbCollection) => {
+        res.json(dbCollection);
+      })
+      .catch((err) => res.status(422).json(err));
+  },
 
   updateTrip: function (req, res) {
     console.log(req.body);
     db.Trip.findByIdAndUpdate({ _id: req.params.id }, req.body)
-    .then(function (dbTrip) {
-      console.log(dbTrip);
-      return db.User.findByIdAndUpdate(
-        req.user._id,
-        {
-          $addToSet: { memberOf: dbTrip.id },
-        },
-        { new: true, upsert: true }
-      );
-    })
+      .then(function (dbTrip) {
+        console.log(dbTrip);
+        return db.User.findByIdAndUpdate(
+          req.user._id,
+          {
+            $addToSet: { memberOf: dbTrip.id },
+          },
+          { new: true, upsert: true }
+        );
+      })
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },

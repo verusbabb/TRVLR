@@ -65,6 +65,7 @@ function Schedule() {
             })
             .then((res) => {
                 console.log(res.data.tripSchedule, "schedule test")
+                
 
                 loadTrip();
             }
@@ -98,11 +99,13 @@ function Schedule() {
                             <Input
                                 onChange={handleInputChange}
                                 name="activityName"
+                                value={formObject.activityName}
                                 placeholder="What are you doing?"
                             />
                             <DatePicker
                                 id="activityDate"
                                 name="activityDate"
+                                value={formObject.activityDate}
                                 placeholder="Date"
                                 options={{
                                     container: "body"
@@ -111,16 +114,19 @@ function Schedule() {
                             <TimePicker
                                 id="startTime"
                                 name="startTime"
+                                value={formObject.startTime}
                                 placeholder="Start Time"
                             />
                             <TimePicker
                                 id="endTime"
                                 name="endTime"
+                                value={formObject.endTime}
                                 placeholder="End Time"
                             />
                             <TextArea
                                 onChange={handleInputChange}
                                 name="activityDescription"
+                                value={formObject.activityDescription}
                                 placeholder="(Optional) Add any necessary details about the activity here"
                             />
                             <FormBtn

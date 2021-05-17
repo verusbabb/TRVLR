@@ -27,7 +27,7 @@ function Expenses() {
 
     useEffect(() => {
         loadTrip();
-    }, [id, tripExpense]);
+    }, [id]);
 
     function loadTrip() {
         API.getTrip(id)
@@ -64,7 +64,7 @@ function Expenses() {
             })
                 .then((res) => {
                     console.log(res);
-                    setTripExpense(res.data.tripExpenses);
+                    loadTrip();
                     // console.log(user, "user data");
                     // API.getTrips()
                     //     .then((res) => {
@@ -136,7 +136,7 @@ function Expenses() {
                                         placeholder="When did you make the purchase?"
                                         options={{
                                             autoClose: false,
-                                            // container: "body",
+                                            container: "body",
                                         }}
                                     />
                                     <FormBtn onClick={handleFormSubmit}>Add</FormBtn>

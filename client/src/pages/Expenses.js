@@ -138,8 +138,8 @@ function Expenses() {
                 <div>
                   <Table>
                     <TableHead>
-                      <th>Person</th>
-                      <th>Expense</th>
+                      <th>By</th>
+                      <th>Desc.</th>
                       <th>Cost</th>
                       <th>Date</th>
                     </TableHead>

@@ -6,7 +6,7 @@ import "./DeleteBtn.css";
 function DeleteBtn(props) {
   return (
     <span className="delete-btn tooltip" {...props} role="button" tabIndex="0">
-      ✗
+      <i className="material-icons">delete</i>
     <span className="tooltiptext">Delete Trip</span>
     </span>
     

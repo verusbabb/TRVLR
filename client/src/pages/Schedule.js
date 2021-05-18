@@ -103,7 +103,7 @@ function Schedule() {
                             ]}
                             bottomSheet={false}
                             fixedFooter={false}
-                            header="Add an Expense"
+                            header="Add an Activity"
                             id="Modal-0"
                             className="modal"
                             open={false}

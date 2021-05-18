@@ -6,10 +6,12 @@ import { Input, TextArea, FormBtn } from "../components/Form";
 import { Container, Row, Col } from "../components/Grid";
 import Jumbotron from "../components/Jumbotron";
 import { Table, TableHead, TableBody } from "../components/Table";
-import { List, ListItem } from "../components/List";
 import API from "../utils/API";
 import { useUserContext } from "../utils/userContext";
 import { Modal, Button, DatePicker } from "react-materialize";
+import DeleteButton from "../components/DeleteBtn";
+// import EditButton from "../components/EditBtn";
+// import compModal from "../components/Modal";
 
 function Expenses() {
     const [tripExpense, setTripExpense] = useState({});
@@ -18,12 +20,6 @@ function Expenses() {
     const { state } = useUserContext();
 
     const { id } = useParams();
-
-    // useEffect(() => {
-    //     API.getTrip(id)
-    //         .then(res => setTrip(res.data))
-    //         .catch(err => console.log(err));
-    // }, [])
 
     useEffect(() => {
         loadTrip();
@@ -36,6 +32,14 @@ function Expenses() {
                 setTripExpense(res.data.tripExpenses);
             })
             .catch((err) => console.log(err));
+    }
+
+    function removeExpense(expenseId) {
+        API.deleteExpense(expenseId)
+            .then((res) => {
+                loadTrip();
+            })
+            .catch(err => console.log(err));
     }
 
     function handleInputChange(event) {
@@ -171,5 +175,4 @@ function Expenses() {
         </>
     );
 }
-
 export default Expenses;

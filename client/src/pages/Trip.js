@@ -11,6 +11,8 @@ import { useUserContext } from "../utils/userContext";
 import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
 import Collections from "../components/Collections";
+import Expenses from "./Expenses";
+import Schedule from "./Schedule";
 
 function Trip() {
     const [trip, setTrip] = useState({ members: [] });
@@ -108,20 +110,22 @@ function Trip() {
                 </Row>
             </Card>
             <Collections />
-            <Card>
+            <Schedule />
+            {/* <Card>
                 <Row>
                     <Col size="m12 s12">
                         <Link to={"/trips/" + trip._id + "/schedule"}>Trip Schedule</Link>
                     </Col>
                 </Row>
-            </Card>
-            <Card>
+            </Card> */}
+            {/* <Card>
                 <Row>
                     <Col size="m12 s12">
                         <Link to={"/trips/" + trip._id + "/expenses"}>Trip Expenses</Link>
                     </Col>
                 </Row>
-            </Card>
+            </Card> */}
+            <Expenses />
             <Card>
                 <Row>
                     <Col size="m12 s12">

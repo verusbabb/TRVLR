@@ -16,12 +16,18 @@ router
   .delete(tripsController.removeTrip)
   .post(tripsController.createExpense);
 
-router.route("/schedule/:id").post(tripsController.createSchedule);
+router.route("/schedule/:id")
+  .post(tripsController.createSchedule)
+  .delete(tripsController.deleteSchedule);
+
+router.route("/expenses/:id")
+  .delete(tripsController.deleteExpense);
 
 router
   .route("/collection/:id")
   .post(tripsController.createCollection)
-  .put(tripsController.createCollectionItem);
+  .put(tripsController.createCollectionItem)
+  .delete(tripsController.deleteCollection);
 
 // Matches with "/api/trips/tripId"
 router.route("/tripId/:tripId").get(tripsController.findTripByTripId);

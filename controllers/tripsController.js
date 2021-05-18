@@ -126,4 +126,19 @@ module.exports = {
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
+  deleteExpense: function (req, res) {
+    db.Expense.deleteOne({ _id: req.params.id})
+      .then((dbModel) => res.json(dbModel))
+      .catch((err) => res.status(422).json(err));
+  },
+  deleteSchedule: function (req, res) {
+    db.Schedule.deleteOne({ _id: req.params.id})
+      .then((dbModel) => res.json(dbModel))
+      .catch((err) => res.status(422).json(err));
+  },
+  deleteCollection: function (req, res) {
+    db.Collection.deleteOne({ _id: req.params.id})
+    .then((dbModel) => res.json(dbModel))
+    .catch((err) => res.status(422).json(err));
+  }
 };

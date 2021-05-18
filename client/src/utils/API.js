@@ -70,8 +70,16 @@ const API = {
     return axios.post(`/api/trips/${id}`, expenseData);
   },
 
+  deleteExpense: function(id) {
+    return axios.delete("/api/trips/expenses/" + id);
+  },
+
   createSchedule: function(id, scheduleData) {
     return axios.post(`/api/trips/schedule/${id}`, scheduleData);
+  },
+
+  deleteSchedule: function(id) {
+    return axios.delete("/api/trips/schedule/" + id);
   },
 
   createCollection: function(id, collectionData) {
@@ -80,6 +88,10 @@ const API = {
 
   createCollectionItem: function(id, collectionData) {
     return axios.put(`/api/trips/collection/${id}`, collectionData)
+  },
+
+  deleteCollection: function(id) {
+    return axios.delete("/api/trips/collection/" + id);
   }
 };
 

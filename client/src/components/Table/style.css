@@ -5,4 +5,14 @@
   and (max-device-width: 992px) {
     .container {
         width: 100%;
-    }}
+    }
+    table {
+      table-layout: fixed;
+      width: 100%;
+      word-wrap: break-word;
+    };
+  }
+
+  table {
+    background-color: white;
+  }

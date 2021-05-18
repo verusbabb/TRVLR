@@ -7,6 +7,7 @@ import { Table, TableHead, TableBody } from "../Table";
 import API from "../../utils/API";
 import { Modal, Button, Collapsible, CollapsibleItem } from "react-materialize";
 import { Link, useParams } from "react-router-dom";
+import DeleteButton from "../DeleteBtn";
 
 function Collections() {
   const [collection, setCollection] = useState({});
@@ -25,6 +26,14 @@ function Collections() {
       .then((res) => {
         setTrip(res.data);
         setCollection(res.data.tripCollections);
+      })
+      .catch((err) => console.log(err));
+  }
+
+  function removeCategory(categoryId) {
+    API.deleteCollection(categoryId)
+      .then((res) => {
+        loadTrip();
       })
       .catch((err) => console.log(err));
   }
@@ -48,6 +57,7 @@ function Collections() {
           console.log(res);
           // setCollection(res.data.tripCollections);
           loadTrip();
+          handleFormClear();
           // console.log(user, "user data");
           // API.getTrips()
           //     .then((res) => {
@@ -70,27 +80,42 @@ function Collections() {
       })
         .then((res) => {
           loadTrip();
+          handleFormClear();
         })
         .catch((err) => console.log(err));
     }
   };
 
+  function handleFormClear() {
+
+    document.getElementById("add-collection-form").reset();
+
+    setFormObject({
+        collectionName: "",
+        collectionDescription: "",
+        itemName: "",
+        itemUrl: "",
+        itemDescription: ""
+    });
+};
+
   return (
     <>
       <Card>
         <Row>
-          <Col size="m12">
-            <h1>Collections</h1>
+          <Col size="m12 s12">
+            <h1>Idea Board</h1>
             <br></br>
             <Modal
               actions={[
                 <Button flat modal="close" node="button" waves="green">
                   Close
                 </Button>,
+                <Button className="modal-close" onClick={handleFormSubmit}>Add</Button>
               ]}
               bottomSheet={false}
               fixedFooter={false}
-              header="Add a Collection"
+              header="Add a Category"
               id="Modal-0"
               open={false}
               options={{
@@ -103,26 +128,26 @@ function Collections() {
                 preventScrolling: true,
                 startingTop: "4%",
               }}
-              trigger={<Link node="button">+ Add a Collection</Link>}
+              trigger={<Link to="" node="button">+ Add a Category</Link>}
             >
-              <form>
+              <form id="add-collection-form">
                 <Input
                   onChange={handleInputChange}
                   name="collectionName"
-                  placeholder="Name of the Collection"
+                  placeholder="Name of the Category"
                 />
                 <TextArea
                   onChange={handleInputChange}
                   name="collectionDescription"
                   placeholder="(Optional) Add any necessary details here"
                 />
-                <FormBtn onClick={handleFormSubmit}>Add</FormBtn>
+                
               </form>
             </Modal>
           </Col>
         </Row>
         <Row>
-          <Col size="m12">
+          <Col size="m12 s12">
             {collection.length ? (
               <Collapsible accordion={false}>
                 {collection.map((collect, index) => (
@@ -141,6 +166,9 @@ function Collections() {
                         <Button flat modal="close" node="button" waves="green">
                           Close
                         </Button>,
+                        <Button className="modal-close" onClick={() => handleItemEntry(collect._id)}>
+                        Add
+                      </Button>
                       ]}
                       bottomSheet={false}
                       fixedFooter={false}
@@ -183,26 +211,24 @@ function Collections() {
                         value={formObject.itemDescription}
                         placeholder="(Optional) Add a description"
                       ></TextArea>
-                      <FormBtn onClick={() => handleItemEntry(collect._id)}>
-                        Add
-                      </FormBtn>
+                      
                       {/* </form> */}
                     </Modal>
 
                     {collect.collectionItems.length ? (
                       <Table>
                         <TableHead>
-                          <th>{collect.collectionName}</th>
-                          <th>Url</th>
-                          <th>Suggested By</th>
+                          <th>Idea</th>
+                          <th>URL</th>
+                          <th>By</th>
                         </TableHead>
                         <TableBody>
                           {collect.collectionItems.map((item, index) => (
                             <tr key={index}>
                               <td>{item.itemName}</td>
                               <td>
-                                <a href={item.itemUrl} target="_blank">
-                                  {item.itemUrl}
+                                <a href={item.itemUrl} target="_blank" rel="noreferrer">
+                                  Link
                                 </a>
                               </td>
                               <td>{item.itemSubmitter}</td>
@@ -211,13 +237,14 @@ function Collections() {
                         </TableBody>
                       </Table>
                     ) : (
-                      <p>No Results to Display</p>
+                      <p>to get started</p>
                     )}
+                    <DeleteButton onClick={(() => removeCategory(collect._id))} />
                   </CollapsibleItem>
                 ))}
               </Collapsible>
             ) : (
-              <h3>No Results to Display</h3>
+              <p>No collections started yet!</p>
             )}
           </Col>
         </Row>

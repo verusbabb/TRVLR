@@ -150,8 +150,8 @@ function Expenses() {
                         {tripExpense.length ? (
                             <Table>
                                 <TableHead>
-                                    <th>Person</th>
-                                    <th>Expense</th>
+                                    <th>By</th>
+                                    <th>Entry</th>
                                     <th>Cost</th>
                                     <th>Date</th>
                                 </TableHead>
@@ -162,6 +162,8 @@ function Expenses() {
                                             <td>{expense.expenseDescription}</td>
                                             <td>${expense.expenseAmount}</td>
                                             <td>{expense.expenseDate}</td>
+                                            {/* <td><compModal header="Edit Expense" onChange={handleInputChange} onClick={handleFormSubmit} trigger={<EditButton onClick={(() => editExpense(expense._id))} />} /></td> */}
+                                            <td><DeleteButton onClick={(() => removeExpense(expense._id))} /></td>
                                         </tr>
                                     ))}
                                 </TableBody>

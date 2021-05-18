@@ -8,6 +8,7 @@ import API from "../../utils/API";
 import { Modal, Button, Collapsible, CollapsibleItem } from "react-materialize";
 import { Link, useParams } from "react-router-dom";
 
+
 function Collections() {
   const [collection, setCollection] = useState({});
   const [trip, setTrip] = useState();
@@ -119,7 +120,7 @@ function Collections() {
                 preventScrolling: true,
                 startingTop: "4%",
               }}
-              trigger={<Link node="button">+ Add a Collection</Link>}
+              trigger={<Link to="" node="button">+ Add a Collection</Link>}
             >
               <form id="add-collection-form">
                 <Input
@@ -209,9 +210,9 @@ function Collections() {
                     {collect.collectionItems.length ? (
                       <Table>
                         <TableHead>
-                          <th>{collect.collectionName}</th>
-                          <th>Url</th>
-                          <th>Suggested By</th>
+                          <th>Idea</th>
+                          <th>URL</th>
+                          <th>By</th>
                         </TableHead>
                         <TableBody>
                           {collect.collectionItems.map((item, index) => (
@@ -219,7 +220,7 @@ function Collections() {
                               <td>{item.itemName}</td>
                               <td>
                                 <a href={item.itemUrl} target="_blank">
-                                  {item.itemUrl}
+                                  Link
                                 </a>
                               </td>
                               <td>{item.itemSubmitter}</td>

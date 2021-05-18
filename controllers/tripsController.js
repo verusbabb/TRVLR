@@ -130,5 +130,10 @@ module.exports = {
     db.Expense.deleteOne({ _id: req.params.id})
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
+  },
+  deleteSchedule: function (req, res) {
+    db.Schedule.deleteOne({ _id: req.params.id})
+      .then((dbModel) => res.json(dbModel))
+      .catch((err) => res.status(422).json(err));
   }
 };

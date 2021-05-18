@@ -26,7 +26,8 @@ router.route("/expenses/:id")
 router
   .route("/collection/:id")
   .post(tripsController.createCollection)
-  .put(tripsController.createCollectionItem);
+  .put(tripsController.createCollectionItem)
+  .delete(tripsController.deleteCollection);
 
 // Matches with "/api/trips/tripId"
 router.route("/tripId/:tripId").get(tripsController.findTripByTripId);

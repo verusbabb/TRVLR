@@ -135,5 +135,10 @@ module.exports = {
     db.Schedule.deleteOne({ _id: req.params.id})
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
+  },
+  deleteCollection: function (req, res) {
+    db.Collection.deleteOne({ _id: req.params.id})
+    .then((dbModel) => res.json(dbModel))
+    .catch((err) => res.status(422).json(err));
   }
 };

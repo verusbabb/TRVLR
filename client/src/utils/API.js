@@ -88,6 +88,10 @@ const API = {
 
   createCollectionItem: function(id, collectionData) {
     return axios.put(`/api/trips/collection/${id}`, collectionData)
+  },
+
+  deleteCollection: function(id) {
+    return axios.delete("/api/trips/collection/" + id);
   }
 };
 

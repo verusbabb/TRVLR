@@ -21,8 +21,7 @@ function Dashboard() {
   const [currentTrip, setCurrentTrip] = useState({});
   const [weather, setWeather] = useState({});
 
-  const apiKey = process.env.REACT_APP_API_KEY;
-  const apiUrl = `https://api.openweathermap.org/data/2.5/daily?q=Denver&units=imperial&appid=f21ee75183114c7c096d92749641d1f4`;
+  // const apiKey = process.env.REACT_APP_API_KEY;
 
   useEffect(() => {
     loadTrips();

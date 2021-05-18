@@ -19,19 +19,39 @@ function Dashboard() {
   const [friendUsername, setFriendUsername] = useState("");
   const [foundFriends, setFoundFriends] = useState([]);
   const [currentTrip, setCurrentTrip] = useState({});
+  const [weather, setWeather] = useState({});
+
+  const apiKey = process.env.REACT_APP_API_KEY;
+  const apiUrl = `https://api.openweathermap.org/data/2.5/daily?q=Denver&units=imperial&appid=f21ee75183114c7c096d92749641d1f4`;
 
   useEffect(() => {
     loadTrips();
+    getWeather();
   }, []);
+
+  async function getWeather(location) {
+    try {
+      const result = await fetch(
+        `https://api.openweathermap.org/data/2.5/forecast/daily?q=Cozumel&cnt=1&appid=bfb8b19c29117879854c3946d13147c8`
+      );
+
+      if (result.status === 200) {
+        console.log(result);
+        return { success: true, data: await result.json() };
+      }
+
+      return { success: false, error: result.statusText };
+    } catch (ex) {
+      return { success: false, error: ex.message };
+    }
+  }
+  console.log(weather);
 
   function loadTrips() {
     API.getUser(state.id)
       .then((res) => {
-        console.log(res.data);
         setUser(res.data);
-        console.log(user, "user data");
-        console.log(typeof Date.now());
-        console.log(res.data.memberOf.length);
+        console.log(user);
 
         for (let i = 0; i < res.data.memberOf.length; i++) {
           let startDate = res.data.memberOf[i].startDate;
@@ -50,7 +70,7 @@ function Dashboard() {
       .catch((err) => console.log(err));
   }
 
-  console.log(currentTrip);
+  // console.log(currentTrip);
 
   function removeTrip(id) {
     API.deleteTrip(id)
@@ -114,7 +134,8 @@ function Dashboard() {
           <Card>
             <Row>
               <Col size="m12">
-                <h3>My Current Trip: {currentTrip.tripName}</h3>
+                <h3>Current Trip Schedule</h3>
+                <h4>{currentTrip.tripName}</h4>
 
                 <Table>
                   <TableHead>
@@ -138,6 +159,32 @@ function Dashboard() {
         ) : (
           ""
         )}
+
+        {/* {JSON.stringify(currentTrip) !== "{}" ? (
+          <Card>
+            <Row>
+              <Col size="m12">
+                <h3>Current Trip Forecast</h3>
+                <h4>{currentTrip.tripName}</h4>
+
+                <Table>
+                  <TableHead>
+                    <th>temp</th>
+                  </TableHead>
+                  <TableBody>
+                    {weather.list.map((list, index) => (
+                      <tr key={index}>
+                        <td>{list.main.temp}</td>
+                      </tr>
+                    ))}
+                  </TableBody>
+                </Table>
+              </Col>
+            </Row>
+          </Card>
+        ) : (
+          ""
+        )} */}
       </Container>
     </>
   );

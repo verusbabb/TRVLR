@@ -171,12 +171,12 @@ function Expenses() {
         </Card>
         <Card>
           <Row>
-            <Col size="m12">
+            <Col size="m12 s12">
               <Link to={"/trips/" + id}>← Back to Trip</Link>
             </Col>
           </Row>
           <Row>
-            <Col size="m12">
+            <Col size="m12 s12">
               <Link to="/dashboard">← Back to Dashboard</Link>
             </Col>
           </Row>

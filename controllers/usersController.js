@@ -21,7 +21,13 @@ module.exports = {
   findUserById: function (req, res) {
     console.log(req.body);
     db.User.findById(req.params.id)
-      .populate("memberOf")
+      .populate({
+        path: "memberOf",
+        populate: {
+          path: "tripSchedule",
+          model: "Schedule",
+        },
+      })
       .exec()
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));

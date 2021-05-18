@@ -8,6 +8,7 @@ import { Container, Row, Col } from "../components/Grid";
 import { List, ListItem } from "../components/List";
 import API from "../utils/API";
 import { useUserContext } from "../utils/userContext";
+import { Table, TableHead, TableBody } from "../components/Table";
 // import SearchBar from "../components/SearchBar";
 // import SubmitButton from "../components/SubmitButton";
 
@@ -17,6 +18,7 @@ function Dashboard() {
   const { state } = useUserContext();
   const [friendUsername, setFriendUsername] = useState("");
   const [foundFriends, setFoundFriends] = useState([]);
+  const [currentTrip, setCurrentTrip] = useState([]);
 
   useEffect(() => {
     loadTrips();
@@ -25,8 +27,25 @@ function Dashboard() {
   function loadTrips() {
     API.getUser(state.id)
       .then((res) => {
+        console.log(res.data);
         setUser(res.data);
         console.log(user, "user data");
+        console.log(typeof Date.now());
+        console.log(res.data.memberOf.length);
+
+        for (let i = 0; i < res.data.memberOf.length; i++) {
+          let startDate = res.data.memberOf[i].startDate;
+          let endDate = res.data.memberOf[i].endDate;
+          let tripStart = Date.parse(startDate);
+          let tripEnd = Date.parse(endDate);
+
+          if (tripStart <= Date.now() && tripEnd >= Date.now()) {
+            console.log("true");
+            setCurrentTrip(res.data.memberOf[i]);
+          } else {
+            console.log("false");
+          }
+        }
         // API.getTrips()
         //     .then((res) => {
         //         setTrips(res.data);
@@ -34,6 +53,8 @@ function Dashboard() {
       })
       .catch((err) => console.log(err));
   }
+
+  console.log(currentTrip);
 
   function removeTrip(id) {
     API.deleteTrip(id)
@@ -93,24 +114,36 @@ function Dashboard() {
             </Col>
           </Row>
         </Card>
-        {/* <Card>
-          <Row>
-            <Col size="m12">
-              <h2>My Friends</h2>
-              <SearchBar onChange={handleInputChange} />
-              <SubmitButton onClick={handleSubmit} />
-              {foundFriends.length ? (
-                <List>
-                  {foundFriends.map((friend, index) => (
-                    <ListItem key={index}>{friend.userName}</ListItem>
-                  ))}
-                </List>
-              ) : (
-                ""
-              )}
-            </Col>
-          </Row>
-        </Card> */}
+
+        {currentTrip.length ? (
+          <Card>
+            <Row>
+              <Col size="m12">
+                <h1>{currentTrip.</h1>
+                {/* map using schedule.days or something similar from a schedule object*/}
+                {/* {schedule.map((schedule, index))} */}
+                <Table>
+                  <TableHead>
+                    <th>Date</th>
+                    <th>Activity</th>
+                    <th>Time</th>
+                  </TableHead>
+                  <TableBody>
+                    {currentTrip.map((schedule, index) => (
+                      <tr key={index}>
+                        <td>{schedule.activityDate}</td>
+                        <td>{schedule.activityName}</td>
+                        <td>{schedule.startTime}</td>
+                      </tr>
+                    ))}
+                  </TableBody>
+                </Table>
+              </Col>
+            </Row>
+          </Card>
+        ) : (
+          ""
+        )}
       </Container>
     </>
   );

@@ -11,12 +11,46 @@ import Signout from "./pages/Signout";
 // import NoMatch from "./pages/NoMatch";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  useHistory,
+} from "react-router-dom";
 import { useUserContext } from "./utils/userContext";
 import { ProtectedRoute } from "./components/protectedRoutes";
 
 function App() {
   const { state, dispatch } = useUserContext();
+
+  var inactivityTime = function () {
+    var time;
+    window.onload = resetTimer;
+    // DOM Events
+    document.onmousemove = resetTimer;
+    document.onkeydown = resetTimer;
+
+    function logout() {
+      alert("You are now logged out.");
+      dispatch({
+        type: "logOut",
+        isAuthenticated: "false",
+      });
+      localStorage.removeItem("user");
+      // eslint-disable-next-line no-restricted-globals
+      location.href = "/login";
+    }
+
+    function resetTimer() {
+      clearTimeout(time);
+      time = setTimeout(logout, 1200000);
+      // 1000 milliseconds = 1 second
+    }
+  };
+
+  if (state.isAuthenticated) {
+    inactivityTime();
+  }
 
   return (
     <Router>

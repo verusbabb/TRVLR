@@ -33,6 +33,16 @@ function reducer(state, action) {
       localStorage.setItem("user", JSON.stringify(updateData));
       return { ...state, memberOf: action.memberOf };
 
+    case "timeOut":
+      return {
+        ...state,
+        userName: "",
+        firstName: "",
+        lastName: "",
+        memberOf: [],
+        isAuthenticated: "false",
+      };
+
     default:
       return state;
   }

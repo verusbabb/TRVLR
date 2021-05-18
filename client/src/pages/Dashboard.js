@@ -31,7 +31,7 @@ function Dashboard() {
   async function getWeather(location) {
     try {
       const result = await fetch(
-        `https://api.openweathermap.org/data/2.5/forecast/daily?q=Cozumel&cnt=1&appid=bfb8b19c29117879854c3946d13147c8`
+        `https://api.openweathermap.org/data/2.5/forecast/weather?q=Cozumel&cnt=1&appid=bfb8b19c29117879854c3946d13147c8`
       );
 
       if (result.status === 200) {

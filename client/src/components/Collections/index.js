@@ -57,6 +57,7 @@ function Collections() {
           console.log(res);
           // setCollection(res.data.tripCollections);
           loadTrip();
+          handleFormClear();
           // console.log(user, "user data");
           // API.getTrips()
           //     .then((res) => {
@@ -79,10 +80,24 @@ function Collections() {
       })
         .then((res) => {
           loadTrip();
+          handleFormClear();
         })
         .catch((err) => console.log(err));
     }
   };
+
+  function handleFormClear() {
+
+    document.getElementById("add-collection-form").reset();
+
+    setFormObject({
+        collectionName: "",
+        collectionDescription: "",
+        itemName: "",
+        itemUrl: "",
+        itemDescription: ""
+    });
+};
 
   return (
     <>
@@ -96,7 +111,7 @@ function Collections() {
                 <Button flat modal="close" node="button" waves="green">
                   Close
                 </Button>,
-                <FormBtn onClick={handleFormSubmit}>Add</FormBtn>
+                <Button className="modal-close" onClick={handleFormSubmit}>Add</Button>
               ]}
               bottomSheet={false}
               fixedFooter={false}
@@ -115,7 +130,7 @@ function Collections() {
               }}
               trigger={<Link to="" node="button">+ Add a Category</Link>}
             >
-              <form>
+              <form id="add-collection-form">
                 <Input
                   onChange={handleInputChange}
                   name="collectionName"
@@ -151,9 +166,9 @@ function Collections() {
                         <Button flat modal="close" node="button" waves="green">
                           Close
                         </Button>,
-                        <FormBtn onClick={() => handleItemEntry(collect._id)}>
+                        <Button className="modal-close" onClick={() => handleItemEntry(collect._id)}>
                         Add
-                      </FormBtn>
+                      </Button>
                       ]}
                       bottomSheet={false}
                       fixedFooter={false}
@@ -222,14 +237,14 @@ function Collections() {
                         </TableBody>
                       </Table>
                     ) : (
-                      <p>No Results to Display</p>
+                      <p>to get started</p>
                     )}
                     <DeleteButton onClick={(() => removeCategory(collect._id))} />
                   </CollapsibleItem>
                 ))}
               </Collapsible>
             ) : (
-              <h3>No Results to Display</h3>
+              <p>No collections started yet!</p>
             )}
           </Col>
         </Row>

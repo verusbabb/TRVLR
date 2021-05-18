@@ -18,7 +18,8 @@ function Schedule() {
     const [sched, setSched] = useState({});
     const [trip, setTrip] = useState({});
     const { state } = useUserContext();
-    const [formObject, setFormObject] = useState({})
+    const [formObject, setFormObject] = useState({});
+    const [modalOpen, setModalOpen] = useState(false)
 
     const { id } = useParams();
 
@@ -69,13 +70,15 @@ function Schedule() {
                 activityDate: document.getElementById("activityDate").value,
                 activitySubmitter: state.firstName,
                 startTime: document.getElementById("startTime").value,
-                endTime: document.getElementById("endTime").value
+                endTime: document.getElementById("endTime").value,
+                activityDescription: formObject.activityDescription
             })
                 .then((res) => {
                     console.log(res.data.tripSchedule, "schedule test")
 
 
                     loadTrip();
+                    handleFormClear();
                 }
                 )
                 // .then(res => findAllTrips())
@@ -83,9 +86,19 @@ function Schedule() {
         }
     };
 
+    function handleFormClear() {
+
+        document.getElementById("addScheduleForm").reset();
+
+        setFormObject({
+            activityName: "",
+            activityDescription: ""
+        });
+    };
+
     return (
         <>
-        {/* // <Container fluid> */}
+            {/* // <Container fluid> */}
 
             {/* <Card>
                 <Row>
@@ -107,12 +120,16 @@ function Schedule() {
                             actions={[
                                 <Button flat modal="close" node="button" waves="green">
                                     Close
-                  </Button>,
+                                </Button>,
+                                <Button
+                                    onClick={handleFormSubmit}
+                                    className="modal-close"
+                                >Add</Button>
                             ]}
                             bottomSheet={false}
                             fixedFooter={false}
                             header="Add an Activity"
-                            id="Modal-0"
+                            id="add-activity-modal"
                             className="modal"
                             open={false}
                             options={{
@@ -128,44 +145,51 @@ function Schedule() {
                             }}
                             trigger={<Link node="button">+ Add an Activity</Link>}
                         >
-                            <form>
-                                                       <Input
-                                onChange={handleInputChange}
-                                name="activityName"
-                                value={formObject.activityName}
-                                placeholder="What are you doing?"
-                            />
-                            <DatePicker
-                                id="activityDate"
-                                name="activityDate"
-                                value={formObject.activityDate}
-                                placeholder="Date"
-                                options={{
-                                    container: "body"
-                                }}
-                            />
-                            <TimePicker
-                                id="startTime"
-                                name="startTime"
-                                value={formObject.startTime}
-                                placeholder="Start Time"
-                            />
-                            <TimePicker
-                                id="endTime"
-                                name="endTime"
-                                value={formObject.endTime}
-                                placeholder="End Time"
-                            />
-                            <TextArea
-                                onChange={handleInputChange}
-                                name="activityDescription"
-                                value={formObject.activityDescription}
-                                placeholder="(Optional) Add any necessary details about the activity here"
-                            />
-                            <FormBtn
-                                onClick={handleFormSubmit}
-                            >Add</FormBtn>
-                        </form>
+                            <form id="addScheduleForm">
+                                <Input
+                                    onChange={handleInputChange}
+                                    name="activityName"
+                                    value={formObject.activityName}
+                                    placeholder="What are you doing?"
+                                />
+                                <DatePicker
+                                    id="activityDate"
+                                    name="activityDate"
+                                    value={formObject.activityDate}
+                                    placeholder="Date"
+                                    options={{
+                                        container: "body",
+                                        autoClose: true
+                                    }}
+                                />
+                                <TimePicker
+                                    id="startTime"
+                                    name="startTime"
+                                    value={formObject.startTime}
+                                    placeholder="Start Time"
+                                    options={{
+                                        container: "body",
+                                        autoClose: true
+                                    }}
+                                />
+                                <TimePicker
+                                    id="endTime"
+                                    name="endTime"
+                                    value={formObject.endTime}
+                                    placeholder="End Time"
+                                    options={{
+                                        container: "body",
+                                        autoClose: true
+                                    }}
+                                />
+                                <TextArea
+                                    onChange={handleInputChange}
+                                    name="activityDescription"
+                                    value={formObject.activityDescription}
+                                    placeholder="(Optional) Add any necessary details about the activity here"
+                                />
+
+                            </form>
                         </Modal>
                         {sched.length ? (
                             <Table >
@@ -203,7 +227,7 @@ function Schedule() {
                     </Col>
                 </Row>
             </Card> */}
-        {/* // </Container > */}
+            {/* // </Container > */}
         </>
     )
 }

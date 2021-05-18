@@ -27,7 +27,7 @@ header {
   background-color: lightgrey;
 }
 
-.btn {
+.sidenav li>a.btn {
   background-color: black !important;
 }
 

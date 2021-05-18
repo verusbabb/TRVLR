@@ -78,6 +78,10 @@ function Trip() {
                         <h3>
                             {trip.startDate} to {trip.endDate}
                         </h3>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col size="m12">
                         <p>{trip.description}</p>
                     </Col>
                 </Row>
@@ -98,8 +102,6 @@ function Trip() {
 
                                             {friend.name.firstName + " " + friend.name.lastName}
                                         </CollectionItem>
-
-
                                     ))}
                                 </Collection>
                             ) : (
@@ -111,20 +113,6 @@ function Trip() {
             </Card>
             <Collections />
             <Schedule />
-            {/* <Card>
-                <Row>
-                    <Col size="m12 s12">
-                        <Link to={"/trips/" + trip._id + "/schedule"}>Trip Schedule</Link>
-                    </Col>
-                </Row>
-            </Card> */}
-            {/* <Card>
-                <Row>
-                    <Col size="m12 s12">
-                        <Link to={"/trips/" + trip._id + "/expenses"}>Trip Expenses</Link>
-                    </Col>
-                </Row>
-            </Card> */}
             <Expenses />
             <Card>
                 <Row>

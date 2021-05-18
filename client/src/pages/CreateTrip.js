@@ -133,7 +133,8 @@ function CreateTrip() {
                             name="startDate"
                             placeholder="Start Date"
                             options={{
-                                container: "body"
+                                container: "body",
+                                autoClose: true
                             }}
                         />
                         <DatePicker
@@ -141,7 +142,8 @@ function CreateTrip() {
                             name="endDate"
                             placeholder="End Date"
                             options={{
-                                container: "body"
+                                container: "body",
+                                autoClose: true
                             }}
                         />
                         <TextArea

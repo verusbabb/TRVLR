@@ -11,6 +11,7 @@ function compModal(props) {
                 <Button flat modal="close" node="button" waves="green">
                 Close
                 </Button>,
+                <FormBtn onClick={props.onClick}>Add</FormBtn>
             ]}
             bottomSheet={false}
             fixedFooter={false}
@@ -50,7 +51,7 @@ function compModal(props) {
                       container: "body",
                     }}
                   />
-                  <FormBtn onClick={props.onClick}>Add</FormBtn>
+                  
         </form>
         </div>
     )

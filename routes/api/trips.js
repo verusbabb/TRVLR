@@ -17,7 +17,8 @@ router
   .post(tripsController.createExpense);
 
 router.route("/schedule/:id")
-  .post(tripsController.createSchedule);
+  .post(tripsController.createSchedule)
+  .delete(tripsController.deleteSchedule);
 
 router.route("/expenses/:id")
   .delete(tripsController.deleteExpense);

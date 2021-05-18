@@ -18,7 +18,7 @@ function Dashboard() {
   const { state } = useUserContext();
   const [friendUsername, setFriendUsername] = useState("");
   const [foundFriends, setFoundFriends] = useState([]);
-  const [currentTrip, setCurrentTrip] = useState([]);
+  const [currentTrip, setCurrentTrip] = useState({});
 
   useEffect(() => {
     loadTrips();
@@ -46,10 +46,6 @@ function Dashboard() {
             console.log("false");
           }
         }
-        // API.getTrips()
-        //     .then((res) => {
-        //         setTrips(res.data);
-        //         console.log(res.data);
       })
       .catch((err) => console.log(err));
   }
@@ -114,14 +110,12 @@ function Dashboard() {
             </Col>
           </Row>
         </Card>
-
-        {currentTrip.length ? (
+        {JSON.stringify(currentTrip) !== "{}" ? (
           <Card>
             <Row>
               <Col size="m12">
-                <h1>{currentTrip.</h1>
-                {/* map using schedule.days or something similar from a schedule object*/}
-                {/* {schedule.map((schedule, index))} */}
+                <h3>My Current Trip: {currentTrip.tripName}</h3>
+
                 <Table>
                   <TableHead>
                     <th>Date</th>
@@ -129,7 +123,7 @@ function Dashboard() {
                     <th>Time</th>
                   </TableHead>
                   <TableBody>
-                    {currentTrip.map((schedule, index) => (
+                    {currentTrip.tripSchedule.map((schedule, index) => (
                       <tr key={index}>
                         <td>{schedule.activityDate}</td>
                         <td>{schedule.activityName}</td>

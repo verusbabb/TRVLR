@@ -78,6 +78,10 @@ const API = {
     return axios.post(`/api/trips/schedule/${id}`, scheduleData);
   },
 
+  deleteSchedule: function(id) {
+    return axios.delete("/api/trips/schedule/" + id);
+  },
+
   createCollection: function(id, collectionData) {
     return axios.post(`/api/trips/collection/${id}`, collectionData);
   },

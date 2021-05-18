@@ -11,6 +11,7 @@ import { useUserContext } from "../utils/userContext";
 // import schedule from "../utils/schedule.json";
 import { DatePicker, TimePicker } from "react-materialize";
 import moment from "moment";
+import DeleteButton from "../components/DeleteBtn";
 
 function Schedule() {
 
@@ -44,7 +45,14 @@ function Schedule() {
         setSched(sortedSchedule);
     }
 
-    // sortSched();
+    function removeSchedule(scheduleId) {
+        console.log(scheduleId);
+        API.deleteSchedule(scheduleId)
+            .then((res) => {
+                loadTrip();
+            })
+            .catch(err => console.log(err));
+    }
 
     function handleInputChange(event) {
         const { name, value } = event.target;
@@ -155,6 +163,7 @@ function Schedule() {
                                             <td>{schedule.activityDate}</td>
                                             <td>{schedule.activityName}</td>
                                             <td>{schedule.startTime}</td>
+                                            <td><DeleteButton onClick={(() => removeSchedule(schedule._id))} /></td>
                                         </tr>
                                     ))}
                                 </TableBody>

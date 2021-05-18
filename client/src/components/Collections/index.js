@@ -79,7 +79,7 @@ function Collections() {
     <>
       <Card>
         <Row>
-          <Col size="m12">
+          <Col size="m12 s12">
             <h1>Collections</h1>
             <br></br>
             <Modal
@@ -87,6 +87,7 @@ function Collections() {
                 <Button flat modal="close" node="button" waves="green">
                   Close
                 </Button>,
+                <FormBtn onClick={handleFormSubmit}>Add</FormBtn>
               ]}
               bottomSheet={false}
               fixedFooter={false}
@@ -116,13 +117,13 @@ function Collections() {
                   name="collectionDescription"
                   placeholder="(Optional) Add any necessary details here"
                 />
-                <FormBtn onClick={handleFormSubmit}>Add</FormBtn>
+                
               </form>
             </Modal>
           </Col>
         </Row>
         <Row>
-          <Col size="m12">
+          <Col size="m12 s12">
             {collection.length ? (
               <Collapsible accordion={false}>
                 {collection.map((collect, index) => (
@@ -141,6 +142,9 @@ function Collections() {
                         <Button flat modal="close" node="button" waves="green">
                           Close
                         </Button>,
+                        <FormBtn onClick={() => handleItemEntry(collect._id)}>
+                        Add
+                      </FormBtn>
                       ]}
                       bottomSheet={false}
                       fixedFooter={false}
@@ -183,9 +187,7 @@ function Collections() {
                         value={formObject.itemDescription}
                         placeholder="(Optional) Add a description"
                       ></TextArea>
-                      <FormBtn onClick={() => handleItemEntry(collect._id)}>
-                        Add
-                      </FormBtn>
+                      
                       {/* </form> */}
                     </Modal>
 

@@ -80,7 +80,7 @@ function Schedule() {
 
             <Card>
                 <Row>
-                    <Col size="m12">
+                    <Col size="m12 s12">
                         <Jumbotron>
                             <h1>
                                 {trip.tripName}
@@ -91,7 +91,7 @@ function Schedule() {
             </Card>
             <Card>
                 <Row>
-                    <Col size="m12">
+                    <Col size="m12 s12">
                         <form>
                             <h3>
                                 + Add an Activity
@@ -138,7 +138,7 @@ function Schedule() {
             </Card>
             <Card>
                 <Row>
-                    <Col size="m12">
+                    <Col size="m12 s12">
                         <h1>Schedule</h1>
                         {/* map using schedule.days or something similar from a schedule object*/}
                         {/* {schedule.map((schedule, index))} */}
@@ -167,12 +167,12 @@ function Schedule() {
             </Card>
             <Card>
                 <Row>
-                    <Col size="m12">
+                    <Col size="m12 s12">
                         <Link to={"/trips/" + id}>← Back to Trip</Link>
                     </Col>
                 </Row>
                 <Row>
-                    <Col size="m12">
+                    <Col size="m12 s12">
                         <Link to="/dashboard">← Back to Dashboard</Link>
                     </Col>
                 </Row>

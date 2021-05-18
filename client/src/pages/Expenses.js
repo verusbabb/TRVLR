@@ -87,6 +87,7 @@ function Expenses() {
                   <Button flat modal="close" node="button" waves="green">
                     Close
                   </Button>,
+                  <FormBtn onClick={handleFormSubmit}>Add</FormBtn>
                 ]}
                 bottomSheet={false}
                 fixedFooter={false}
@@ -126,7 +127,7 @@ function Expenses() {
                       container: "body",
                     }}
                   />
-                  <FormBtn onClick={handleFormSubmit}>Add</FormBtn>
+                  
                 </form>
               </Modal>
             </Col>
@@ -164,12 +165,12 @@ function Expenses() {
         </Card>
         <Card>
           <Row>
-            <Col size="m12">
+            <Col size="m12 s12">
               <Link to={"/trips/" + id}>← Back to Trip</Link>
             </Col>
           </Row>
           <Row>
-            <Col size="m12">
+            <Col size="m12 s12">
               <Link to="/dashboard">← Back to Dashboard</Link>
             </Col>
           </Row>

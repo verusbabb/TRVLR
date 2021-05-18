@@ -99,7 +99,10 @@ function Schedule() {
                             actions={[
                                 <Button flat modal="close" node="button" waves="green">
                                     Close
-                  </Button>,
+                                </Button>,
+                                <FormBtn
+                                onClick={handleFormSubmit}
+                            >Add</FormBtn>
                             ]}
                             bottomSheet={false}
                             fixedFooter={false}
@@ -154,9 +157,7 @@ function Schedule() {
                                 value={formObject.activityDescription}
                                 placeholder="(Optional) Add any necessary details about the activity here"
                             />
-                            <FormBtn
-                                onClick={handleFormSubmit}
-                            >Add</FormBtn>
+                            
                         </form>
                         </Modal>
                         {sched.length ? (

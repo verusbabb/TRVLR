@@ -9,7 +9,7 @@ import { Table, TableHead, TableBody } from "../components/Table";
 import API from "../utils/API";
 import { useUserContext } from "../utils/userContext";
 // import schedule from "../utils/schedule.json";
-import { DatePicker, TimePicker } from "react-materialize";
+import { Modal, Button, DatePicker, TimePicker } from "react-materialize";
 import moment from "moment";
 
 function Schedule() {
@@ -63,22 +63,23 @@ function Schedule() {
                 startTime: document.getElementById("startTime").value,
                 endTime: document.getElementById("endTime").value
             })
-            .then((res) => {
-                console.log(res.data.tripSchedule, "schedule test")
-                
+                .then((res) => {
+                    console.log(res.data.tripSchedule, "schedule test")
 
-                loadTrip();
-            }
-            )
+
+                    loadTrip();
+                }
+                )
                 // .then(res => findAllTrips())
                 .catch(err => console.log(err));
         }
     };
 
     return (
-        <Container fluid>
+        <>
+        {/* // <Container fluid> */}
 
-            <Card>
+            {/* <Card>
                 <Row>
                     <Col size="m12">
                         <Jumbotron>
@@ -88,15 +89,39 @@ function Schedule() {
                         </Jumbotron>
                     </Col>
                 </Row>
-            </Card>
+            </Card> */}
             <Card>
                 <Row>
                     <Col size="m12">
-                        <form>
-                            <h3>
-                                + Add an Activity
-                                </h3>
-                            <Input
+                        <h1>Schedule</h1>
+                        <br></br>
+                        <Modal
+                            actions={[
+                                <Button flat modal="close" node="button" waves="green">
+                                    Close
+                  </Button>,
+                            ]}
+                            bottomSheet={false}
+                            fixedFooter={false}
+                            header="Add an Expense"
+                            id="Modal-0"
+                            className="modal"
+                            open={false}
+                            options={{
+                                autoclose: true,
+                                container: "body",
+                                dismissible: true,
+                                endingTop: "10%",
+                                inDuration: 250,
+                                opacity: 0.5,
+                                outDuration: 250,
+                                preventScrolling: true,
+                                startingTop: "4%",
+                            }}
+                            trigger={<Link node="button">+ Add an Activity</Link>}
+                        >
+                            <form>
+                                                       <Input
                                 onChange={handleInputChange}
                                 name="activityName"
                                 value={formObject.activityName}
@@ -133,15 +158,7 @@ function Schedule() {
                                 onClick={handleFormSubmit}
                             >Add</FormBtn>
                         </form>
-                    </Col>
-                </Row>
-            </Card>
-            <Card>
-                <Row>
-                    <Col size="m12">
-                        <h1>Schedule</h1>
-                        {/* map using schedule.days or something similar from a schedule object*/}
-                        {/* {schedule.map((schedule, index))} */}
+                        </Modal>
                         {sched.length ? (
                             <Table >
                                 <TableHead>
@@ -165,7 +182,7 @@ function Schedule() {
                     </Col>
                 </Row>
             </Card>
-            <Card>
+            {/* <Card>
                 <Row>
                     <Col size="m12">
                         <Link to={"/trips/" + id}>← Back to Trip</Link>
@@ -176,8 +193,9 @@ function Schedule() {
                         <Link to="/dashboard">← Back to Dashboard</Link>
                     </Col>
                 </Row>
-            </Card>
-        </Container>
+            </Card> */}
+        {/* // </Container > */}
+        </>
     )
 }
 

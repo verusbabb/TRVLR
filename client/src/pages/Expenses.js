@@ -6,10 +6,12 @@ import { Input, TextArea, FormBtn } from "../components/Form";
 import { Container, Row, Col } from "../components/Grid";
 import Jumbotron from "../components/Jumbotron";
 import { Table, TableHead, TableBody } from "../components/Table";
-import { List, ListItem } from "../components/List";
 import API from "../utils/API";
 import { useUserContext } from "../utils/userContext";
 import { Modal, Button, DatePicker } from "react-materialize";
+import DeleteButton from "../components/DeleteBtn";
+// import EditButton from "../components/EditBtn";
+// import compModal from "../components/Modal";
 
 function Expenses() {
   const [tripExpense, setTripExpense] = useState({});
@@ -18,12 +20,6 @@ function Expenses() {
   const { state } = useUserContext();
 
   const { id } = useParams();
-
-  // useEffect(() => {
-  //     API.getTrip(id)
-  //         .then(res => setTrip(res.data))
-  //         .catch(err => console.log(err));
-  // }, [])
 
   useEffect(() => {
     loadTrip();
@@ -34,18 +30,17 @@ function Expenses() {
       .then((res) => {
         setTrip(res.data);
         setTripExpense(res.data.tripExpenses);
-        // setTripExpense(trip.tripExpenses);
-        // console.log(trip.tripExpenses, "expense test1");
-        // setExpense()
       })
       .catch((err) => console.log(err));
   }
 
-  //   function setExpense() {
-  //     // console.log(trip, "expense test");
-  //     setTripExpense(trip.tripExpenses);
-  //     // console.log(expenses, "expenses 2")
-  //   }
+  function removeExpense(expenseId) {
+    API.deleteExpense(expenseId)
+      .then((res) => {
+        loadTrip();
+      })
+      .catch(err => console.log(err));
+  }
 
   function handleInputChange(event) {
     const { name, value } = event.target;
@@ -65,11 +60,6 @@ function Expenses() {
         .then((res) => {
           console.log(res);
           loadTrip();
-          // console.log(user, "user data");
-          // API.getTrips()
-          //     .then((res) => {
-          //         setTrips(res.data);
-          //         console.log(res.data);
         })
         .catch((err) => console.log(err));
     }
@@ -144,24 +134,28 @@ function Expenses() {
           <Row>
             <Col size="m12 s12">
               {tripExpense.length ? (
-                <Table>
-                  <TableHead>
-                    <th>Person</th>
-                    <th>Expense</th>
-                    <th>Cost</th>
-                    <th>Date</th>
-                  </TableHead>
-                  <TableBody>
-                    {tripExpense.map((expense, index) => (
-                      <tr key={index}>
-                        <td>{expense.expenseSubmitter}</td>
-                        <td>{expense.expenseDescription}</td>
-                        <td>${expense.expenseAmount}</td>
-                        <td>{expense.expenseDate}</td>
-                      </tr>
-                    ))}
-                  </TableBody>
-                </Table>
+                <div>
+                  <Table>
+                    <TableHead>
+                      <th>Person</th>
+                      <th>Expense</th>
+                      <th>Cost</th>
+                      <th>Date</th>
+                    </TableHead>
+                    <TableBody>
+                      {tripExpense.map((expense, index) => (
+                        <tr key={index}>
+                          <td>{expense.expenseSubmitter}</td>
+                          <td>{expense.expenseDescription}</td>
+                          <td>${expense.expenseAmount}</td>
+                          <td>{expense.expenseDate}</td>
+                          {/* <td><compModal header="Edit Expense" onChange={handleInputChange} onClick={handleFormSubmit} trigger={<EditButton onClick={(() => editExpense(expense._id))} />} /></td> */}
+                          <td><DeleteButton onClick={(() => removeExpense(expense._id))} /></td>
+                        </tr>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </div>
               ) : (
                 <h3>No Results to Display</h3>
               )}

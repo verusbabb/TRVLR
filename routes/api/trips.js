@@ -16,7 +16,11 @@ router
   .delete(tripsController.removeTrip)
   .post(tripsController.createExpense);
 
-router.route("/schedule/:id").post(tripsController.createSchedule);
+router.route("/schedule/:id")
+  .post(tripsController.createSchedule);
+
+router.route("/expenses/:id")
+  .delete(tripsController.deleteExpense);
 
 router
   .route("/collection/:id")

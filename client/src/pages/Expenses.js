@@ -60,10 +60,22 @@ function Expenses() {
                 .then((res) => {
                     console.log(res);
                     loadTrip();
+                    handleFormClear();
+
                 })
                 .catch((err) => console.log(err));
         }
-    }
+    };
+
+    function handleFormClear() {
+
+        document.getElementById("add-expense-form").reset();
+
+        setFormObject({
+            expenseDescription: "",
+            expenseAmount: ""
+        });
+    };
 
     return (
         <>
@@ -86,7 +98,9 @@ function Expenses() {
                             actions={[
                                 <Button flat modal="close" node="button" waves="green">
                                     Close
-                  </Button>,
+                                </Button>,
+                                <Button onClick={handleFormSubmit} className="modal-close">Add</Button>
+
                             ]}
                             bottomSheet={false}
                             fixedFooter={false}
@@ -107,7 +121,7 @@ function Expenses() {
                             }}
                             trigger={<Link node="button">+ Add an Expense</Link>}
                         >
-                            <form>
+                            <form id="add-expense-form">
                                 <Input
                                     onChange={handleInputChange}
                                     name="expenseDescription"
@@ -123,11 +137,10 @@ function Expenses() {
                                     name="expenseDate"
                                     placeholder="When did you make the purchase?"
                                     options={{
-                                        autoClose: false,
+                                        autoClose: true,
                                         container: "body",
                                     }}
                                 />
-                                <FormBtn onClick={handleFormSubmit}>Add</FormBtn>
                             </form>
                         </Modal>
                     </Col>
@@ -154,7 +167,7 @@ function Expenses() {
                                 </TableBody>
                             </Table>
                         ) : (
-                            <h3>No Results to Display</h3>
+                            <p>No expenses logged yet!</p>
                         )}
                     </Col>
                 </Row>

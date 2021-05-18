@@ -43,10 +43,17 @@ border: 1px solid rgba( 255, 255, 255, 0.18 );
 }
 
 ::placeholder {
-  color: grey;
-  opacity: 1;
+  color: black;
+}
+
+.input-field>label {
+  color: black;
 }
 
 textarea{
   height: 10vh;
+}
+
+.collapsible-body{
+  background: #d8d8d8;
 }

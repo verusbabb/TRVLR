@@ -71,7 +71,7 @@ function Trip() {
         <Container fluid>
             <Card>
                 <Row>
-                    <Col size="m12">
+                    <Col size="m12 s12">
                         <Jumbotron>
                             <h1>{trip.tripName}</h1>
                         </Jumbotron>
@@ -113,14 +113,14 @@ function Trip() {
             <Schedule />
             {/* <Card>
                 <Row>
-                    <Col size="m12">
+                    <Col size="m12 s12">
                         <Link to={"/trips/" + trip._id + "/schedule"}>Trip Schedule</Link>
                     </Col>
                 </Row>
             </Card> */}
             {/* <Card>
                 <Row>
-                    <Col size="m12">
+                    <Col size="m12 s12">
                         <Link to={"/trips/" + trip._id + "/expenses"}>Trip Expenses</Link>
                     </Col>
                 </Row>
@@ -128,7 +128,7 @@ function Trip() {
             <Expenses />
             <Card>
                 <Row>
-                    <Col size="m12">
+                    <Col size="m12 s12">
                         <Link to="/dashboard">← Back to Dashboard</Link>
                     </Col>
                 </Row>

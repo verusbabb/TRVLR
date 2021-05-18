@@ -2,7 +2,10 @@ a {
     color: #00322B
 }
 
-
+.card {
+  max-width: 80%;
+  margin: 3% auto;
+}
 
 @media screen 
   and (min-device-width: 320px) 

@@ -50,19 +50,11 @@ function Collections() {
       API.createCollection(id, {
         collectionName: formObject.collectionName,
         collectionDescription: formObject.collectionDescription,
-        // collectionSubmitter: state.firstName,
-        // collectionUrl: formObject.collectionUrl
       })
         .then((res) => {
           console.log(res);
-          // setCollection(res.data.tripCollections);
           loadTrip();
           handleFormClear();
-          // console.log(user, "user data");
-          // API.getTrips()
-          //     .then((res) => {
-          //         setTrips(res.data);
-          //         console.log(res.data);
         })
         .catch((err) => console.log(err));
     }
@@ -244,7 +236,7 @@ function Collections() {
                 ))}
               </Collapsible>
             ) : (
-              <p>No collections started yet!</p>
+              <p>No idea categories started yet!</p>
             )}
           </Col>
         </Row>

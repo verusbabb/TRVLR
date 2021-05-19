@@ -1,11 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useHistory, Link } from "react-router-dom";
-// import { findAllTrips } from "../../../controllers/tripsController";
 import Card from "../components/Card";
-import DeleteBtn from "../components/DeleteBtn";
 import { Container, Row, Col } from "../components/Grid";
-import { List, ListItem } from "../components/List";
-import { Input, TextArea, FormBtn } from "../components/Form";
+import { Input, TextArea } from "../components/Form";
 import API from "../utils/API";
 import { useUserContext } from "../utils/userContext";
 import Jumbotron from "../components/Jumbotron";
@@ -50,7 +47,6 @@ function CreateTrip() {
 
                     history.push("/dashboard");
                 })
-                // .then(res => findAllTrips())
                 .catch((err) => {
                     setSuccess(false);
                     setFail(true);

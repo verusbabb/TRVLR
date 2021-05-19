@@ -2,13 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import Card from "../components/Card";
 // import DeleteBtn from "../components/DeleteBtn";
-import { Container, Row, Col } from "../components/Grid";
+import { Row, Col } from "../components/Grid";
 import { Input, TextArea, FormBtn } from "../components/Form";
-import Jumbotron from "../components/Jumbotron"
 import { Table, TableHead, TableBody } from "../components/Table";
 import API from "../utils/API";
 import { useUserContext } from "../utils/userContext";
-// import schedule from "../utils/schedule.json";
 import { Modal, Button, DatePicker, TimePicker } from "react-materialize";
 import moment from "moment";
 import DeleteButton from "../components/DeleteBtn";
@@ -98,19 +96,6 @@ function Schedule() {
 
     return (
         <>
-            {/* // <Container fluid> */}
-
-            {/* <Card>
-                <Row>
-                    <Col size="m12 s12">
-                        <Jumbotron>
-                            <h1>
-                                {trip.tripName}
-                            </h1>
-                        </Jumbotron>
-                    </Col>
-                </Row>
-            </Card> */}
             <Card>
                 <Row>
                     <Col size="m12 s12">
@@ -210,24 +195,11 @@ function Schedule() {
                                 </TableBody>
                             </Table>
                         ) : (
-                            <h3>No Results to Display</h3>
+                            <p>Nothing scheduled yet!</p>
                         )}
                     </Col>
                 </Row>
             </Card>
-            {/* <Card>
-                <Row>
-                    <Col size="m12 s12">
-                        <Link to={"/trips/" + id}>← Back to Trip</Link>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col size="m12 s12">
-                        <Link to="/dashboard">← Back to Dashboard</Link>
-                    </Col>
-                </Row>
-            </Card> */}
-            {/* // </Container > */}
         </>
     )
 }

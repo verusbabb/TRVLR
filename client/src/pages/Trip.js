@@ -111,6 +111,7 @@ function Trip() {
                     </Col>
                 </Row>
             </Card>
+            {/* Other trip components referenced here */}
             <Collections />
             <Schedule />
             <Expenses />

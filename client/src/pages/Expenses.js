@@ -79,16 +79,6 @@ function Expenses() {
 
     return (
         <>
-            {/* <Container fluid> */}
-            {/* <Card>
-          <Row>
-            <Col size="m12 s12">
-              <Jumbotron>
-                <h1>{trip.tripName}</h1>
-              </Jumbotron>
-            </Col>
-          </Row>
-        </Card> */}
             <Card>
                 <Row>
                     <Col size="m12 s12">
@@ -174,19 +164,6 @@ function Expenses() {
                     </Col>
                 </Row>
             </Card>
-            {/* <Card>
-          <Row>
-            <Col size="m12 s12">
-              <Link to={"/trips/" + id}>← Back to Trip</Link>
-            </Col>
-          </Row>
-          <Row>
-            <Col size="m12 s12">
-              <Link to="/dashboard">← Back to Dashboard</Link>
-            </Col>
-          </Row>
-        </Card> */}
-            {/* </Container> */}
         </>
     );
 }

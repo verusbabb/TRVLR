@@ -111,10 +111,10 @@ function Trip() {
                                 <br></br>
                                 <h5>Send your friends this unique Trip ID to join:</h5> 
                                 <h4>{trip.tripId}</h4>
-                                <br></br>
+                                {/* <br></br>
                                 <h5>OR</h5>
                                 <SearchBar onChange={handleInputChange} />
-                                <SubmitButton onClick={handleSubmit} />
+                                <SubmitButton onClick={handleSubmit} /> */}
                         </article>
                     </Col>
                 </Row>

@@ -29,12 +29,11 @@ function Dashboard() {
 
   useEffect(() => {
     loadTrips();
-    getWeather();
   }, []);
 
   function getWeather(location) {
       fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=Cozumel&cnt=1&units=imperial&appid=${koltonApiKey}`
+        `https://api.openweathermap.org/data/2.5/weather?q=${location}&cnt=1&units=imperial&appid=${koltonApiKey}`
       )
       .then((res) => res.json())
       .then(weatherData => {
@@ -58,6 +57,7 @@ function Dashboard() {
           if (tripStart <= Date.now() && tripEnd >= Date.now()) {
             console.log("true");
             setCurrentTrip(res.data.memberOf[i]);
+            getWeather(res.data.memberOf[i].tripName);
             // sortSched(res.data.memberof[i].tripSchedule);
           } else {
             console.log("false");

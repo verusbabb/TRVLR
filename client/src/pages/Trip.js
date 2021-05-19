@@ -28,6 +28,7 @@ function Trip() {
         API.getTrip(id)
             .then((res) => {
                 setTrip(res.data);
+                console.log(trip)
             })
             .catch((err) => console.log(err));
     }, [friendData]);
@@ -91,22 +92,29 @@ function Trip() {
                     <Col size="m12 s12">
                         <article>
                             <h2>Trip Members</h2>
-                            <SearchBar onChange={handleInputChange} />
-                            <SubmitButton onClick={handleSubmit} />
+                            <br></br>
                             {trip.members.length ? (
                                 <Collection>
                                     {trip.members.map((friend, index) => (
-
-                                        <CollectionItem key={index}><span>Username: {friend.userName}</span>
-                                            <br />
+                                        
+                                        <CollectionItem key={index}>
 
                                             {friend.name.firstName + " " + friend.name.lastName}
+                                            <br />
+                                            <span>Username: {friend.userName}</span>
                                         </CollectionItem>
                                     ))}
                                 </Collection>
                             ) : (
                                 ""
-                            )}
+                                )}
+                                <br></br>
+                                <h5>Send your friends this unique Trip ID to join:</h5> 
+                                <h4>{trip.tripId}</h4>
+                                <br></br>
+                                <h5>OR</h5>
+                                <SearchBar onChange={handleInputChange} />
+                                <SubmitButton onClick={handleSubmit} />
                         </article>
                     </Col>
                 </Row>

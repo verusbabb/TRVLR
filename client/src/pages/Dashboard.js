@@ -9,6 +9,7 @@ import { List, ListItem } from "../components/List";
 import API from "../utils/API";
 import { useUserContext } from "../utils/userContext";
 import { Table, TableHead, TableBody } from "../components/Table";
+import moment from "moment";
 // import SearchBar from "../components/SearchBar";
 // import SubmitButton from "../components/SubmitButton";
 
@@ -19,7 +20,10 @@ function Dashboard() {
   const [friendUsername, setFriendUsername] = useState("");
   const [foundFriends, setFoundFriends] = useState([]);
   const [currentTrip, setCurrentTrip] = useState({});
+  // const [schedule, setSchedule] = useState("");
   const [weather, setWeather] = useState({});
+  const steveApiKey = "bfb8b19c29117879854c3946d13147c8";
+  const koltonApiKey = "c6a936905a8566bfdc4cca37ff190c24";
 
   // const apiKey = process.env.REACT_APP_API_KEY;
 
@@ -28,23 +32,16 @@ function Dashboard() {
     getWeather();
   }, []);
 
-  async function getWeather(location) {
-    try {
-      const result = await fetch(
-        `https://api.openweathermap.org/data/2.5/forecast/weather?q=Cozumel&cnt=1&appid=bfb8b19c29117879854c3946d13147c8`
-      );
-
-      if (result.status === 200) {
-        console.log(result);
-        return { success: true, data: await result.json() };
-      }
-
-      return { success: false, error: result.statusText };
-    } catch (ex) {
-      return { success: false, error: ex.message };
-    }
+  function getWeather(location) {
+      fetch(
+        `https://api.openweathermap.org/data/2.5/weather?q=Cozumel&cnt=1&units=imperial&appid=${koltonApiKey}`
+      )
+      .then((res) => res.json())
+      .then(weatherData => {
+        console.log(weatherData);
+        setWeather(weatherData);
+      })
   }
-  console.log(weather);
 
   function loadTrips() {
     API.getUser(state.id)
@@ -61,6 +58,7 @@ function Dashboard() {
           if (tripStart <= Date.now() && tripEnd >= Date.now()) {
             console.log("true");
             setCurrentTrip(res.data.memberOf[i]);
+            // sortSched(res.data.memberof[i].tripSchedule);
           } else {
             console.log("false");
           }
@@ -69,7 +67,12 @@ function Dashboard() {
       .catch((err) => console.log(err));
   }
 
-  // console.log(currentTrip);
+  // function sortSched(unsortedSchedule) {
+  //   let sortedSchedule = unsortedSchedule.sort((a, b) => {
+  //       return moment(a.activityDate + ", " + a.startTime).valueOf() - moment(b.activityDate + ", " + b.startTime).valueOf();
+  //   });
+  //   setSchedule(sortedSchedule);
+  // }
 
   function removeTrip(id) {
     API.deleteTrip(id)
@@ -103,32 +106,44 @@ function Dashboard() {
             </h1>
           </Jumbotron>
         </Card>
-        <Card>
-          <Row>
-            <Col size="m12 s12">
-              <h2>My Trips</h2>
-              <Link to="/createtrip">+ Add a trip</Link>
-              {user.memberOf ? (
-                <List>
-                  {user.memberOf.map((trip, index) => (
-                    <Card key={index}>
-                      <Link to={"/trips/" + trip._id}>
-                        <strong>{trip.tripName}</strong>
-                      </Link>
-                      <DeleteBtn onClick={() => removeTrip(trip._id)} />
-                      <p>
-                        Dates: {trip.startDate} to {trip.endDate}
-                      </p>
-                      <p>Trip ID: {trip.tripId}</p>
-                    </Card>
-                  ))}
-                </List>
-              ) : (
-                <h3>No Results to Display</h3>
-              )}
-            </Col>
-          </Row>
-        </Card>
+        {JSON.stringify(weather) !== "{}" ? (
+          <Card>
+            <Row>
+              <Col size="m12">
+                <h3>Current Trip Forecast</h3>
+                <h4>{currentTrip.tripName}</h4>
+
+                <Table>
+                  <TableHead>
+                    <th>Temperature</th>
+                    <th>Feels Like</th>
+                    <th>Humidity</th>
+                    <th>Description</th>
+                    <th></th>
+                  </TableHead>
+                  <TableBody>
+                    <tr>
+                      <td>
+                        {weather.main.temp}°F
+                      </td>
+                      <td>
+                        {weather.main.feels_like}°F
+                      </td>
+                      <td>
+                        {weather.main.humidity}%
+                      </td>
+                      <td>
+                        {weather.weather[0].description}
+                      </td>
+                    </tr>
+                  </TableBody>
+                </Table>
+              </Col>
+            </Row>
+          </Card>
+        ) : (
+          ""
+        )}
         {JSON.stringify(currentTrip) !== "{}" ? (
           <Card>
             <Row>
@@ -158,32 +173,32 @@ function Dashboard() {
         ) : (
           ""
         )}
-
-        {/* {JSON.stringify(currentTrip) !== "{}" ? (
-          <Card>
-            <Row>
-              <Col size="m12">
-                <h3>Current Trip Forecast</h3>
-                <h4>{currentTrip.tripName}</h4>
-
-                <Table>
-                  <TableHead>
-                    <th>temp</th>
-                  </TableHead>
-                  <TableBody>
-                    {weather.list.map((list, index) => (
-                      <tr key={index}>
-                        <td>{list.main.temp}</td>
-                      </tr>
-                    ))}
-                  </TableBody>
-                </Table>
-              </Col>
-            </Row>
-          </Card>
-        ) : (
-          ""
-        )} */}
+        <Card>
+          <Row>
+            <Col size="m12 s12">
+              <h2>My Trips</h2>
+              <Link to="/createtrip">+ Add a trip</Link>
+              {user.memberOf ? (
+                <List>
+                  {user.memberOf.map((trip, index) => (
+                    <Card key={index}>
+                      <Link to={"/trips/" + trip._id}>
+                        <strong>{trip.tripName}</strong>
+                      </Link>
+                      <DeleteBtn onClick={() => removeTrip(trip._id)} />
+                      <p>
+                        Dates: {trip.startDate} to {trip.endDate}
+                      </p>
+                      <p>Trip ID: {trip.tripId}</p>
+                    </Card>
+                  ))}
+                </List>
+              ) : (
+                <h3>No Results to Display</h3>
+              )}
+            </Col>
+          </Row>
+        </Card>
       </Container>
     </>
   );

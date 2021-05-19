@@ -1,3 +1,4 @@
+// const mongoose = require("mongoose");
 const db = require("../models");
 
 // Defining methods for the TripsController
@@ -10,29 +11,112 @@ module.exports = {
   },
   findTripById: function (req, res) {
     db.Trip.findById(req.params.id)
+      .populate("tripExpenses")
+      .populate("tripSchedule")
+      .populate("tripCollections")
+      .populate("members")
+      .sort({ "tripSchedule.activityName": -1 })
+      .exec()
+      .then((dbModel) => res.json(dbModel))
+      .catch((err) => res.status(422).json(err));
+  },
+  findTripByTripId: function (req, res) {
+    console.log(req.params.tripId)
+    db.Trip.findOne(
+      {
+        tripId: req.params.tripId
+      })
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
   createTrip: function (req, res) {
-    console.log(req.body);
+    //   console.log(req.body);
+    //   db.Trip.create(req.body)
+    //     .then((dbModel) => res.json(dbModel))
+    //     .catch((err) => res.status(422).json(err));
+    // },
     db.Trip.create(req.body)
-      .then((dbModel) => res.json(dbModel))
+      .then((dbModel) => {
+        db.User.findByIdAndUpdate(
+          { _id: req.body.id },
+          { $push: { memberOf: dbModel._id } }
+        )
+          .then((res) => {
+            res.json(dbModel);
+          });
+      })
       .catch((err) => res.status(422).json(err));
   },
-  //   db.Trip.create(req.body)
-  //     .then((dbModel) => {
-  //       console.log(req.user, "current user 2");
-  //       db.User.findByIdAndUpdate(
-  //         { _id: req.user._id },
-  //         { $push: { memberOf: dbModel._id } }
-  //       ).then((res) => {
-  //         res.json(dbModel);
-  //       });
-  //     })
-  //     .catch((err) => res.status(422).json(err));
-  // },
+
+  createExpense: function (req, res) {
+    console.log(req.params);
+    db.Expense.create(req.body)
+      .then((dbExpense) => {
+        return db.Trip.findByIdAndUpdate(
+          req.params.id,
+          { $addToSet: { tripExpenses: dbExpense.id } },
+          { new: true, upsert: true }
+        ).then((expenseData) => {
+          console.log(expenseData);
+          res.json(expenseData);
+        });
+      })
+      .catch((err) => res.status(422).json(err));
+  },
+
+  createSchedule: function (req, res) {
+    console.log(req.body, "schedule test2");
+    db.Schedule.create(req.body)
+      .then((dbTrip) => {
+        db.Trip.findByIdAndUpdate(
+          req.params.id,
+          { $addToSet: { tripSchedule: dbTrip._id } }
+        )
+          .populate("tripSchedule")
+          .exec()
+          .then((dbSchedule) => {
+            res.json(dbSchedule);
+          });
+      })
+      .catch((err) => res.status(422).json(err));
+  },
+
+  createCollection: function (req, res) {
+    db.Collection.create(req.body)
+      .then((dbTrip) => {
+        db.Trip.findByIdAndUpdate(
+          req.params.id,
+          { $addToSet: { tripCollections: dbTrip._id } }
+        ).then((dbCollection) => {
+          res.json(dbCollection);
+        });
+      })
+      .catch((err) => res.status(422).json(err));
+  },
+
+  createCollectionItem: function (req, res) {
+    db.Collection.findByIdAndUpdate(
+      { _id: req.params.id },
+      { $addToSet: { collectionItems: req.body } })
+      .then((dbCollection) => {
+        res.json(dbCollection);
+      })
+      .catch((err) => res.status(422).json(err));
+  },
+
   updateTrip: function (req, res) {
-    db.Trip.findOneAndUpdate({ _id: req.params.id }, req.body)
+    console.log(req.body);
+    db.Trip.findByIdAndUpdate({ _id: req.params.id }, req.body)
+      .then(function (dbTrip) {
+        console.log(dbTrip);
+        return db.User.findByIdAndUpdate(
+          req.user._id,
+          {
+            $addToSet: { memberOf: dbTrip.id },
+          },
+          { new: true, upsert: true }
+        );
+      })
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
@@ -42,4 +126,19 @@ module.exports = {
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
+  deleteExpense: function (req, res) {
+    db.Expense.deleteOne({ _id: req.params.id})
+      .then((dbModel) => res.json(dbModel))
+      .catch((err) => res.status(422).json(err));
+  },
+  deleteSchedule: function (req, res) {
+    db.Schedule.deleteOne({ _id: req.params.id})
+      .then((dbModel) => res.json(dbModel))
+      .catch((err) => res.status(422).json(err));
+  },
+  deleteCollection: function (req, res) {
+    db.Collection.deleteOne({ _id: req.params.id})
+    .then((dbModel) => res.json(dbModel))
+    .catch((err) => res.status(422).json(err));
+  }
 };

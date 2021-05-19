@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const tripsController = require("../../controllers/tripsController");
+const passport = require("../../config/passport");
 
 // Matches with "/api/trips"
 router
@@ -12,6 +13,23 @@ router
   .route("/:id")
   .get(tripsController.findTripById)
   .put(tripsController.updateTrip)
-  .delete(tripsController.removeTrip);
+  .delete(tripsController.removeTrip)
+  .post(tripsController.createExpense);
+
+router.route("/schedule/:id")
+  .post(tripsController.createSchedule)
+  .delete(tripsController.deleteSchedule);
+
+router.route("/expenses/:id")
+  .delete(tripsController.deleteExpense);
+
+router
+  .route("/collection/:id")
+  .post(tripsController.createCollection)
+  .put(tripsController.createCollectionItem)
+  .delete(tripsController.deleteCollection);
+
+// Matches with "/api/trips/tripId"
+router.route("/tripId/:tripId").get(tripsController.findTripByTripId);
 
 module.exports = router;

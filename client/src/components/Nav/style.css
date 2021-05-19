@@ -1,11 +1,34 @@
-.nav-wrapper {
-  width: 80vw !important;
-  margin: auto;
-  align-self:center;
+
+.brand-logo {
+  color: white
+}
+
+header {
+  width: 100%;
+
 }
 
 
 
+@media screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 992px) {
 .brand-logo {
-  color: white
+  display:none !important;
+}
+
+ .sidenav, .nav-wrapper{
+  overflow: none;
+
+} 
+
+.sidenav {
+  float:none !important;
+  background-color: lightgrey;
+}
+
+.sidenav li>a.btn {
+  background-color: black !important;
+}
+
 }

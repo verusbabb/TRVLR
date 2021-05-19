@@ -3,41 +3,48 @@ import "./style.css";
 import { useUserContext } from "../../utils/userContext";
 import React, { useState, useEffect, useContext } from "react";
 import navLinks from "../../utils/navlinks.json";
+import "materialize-css"
+import { Navbar } from "react-materialize";
 
 function Nav() {
-
-  const [state] = useUserContext();
+  const { state } = useUserContext();
 
   console.log(state);
 
   return (
     <>
       <header>
-        <nav className="transparentBG no-shadows">
-          <div className="nav-wrapper">
-            <Link to="/" className="brand-logo center">Trip Planner</Link>
-            <ul id="nav-mobile" className="right hide-on-med-and-down">
-              {navLinks.map(link => {
-                if (state.length > 0 && link.logged === "in")
+        <Navbar className="transparentBG no-shadows">
+          <div>
+            <Link to="/" className="brand-logo center">
+              Trip Planner
+            </Link>
+            <ul>
+              {navLinks.map((link, index) => {
+                if (state.userName && link.logged === "in")
                   return (
                     <>
-                      <li>
-                        <Link to={link.linkTo} className="btn black">{link.linkName}</Link>
+                      <li key={index}>
+                        <Link to={link.linkTo} className="btn transparentBG">
+                          {link.linkName}
+                        </Link>
                       </li>
                     </>
-                  )
-                else if (state.length === 0 && link.logged === "out")
+                  );
+                else if (!state.userName && link.logged === "out")
                   return (
                     <>
-                      <li>
-                        <Link to={link.linkTo} className="btn black">{link.linkName}</Link>
+                      <li key={index}>
+                        <Link to={link.linkTo} className="btn transparentBG">
+                          {link.linkName}
+                        </Link>
                       </li>
                     </>
-                  )
+                  );
               })}
             </ul>
           </div>
-        </nav>
+        </Navbar>
       </header>
     </>
   );

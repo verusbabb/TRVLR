@@ -1,11 +1,18 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const User = require("./users.js");
+const Expense = require("./expenses.js");
+const Collection = require("./collections.js");
+const Schedule = require("./schedule.js");
 
 const TripSchema = new Schema({
   created: {
     type: Date,
     default: Date.now,
+  },
+
+  tripId: {
+    type: String,
   },
 
   tripName: {
@@ -17,6 +24,7 @@ const TripSchema = new Schema({
   startDate: {
     type: String,
   },
+  
   endDate: {
     type: String,
   },
@@ -24,61 +32,26 @@ const TripSchema = new Schema({
     type: String,
   },
   tripOwner: {
-    type: Schema.Types.ObjectId,
-    ref: "User",
+    type: String,
+    // ref: "User",
     // required: true,
   },
-  tripCollections: {
+  members: [{
     type: Schema.Types.ObjectId,
-    ref: "CollectionsSchema",
-  },
-  tripExpenses: {
+    ref: "User",
+  }],
+  tripCollections: [{
     type: Schema.Types.ObjectId,
-    ref: "ExpensesSchema",
-  },
-});
-
-const CollectionsSchema = new Schema({
-  collections: [
-    {
-      collectionName: {
-        type: String,
-        trim: true,
-        required: true,
-      },
-      collectionDescription: {
-        type: String,
-      },
-      collectionUrl: {
-        type: String,
-      },
-    },
-  ],
-});
-
-const ExpensesSchema = new Schema({
-  expenses: [
-    {
-      expenseDescription: {
-        type: String,
-        trim: true,
-        required: true,
-      },
-      expenseAmount: {
-        type: Number,
-        required: true,
-      },
-      expenseSubmitter: {
-        type: String,
-        trim: true,
-        required: true,
-      },
-      expenseDate: {
-        type: String,
-        required: true,
-      },
-    },
-  ],
+    ref: "Collection",
+  }],
+  tripExpenses: [{
+    type: Schema.Types.ObjectId,
+    ref: "Expense",
+  }],
+  tripSchedule: [{
+    type: Schema.Types.ObjectId,
+    ref: "Schedule",
+  }]
 });
 
 const Trip = mongoose.model("Trip", TripSchema);

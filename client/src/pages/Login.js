@@ -11,7 +11,7 @@ function Login() {
   const [success, setSuccess] = useState(true);
   const [fail, setFail] = useState(true);
   const history = useHistory();
-  const [state, dispatch] = useUserContext();
+  const { state, dispatch } = useUserContext();
 
   function handleInputChange(event) {
     const { name, value } = event.target;
@@ -30,15 +30,16 @@ function Login() {
         .then(async (res) => {
           setSuccess(true);
           setFail(false);
-
+          console.log(res);
           dispatch({
             type: "add",
+            id: res.data._id,
             userName: res.data.userName,
             firstName: res.data.name.firstName,
             lastName: res.data.name.lastName,
+            memberOf: res.data.memberOf,
+            isAuthenticated: "true",
           });
-          console.log(state);
-
           history.push("/dashboard");
         })
         .catch((err) => {
@@ -51,15 +52,14 @@ function Login() {
 
   return (
     <>
-
       <div className="container login-box">
         <Row>
-          <Col size="l8 offset-l2 s12">
+          <Col size="m12 s12">
             <Card>
               <Row>
                 <h3>Log Into an Existing Account</h3>
               </Row>
-              <form className="valign">
+              <form>
                 <Input
                   onChange={handleInputChange}
                   name="userName"
@@ -85,7 +85,6 @@ function Login() {
           </Col>
         </Row>
       </div>
-
     </>
   );
 }

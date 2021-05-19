@@ -17,7 +17,8 @@ body {
 
 main {
   flex: 1 0 auto;
-  min-width: 100vw;
+  min-width: 80vw;
+  min-height: 100%;
 }
 
 .transparentBG {
@@ -42,6 +43,19 @@ border: 1px solid rgba( 255, 255, 255, 0.18 );
 }
 
 ::placeholder {
-  color: grey;
-  opacity: 1;
+  color: black;
+}
+
+.input-field>label {
+  color: black;
+}
+
+textarea{
+  height: 10vh;
+}
+
+
+
+h1 {
+  font-size: 3.5rem !important;
 }

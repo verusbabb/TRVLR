@@ -1,64 +1,206 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import Card from "../components/Card";
-import DeleteBtn from "../components/DeleteBtn";
-import { Container, Row, Col } from "../components/Grid";
-import Jumbotron from "../components/Jumbotron"
-import { List, ListItem } from "../components/List";
+// import DeleteBtn from "../components/DeleteBtn";
+import { Row, Col } from "../components/Grid";
+import { Input, TextArea, FormBtn } from "../components/Form";
+import { Table, TableHead, TableBody } from "../components/Table";
 import API from "../utils/API";
 import { useUserContext } from "../utils/userContext";
+import { Modal, Button, DatePicker, TimePicker } from "react-materialize";
+import moment from "moment";
+import DeleteButton from "../components/DeleteBtn";
 
 function Schedule() {
 
     const [sched, setSched] = useState({});
     const [trip, setTrip] = useState({});
+    const { state } = useUserContext();
+    const [formObject, setFormObject] = useState({});
+    const [modalOpen, setModalOpen] = useState(false)
 
-    const { id } = useParams()
+    const { id } = useParams();
+
     useEffect(() => {
+        loadTrip();
+    }, [id])
+
+    function loadTrip() {
         API.getTrip(id)
-            .then(res => setTrip(res.data))
+            .then(res => {
+                setTrip(res.data);
+                console.log(res.data);
+                sortSched(res.data.tripSchedule);
+            })
             .catch(err => console.log(err));
-    }, [])
+    }
+
+    function sortSched(unsortedSchedule) {
+        console.log(unsortedSchedule, "unsorted");
+        let sortedSchedule = unsortedSchedule.sort((a, b) => {
+            return moment(a.activityDate + ", " + a.startTime).valueOf() - moment(b.activityDate + ", " + b.startTime).valueOf();
+        });
+        console.log(sortedSchedule, "sorted")
+        setSched(sortedSchedule);
+    }
+
+    function removeSchedule(scheduleId) {
+        console.log(scheduleId);
+        API.deleteSchedule(scheduleId)
+            .then((res) => {
+                loadTrip();
+            })
+            .catch(err => console.log(err));
+    }
+
+    function handleInputChange(event) {
+        const { name, value } = event.target;
+        setFormObject({ ...formObject, [name]: value })
+    };
+
+    function handleFormSubmit(event) {
+        console.log(state)
+        event.preventDefault();
+
+        if (formObject.activityName) {
+            API.createSchedule(id, {
+                activityName: formObject.activityName,
+                activityDate: document.getElementById("activityDate").value,
+                activitySubmitter: state.firstName,
+                startTime: document.getElementById("startTime").value,
+                endTime: document.getElementById("endTime").value,
+                activityDescription: formObject.activityDescription
+            })
+                .then((res) => {
+                    console.log(res.data.tripSchedule, "schedule test")
+
+
+                    loadTrip();
+                    handleFormClear();
+                }
+                )
+                // .then(res => findAllTrips())
+                .catch(err => console.log(err));
+        }
+    };
+
+    function handleFormClear() {
+
+        document.getElementById("addScheduleForm").reset();
+
+        setFormObject({
+            activityName: "",
+            activityDescription: ""
+        });
+    };
 
     return (
-        <Container fluid>
-
+        <>
             <Card>
                 <Row>
-                    <Col size="m12">
-                        <Jumbotron>
-                        <h1>
-                            {trip.tripName}
-                        </h1>
-                        </Jumbotron>
-                    </Col>
-                </Row>
-            </Card>
-            <Card>
-                <Row>
-                    <Col size="m12">
+                    <Col size="m12 s12">
                         <h1>Schedule</h1>
-                        {/* map using schedule.days or something similar from a schedule object*/}
-                            <h2>Day 1 - Thursday</h2>
-                            <List>
-                                <ListItem>
-                                    8:00am - Leave for Trip
-                                </ListItem>
-                                <ListItem>
-                                    12:00pm - Lunch
-                                </ListItem>
-                            </List>
+                        <br></br>
+                        <Modal
+                            actions={[
+                                <Button flat modal="close" node="button" waves="green">
+                                    Close
+                                </Button>,
+                                <Button
+                                    onClick={handleFormSubmit}
+                                    className="modal-close"
+                                >Add</Button>
+                            ]}
+                            bottomSheet={false}
+                            fixedFooter={false}
+                            header="Add an Activity"
+                            id="add-activity-modal"
+                            className="modal"
+                            open={false}
+                            options={{
+                                autoclose: true,
+                                container: "body",
+                                dismissible: true,
+                                endingTop: "10%",
+                                inDuration: 250,
+                                opacity: 0.5,
+                                outDuration: 250,
+                                preventScrolling: true,
+                                startingTop: "4%",
+                            }}
+                            trigger={<Link node="button">+ Add an Activity</Link>}
+                        >
+                            <form id="addScheduleForm">
+                                <Input
+                                    onChange={handleInputChange}
+                                    name="activityName"
+                                    value={formObject.activityName}
+                                    placeholder="What are you doing?"
+                                />
+                                <DatePicker
+                                    id="activityDate"
+                                    name="activityDate"
+                                    value={formObject.activityDate}
+                                    placeholder="Date"
+                                    options={{
+                                        container: "body",
+                                        autoClose: true
+                                    }}
+                                />
+                                <TimePicker
+                                    id="startTime"
+                                    name="startTime"
+                                    value={formObject.startTime}
+                                    placeholder="Start Time"
+                                    options={{
+                                        container: "body",
+                                        autoClose: true
+                                    }}
+                                />
+                                <TimePicker
+                                    id="endTime"
+                                    name="endTime"
+                                    value={formObject.endTime}
+                                    placeholder="End Time"
+                                    options={{
+                                        container: "body",
+                                        autoClose: true
+                                    }}
+                                />
+                                <TextArea
+                                    onChange={handleInputChange}
+                                    name="activityDescription"
+                                    value={formObject.activityDescription}
+                                    placeholder="(Optional) Add any necessary details about the activity here"
+                                />
+
+                            </form>
+                        </Modal>
+                        {sched.length ? (
+                            <Table >
+                                <TableHead>
+                                    <th>Date</th>
+                                    <th>Activity</th>
+                                    <th>Time</th>
+                                </TableHead>
+                                <TableBody>
+                                    {sched.map((schedule, index) => (
+                                        <tr key={index}>
+                                            <td>{schedule.activityDate}</td>
+                                            <td>{schedule.activityName}</td>
+                                            <td>{schedule.startTime}</td>
+                                            <td><DeleteButton onClick={(() => removeSchedule(schedule._id))} /></td>
+                                        </tr>
+                                    ))}
+                                </TableBody>
+                            </Table>
+                        ) : (
+                            <p>Nothing scheduled yet!</p>
+                        )}
                     </Col>
                 </Row>
             </Card>
-            <Card>
-                <Row>
-                    <Col size="m6">
-                        <Link to="/dashboard">← Back to Dashboard</Link>
-                    </Col>
-                </Row>
-            </Card>
-        </Container>
+        </>
     )
 }
 

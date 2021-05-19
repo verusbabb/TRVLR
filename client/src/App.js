@@ -11,52 +11,83 @@ import Signout from "./pages/Signout";
 // import NoMatch from "./pages/NoMatch";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  useHistory,
+} from "react-router-dom";
 import { useUserContext } from "./utils/userContext";
+import { ProtectedRoute } from "./components/protectedRoutes";
 
 function App() {
-  const [state, dispatch] = useUserContext();
+  const { state, dispatch } = useUserContext();
+
+  var inactivityTime = function () {
+    var time;
+    window.onload = resetTimer;
+    // DOM Events
+    document.onmousemove = resetTimer;
+    document.onkeydown = resetTimer;
+
+    function logout() {
+      alert("You are now logged out.");
+      dispatch({
+        type: "logOut",
+        isAuthenticated: "false",
+      });
+      localStorage.removeItem("user");
+      // eslint-disable-next-line no-restricted-globals
+      location.href = "/login";
+    }
+
+    function resetTimer() {
+      clearTimeout(time);
+      time = setTimeout(logout, 1200000);
+      // 1000 milliseconds = 1 second
+    }
+  };
+
+  if (state.isAuthenticated) {
+    inactivityTime();
+  }
 
   return (
     <Router>
-     
-        <Nav />
-        <main className="valign-wrapper">
-          <Switch>
-            <Route exact path="/">
-              <Home />
-            </Route>
-            <Route exact path="/dashboard">
-              <Dashboard />
-            </Route>
-            <Route exact path="/trips/:id">
-              <Trip />
-            </Route>
-            <Route exact path="/createtrip">
-              <CreateTrip />
-            </Route>
-            <Route exact path="/trips/:id/schedule">
-              <Schedule />
-            </Route>
-            <Route exact path="/trips/:id/expenses">
-              <Expenses />
-            </Route>
-            <Route exact path="/signup">
-              <Signup />
-            </Route>            
-            <Route exact path="/login">
-              <Login />
-            </Route>
-            <Route exact path="/signout">
-              <Signout />
-            </Route>
-            {/* <Route>
+      <Nav />
+      <main className="valign-wrapper">
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <ProtectedRoute exact path="/dashboard" component={Dashboard} />
+          <ProtectedRoute exact path="/trips/:id" component={Trip} />
+          <ProtectedRoute exact path="/createtrip" component={CreateTrip} />
+          <ProtectedRoute
+            exact
+            path="/trips/:id/schedule"
+            component={Schedule}
+          />
+          <ProtectedRoute
+            exact
+            path="/trips/:id/expenses"
+            component={Expenses}
+          />
+          <Route exact path="/signup">
+            <Signup />
+          </Route>
+          <Route exact path="/login">
+            <Login />
+          </Route>
+          <Route exact path="/signout">
+            <Signout />
+          </Route>
+          {/* <Route>
             <NoMatch />
           </Route> */}
-          </Switch>
-        </main>
-        <Footer />
-      
+        </Switch>
+      </main>
+      <Footer />
     </Router>
   );
 }

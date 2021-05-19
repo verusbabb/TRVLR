@@ -1,115 +1,170 @@
-import React, { useState, useEffect, useContext } from "react";
-import { Link, useParams } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useParams, Redirect } from "react-router-dom";
 import Card from "../components/Card";
 import { Input, TextArea, FormBtn } from "../components/Form";
-import DeleteBtn from "../components/DeleteBtn";
+// import DeleteBtn from "../components/DeleteBtn";
 import { Container, Row, Col } from "../components/Grid";
-import Jumbotron from "../components/Jumbotron"
-import { List, ListItem } from "../components/List";
+import Jumbotron from "../components/Jumbotron";
+import { Table, TableHead, TableBody } from "../components/Table";
 import API from "../utils/API";
 import { useUserContext } from "../utils/userContext";
+import { Modal, Button, DatePicker } from "react-materialize";
+import DeleteButton from "../components/DeleteBtn";
+// import EditButton from "../components/EditBtn";
+// import compModal from "../components/Modal";
 
 function Expenses() {
-
-    // const [expense, setExpense] = useState({});
+    const [tripExpense, setTripExpense] = useState({});
     const [trip, setTrip] = useState({});
-    const [formObject, setFormObject] = useState({})
+    const [formObject, setFormObject] = useState({});
+    const { state } = useUserContext();
 
-    const { id } = useParams()
-    
-    // useEffect(() => {
-    //     API.getTrip(id)
-    //         .then(res => setTrip(res.data))
-    //         .catch(err => console.log(err));
-    // }, [])
+    const { id } = useParams();
 
     useEffect(() => {
         loadTrip();
-    }, []);
+    }, [id]);
 
     function loadTrip() {
         API.getTrip(id)
-            .then((res) => setTrip(res.data))
+            .then((res) => {
+                setTrip(res.data);
+                setTripExpense(res.data.tripExpenses);
+            })
             .catch((err) => console.log(err));
+    }
+
+    function removeExpense(expenseId) {
+        API.deleteExpense(expenseId)
+            .then((res) => {
+                loadTrip();
+            })
+            .catch(err => console.log(err));
     }
 
     function handleInputChange(event) {
         const { name, value } = event.target;
-        setFormObject({ ...formObject, [name]: value })
-    };
+        setFormObject({ ...formObject, [name]: value });
+    }
 
     function handleFormSubmit(event) {
+        console.log(state);
         event.preventDefault();
-        if (formObject.tripName) {
-            API.createTrip({
-                expenses: formObject.expenses,
+        if (formObject.expenseAmount) {
+            API.createExpense(id, {
+                expenseDescription: formObject.expenseDescription,
+                expenseAmount: formObject.expenseAmount,
+                expenseSubmitter: state.firstName,
+                expenseDate: document.getElementById("expenseDate").value,
             })
-                // .then(res => findAllTrips())
-                .catch(err => console.log(err));
+                .then((res) => {
+                    console.log(res);
+                    loadTrip();
+                    handleFormClear();
+
+                })
+                .catch((err) => console.log(err));
         }
     };
 
-    // console.log(trip)
-    // console.log(trip.expenses[0].description)
-    // console.log(trip.expenses.length)
+    function handleFormClear() {
 
-     return (
+        document.getElementById("add-expense-form").reset();
+
+        setFormObject({
+            expenseDescription: "",
+            expenseAmount: ""
+        });
+    };
+
+    return (
         <>
-            <Container fluid>
+            <Card>
+                <Row>
+                    <Col size="m12 s12">
+                        <h1>Expenses</h1>
+                        <br></br>
+                        <Modal
+                            actions={[
+                                <Button flat modal="close" node="button" waves="green">
+                                    Close
+                                </Button>,
+                                <Button onClick={handleFormSubmit} className="modal-close">Add</Button>
 
-                <Card>
-                    <Row>
-                        <Col size="m12">
-                            <Jumbotron>
-                                <h1>
-                                    {trip.tripName}
-                                </h1>
-                            </Jumbotron>
-                        </Col>
-                    </Row>
-                </Card>
-                <Card>
-                    <Row>
-                        <Col size="m12">
-                            <h1>Expenses</h1>
-                            <form>
-                                <h3>
-                                Add an Expense
-                                </h3>
-                                <Input 
+                            ]}
+                            bottomSheet={false}
+                            fixedFooter={false}
+                            header="Add an Expense"
+                            id="Modal-0"
+                            className="modal"
+                            open={false}
+                            options={{
+                                autoclose: true,
+                                container: "body",
+                                dismissible: true,
+                                endingTop: "10%",
+                                inDuration: 250,
+                                opacity: 0.5,
+                                outDuration: 250,
+                                preventScrolling: true,
+                                startingTop: "4%",
+                            }}
+                            trigger={<Link node="button">+ Add an Expense</Link>}
+                        >
+                            <form id="add-expense-form">
+                                <Input
                                     onChange={handleInputChange}
-                                    name="expenses"
-                                    placeholder="Add a New Expense"
-                                    />
-                                    <FormBtn
-                                    onClick={handleFormSubmit}
-                                    >Add</FormBtn>
+                                    name="expenseDescription"
+                                    placeholder="Brief description of the expense"
+                                />
+                                <Input
+                                    onChange={handleInputChange}
+                                    name="expenseAmount"
+                                    placeholder="Enter dollar amount here"
+                                />
+                                <DatePicker
+                                    id="expenseDate"
+                                    name="expenseDate"
+                                    placeholder="When did you make the purchase?"
+                                    options={{
+                                        autoClose: true,
+                                        container: "body",
+                                    }}
+                                />
                             </form>
-                            {/* map using Expenses.members or something similar from a Expenses object*/}
-                            {trip.expenses ? (
-                                <List>
-                                    {trip.expenses.map((expense) => (
-                                        <ListItem>
-                                            <p>{expense.description} - {expense.submitter}</p>
-                                        </ListItem>
+                        </Modal>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col size="m12 s12">
+                        {tripExpense.length ? (
+                            <Table>
+                                <TableHead>
+                                    <th>By</th>
+                                    <th>Entry</th>
+                                    <th>Cost</th>
+                                    <th>Date</th>
+                                </TableHead>
+                                <TableBody>
+                                    {tripExpense.map((expense, index) => (
+                                        <tr key={index}>
+                                            <td>{expense.expenseSubmitter}</td>
+                                            <td>{expense.expenseDescription}</td>
+                                            <td>${expense.expenseAmount}</td>
+                                            <td>{expense.expenseDate}</td>
+                                            {/* <td><compModal header="Edit Expense" onChange={handleInputChange} onClick={handleFormSubmit} trigger={<EditButton onClick={(() => editExpense(expense._id))} />} /></td> */}
+                                            <td><DeleteButton onClick={(() => removeExpense(expense._id))} /></td>
+                                        </tr>
                                     ))}
-                                </List>
-                            ) : (
-                                <h3>No Results to Display</h3>
-                            )}
-                        </Col>
-                    </Row>
-                </Card>
-                <Card>
-                    <Row>
-                        <Col size="m6">
-                            <Link to="/dashboard">← Back to Dashboard</Link>
-                        </Col>
-                    </Row>
-                </Card>
-            </Container>
+                                </TableBody>
+                            </Table>
+                        ) : (
+                            <p>No expenses logged yet!</p>
+                        )}
+                    </Col>
+                </Row>
+            </Card>
         </>
-    )
+    );
 }
-
-export default Expenses
+export default Expenses;

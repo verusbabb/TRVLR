@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useUserContext } from "../../utils/userContext";
 import Card from "../Card";
-import { Container, Row, Col } from "../Grid";
-import { Input, TextArea, FormBtn } from "../Form";
+import { Row, Col } from "../Grid";
+import { Input, TextArea } from "../Form";
 import { Table, TableHead, TableBody } from "../Table";
 import API from "../../utils/API";
 import { Modal, Button, Collapsible, CollapsibleItem } from "react-materialize";
 import { Link, useParams } from "react-router-dom";
-import DeleteButton from "../DeleteBtn";
 
 function Collections() {
   const [collection, setCollection] = useState({});
-  const [trip, setTrip] = useState();
   const [formObject, setFormObject] = useState({});
   const { state } = useUserContext();
 
@@ -19,12 +17,11 @@ function Collections() {
 
   useEffect(() => {
     loadTrip();
-  }, [id]);
+  }, []);
 
   function loadTrip() {
     API.getTrip(id)
       .then((res) => {
-        setTrip(res.data);
         setCollection(res.data.tripCollections);
       })
       .catch((err) => console.log(err));

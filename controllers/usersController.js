@@ -10,7 +10,6 @@ module.exports = {
       .catch((err) => res.status(422).json(err));
   },
   findOneUser: function (req, res) {
-    console.log(req.user);
     if (req.user) {
       res.json(req.user);
     } else {
@@ -19,7 +18,6 @@ module.exports = {
   },
 
   findUserById: function (req, res) {
-    console.log(req.body);
     db.User.findById(req.params.id)
       .populate({
         path: "memberOf",
@@ -33,12 +31,13 @@ module.exports = {
       .catch((err) => res.status(422).json(err));
   },
   createUser: function (req, res) {
-    console.log(req.body);
     db.User.create(req.body)
       .then((dbModel) => {
         res.json(dbModel);
       })
-      .catch((err) => res.status(422).json(err));
+      .catch((err) => {
+        res.status(422).json(err);
+      });
   },
   updateUser: function (req, res) {
     db.User.findOneAndUpdate({ _id: req.params.id }, req.body)
@@ -59,7 +58,6 @@ module.exports = {
   },
 
   addTrip: function (req, res) {
-    console.log(req.body, req.user);
     db.Trip.create(req.body)
       .then(function (dbTrip) {
         return db.User.findOneAndUpdate(
@@ -79,7 +77,6 @@ module.exports = {
   },
 
   signOut: function (req, res) {
-    console.log("sign me out?");
     req.logout();
     res.redirect("/signout");
   },

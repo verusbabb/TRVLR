@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
 import Trip from "./pages/Trip";
@@ -8,14 +8,12 @@ import Expenses from "./pages/Expenses";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Signout from "./pages/Signout";
-// import NoMatch from "./pages/NoMatch";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 import {
   BrowserRouter as Router,
   Route,
   Switch,
-  useHistory,
 } from "react-router-dom";
 import { useUserContext } from "./utils/userContext";
 import { ProtectedRoute } from "./components/protectedRoutes";
@@ -82,9 +80,6 @@ function App() {
           <Route exact path="/signout">
             <Signout />
           </Route>
-          {/* <Route>
-            <NoMatch />
-          </Route> */}
         </Switch>
       </main>
       <Footer />

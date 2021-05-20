@@ -1,21 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { Link, useParams, Redirect } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Card from "../components/Card";
-import { Input, TextArea, FormBtn } from "../components/Form";
-// import DeleteBtn from "../components/DeleteBtn";
-import { Container, Row, Col } from "../components/Grid";
-import Jumbotron from "../components/Jumbotron";
+import { Input } from "../components/Form";
+import { Row, Col } from "../components/Grid";
 import { Table, TableHead, TableBody } from "../components/Table";
 import API from "../utils/API";
 import { useUserContext } from "../utils/userContext";
 import { Modal, Button, DatePicker } from "react-materialize";
 import DeleteButton from "../components/DeleteBtn";
-// import EditButton from "../components/EditBtn";
-// import compModal from "../components/Modal";
 
 function Expenses() {
     const [tripExpense, setTripExpense] = useState({});
-    const [trip, setTrip] = useState({});
     const [formObject, setFormObject] = useState({});
     const { state } = useUserContext();
 
@@ -28,7 +23,6 @@ function Expenses() {
     function loadTrip() {
         API.getTrip(id)
             .then((res) => {
-                setTrip(res.data);
                 setTripExpense(res.data.tripExpenses);
             })
             .catch((err) => console.log(err));
@@ -48,7 +42,6 @@ function Expenses() {
     }
 
     function handleFormSubmit(event) {
-        console.log(state);
         event.preventDefault();
         if (formObject.expenseAmount) {
             API.createExpense(id, {
@@ -58,7 +51,6 @@ function Expenses() {
                 expenseDate: document.getElementById("expenseDate").value,
             })
                 .then((res) => {
-                    console.log(res);
                     loadTrip();
                     handleFormClear();
 

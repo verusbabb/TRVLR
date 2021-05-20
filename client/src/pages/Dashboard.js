@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Card from "../components/Card";
 import DeleteBtn from "../components/DeleteBtn";
 import Jumbotron from "../components/Jumbotron";
 import { Container, Row, Col } from "../components/Grid";
-import { List, ListItem } from "../components/List";
+import { List } from "../components/List";
 import API from "../utils/API";
 import { useUserContext } from "../utils/userContext";
 import { Table, TableHead, TableBody } from "../components/Table";
@@ -12,17 +12,12 @@ import moment from "moment";
 import { Modal, Button } from "react-materialize";
 
 function Dashboard() {
-  const [trips, setTrips] = useState([]);
   const [user, setUser] = useState([]);
   const { state } = useUserContext();
-  const [friendUsername, setFriendUsername] = useState("");
-  const [foundFriends, setFoundFriends] = useState([]);
   const [currentTrip, setCurrentTrip] = useState({});
   const [weather, setWeather] = useState({});
-  const steveApiKey = "bfb8b19c29117879854c3946d13147c8";
-  const koltonApiKey = "c6a936905a8566bfdc4cca37ff190c24";
 
-  // const apiKey = process.env.REACT_APP_API_KEY;
+  const apiKey = process.env.REACT_APP_API_KEY;
 
   useEffect(() => {
     loadTrips();
@@ -30,23 +25,22 @@ function Dashboard() {
 
   function getWeather(location) {
       fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${location}&cnt=1&units=imperial&appid=${koltonApiKey}`
+        `https://api.openweathermap.org/data/2.5/weather?q=${location}&cnt=1&units=imperial&appid=${apiKey}`
       )
       .then((res) => res.json())
       .then(weatherData => {
-        console.log(weatherData);
         if(weatherData.message === "city not found") {
-          return 
+          return;
         }
         setWeather(weatherData);
       })
+      .catch(err => console.log(err));
   }
 
   function loadTrips() {
     API.getUser(state.id)
       .then((res) => {
         setUser(res.data);
-        console.log(user);
 
         for (let i = 0; i < res.data.memberOf.length; i++) {
           let startDate = res.data.memberOf[i].startDate;
@@ -55,44 +49,20 @@ function Dashboard() {
           let tripEnd = Date.parse(endDate);
 
           if (tripStart <= Date.now() && tripEnd >= Date.now()) {
-            console.log(currentTrip, "true");
             setCurrentTrip(res.data.memberOf[i]);
             getWeather(res.data.memberOf[i].tripCity);
 
           } else {
-            console.log("false");
+            return;
           }
         }
       })
       .catch((err) => console.log(err));
   }
 
-  // function sortSched(unsortedSchedule) {
-  //   let sortedSchedule = unsortedSchedule.sort((a, b) => {
-  //       return moment(a.activityDate + ", " + a.startTime).valueOf() - moment(b.activityDate + ", " + b.startTime).valueOf();
-  //   });
-  //   setSchedule(sortedSchedule);
-  // }
-
   function removeTrip(id) {
     API.deleteTrip(id)
       .then(() => loadTrips())
-      .catch((err) => console.log(err));
-  }
-
-  function handleInputChange(e) {
-    const username = e.target.value;
-
-    setFriendUsername(username);
-  }
-
-  function handleSubmit(e) {
-    e.preventDefault();
-
-    API.getUserByUsername(friendUsername)
-      .then((res) => {
-        setFoundFriends([...foundFriends, res.data]);
-      })
       .catch((err) => console.log(err));
   }
 
@@ -120,7 +90,7 @@ function Dashboard() {
                 <Card>
                   <Row>
                     <Col size="m4 s12">
-                      <img src={`https://openweathermap.org/img/w/${weather.weather[0].icon}.png`}></img>
+                      <img src={`https://openweathermap.org/img/w/${weather.weather[0].icon}.png`} alt="weather status icon"></img>
                       <p>{weather.weather[0].description}</p>
                     </Col>
                     <Col size="m8 s12">

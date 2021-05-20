@@ -1,18 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import API from "../utils/API";
-// import { Link } from "react-router-dom";
 import { Input, FormBtn } from "../components/Form";
 import { Col, Row, Container } from "../components/Grid";
 import Card from "../components/Card";
-import { useHistory, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useUserContext } from "../utils/userContext";
 
 function Signup() {
-  const [user, setUser] = useState([]);
-  const [users, setUsers] = useState([]);
   const [formObject, setFormObject] = useState({});
   const [success, setSuccess] = useState(false);
-  const { state, dispatch } = useUserContext();
+  const { dispatch } = useUserContext();
 
   const validated = () => {
     setSuccess(true);
@@ -33,11 +30,6 @@ function Signup() {
 
   function handleFormSubmit(event) {
     event.preventDefault();
-    console.log(
-      formObject.userName,
-      formObject.firstName,
-      formObject.lastName,
-    );
     if (
       formObject.userName &&
       formObject.firstName &&
@@ -73,7 +65,7 @@ function Signup() {
             .catch((err) => {
               // setSuccess(false);
               // setFail(true);
-              console.log(401);
+              console.log(err);
             });
 
           validated();

@@ -1,6 +1,10 @@
-
+nav {
+  margin-bottom: 2em;
+}
 .brand-logo {
-  color: white
+  color: white;
+  font-family: 'Maven Pro', sans-serif;
+  font-size: 4em !important;
 }
 
 header {
@@ -8,6 +12,14 @@ header {
 
 }
 
+a {
+  color: black !important;
+  font-weight:400 !important;
+}
+
+.brand-logo:hover{
+  background:white !important;
+}
 
 
 @media screen 
@@ -27,8 +39,8 @@ header {
   background-color: lightgrey;
 }
 
-.sidenav li>a.btn {
+/* .sidenav li>a.btn {
   background-color: black !important;
-}
+} */
 
 }

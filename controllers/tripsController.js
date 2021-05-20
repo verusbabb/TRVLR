@@ -21,7 +21,6 @@ module.exports = {
       .catch((err) => res.status(422).json(err));
   },
   findTripByTripId: function (req, res) {
-    console.log(req.params.tripId)
     db.Trip.findOne(
       {
         tripId: req.params.tripId
@@ -30,11 +29,6 @@ module.exports = {
       .catch((err) => res.status(422).json(err));
   },
   createTrip: function (req, res) {
-    //   console.log(req.body);
-    //   db.Trip.create(req.body)
-    //     .then((dbModel) => res.json(dbModel))
-    //     .catch((err) => res.status(422).json(err));
-    // },
     db.Trip.create(req.body)
       .then((dbModel) => {
         db.User.findByIdAndUpdate(
@@ -49,7 +43,6 @@ module.exports = {
   },
 
   createExpense: function (req, res) {
-    console.log(req.params);
     db.Expense.create(req.body)
       .then((dbExpense) => {
         return db.Trip.findByIdAndUpdate(
@@ -57,7 +50,6 @@ module.exports = {
           { $addToSet: { tripExpenses: dbExpense.id } },
           { new: true, upsert: true }
         ).then((expenseData) => {
-          console.log(expenseData);
           res.json(expenseData);
         });
       })
@@ -65,7 +57,6 @@ module.exports = {
   },
 
   createSchedule: function (req, res) {
-    console.log(req.body, "schedule test2");
     db.Schedule.create(req.body)
       .then((dbTrip) => {
         db.Trip.findByIdAndUpdate(
@@ -105,10 +96,8 @@ module.exports = {
   },
 
   updateTrip: function (req, res) {
-    console.log(req.body);
     db.Trip.findByIdAndUpdate({ _id: req.params.id }, req.body)
       .then(function (dbTrip) {
-        console.log(dbTrip);
         return db.User.findByIdAndUpdate(
           req.user._id,
           {

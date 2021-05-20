@@ -21,7 +21,7 @@ function Login() {
 
   function handleFormSubmit(event) {
     event.preventDefault();
-    console.log(formObject.userName, formObject.password);
+    // console.log(formObject.userName, formObject.password);
     if (formObject.userName && formObject.password) {
       API.findOneUser({
         userName: formObject.userName,
@@ -30,7 +30,6 @@ function Login() {
         .then(async (res) => {
           setSuccess(true);
           setFail(false);
-          console.log(res);
           dispatch({
             type: "add",
             id: res.data._id,

@@ -15,7 +15,7 @@ function Dashboard() {
   const [currentTrip, setCurrentTrip] = useState({});
   const [weather, setWeather] = useState({});
 
-  const apiKey = process.env.REACT_APP_API_KEY || "bfb8b19c29117879854c3946d13147c8";
+  const apiKey = process.env.REACT_APP_API_KEY;
 
   useEffect(() => {
     loadTrips();

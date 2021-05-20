@@ -109,6 +109,9 @@ function Dashboard() {
             <Row>
               <Col size="m12">
                 <h5>It looks like you're currently on a trip to {currentTrip.tripName}!</h5>
+                <br></br>
+                <Link to={"/trips/" + currentTrip._id}>Go to Trip Dashboard</Link>
+
                 <h4>Current weather in {currentTrip.tripName}:</h4>
                 <Card>
                   <Row>

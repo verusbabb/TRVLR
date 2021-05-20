@@ -213,7 +213,7 @@ function Collections() {
                       <Table>
                         <TableHead>
                           <th>Idea</th>
-                          <th>URL</th>
+                          <th>Link</th>
                           <th>By</th>
                         </TableHead>
                         <TableBody>
@@ -222,7 +222,7 @@ function Collections() {
                               <td>{item.itemName}</td>
                               <td>
                                 <a href={item.itemUrl} target="_blank" rel="noreferrer">
-                                  Link
+                                <i class="material-icons">link</i>
                                 </a>
                               </td>
                               <td>{item.itemSubmitter}</td>

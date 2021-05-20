@@ -120,6 +120,7 @@ function Expenses() {
                                 <Input
                                     onChange={handleInputChange}
                                     name="expenseAmount"
+                                    type="number"
                                     placeholder="Enter dollar amount here"
                                 />
                                 <DatePicker

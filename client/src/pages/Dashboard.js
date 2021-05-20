@@ -34,6 +34,9 @@ function Dashboard() {
       .then((res) => res.json())
       .then(weatherData => {
         console.log(weatherData);
+        if(weatherData.message === "city not found") {
+          return 
+        }
         setWeather(weatherData);
       })
   }
@@ -53,7 +56,7 @@ function Dashboard() {
           if (tripStart <= Date.now() && tripEnd >= Date.now()) {
             console.log(currentTrip, "true");
             setCurrentTrip(res.data.memberOf[i]);
-            getWeather(res.data.memberOf[i].tripName);
+            getWeather(res.data.memberOf[i].tripCity);
 
           } else {
             console.log("false");
@@ -108,11 +111,11 @@ function Dashboard() {
           // <Card>
             <Row>
               <Col size="m12">
-                <h5>It looks like you're currently on a trip to {currentTrip.tripName}!</h5>
+                <h5>It looks like you're currently on a trip to {currentTrip.tripCity}!</h5>
                 <br></br>
-                <Link to={"/trips/" + currentTrip._id}>Go to Trip Dashboard</Link>
+                <Link to={"/trips/" + currentTrip._id}>Go to Trip Dashboard ➜</Link>
 
-                <h4>Current weather in {currentTrip.tripName}:</h4>
+                <h4>Current weather in {currentTrip.tripCity}:</h4>
                 <Card>
                   <Row>
                     <Col size="m4 s12">
@@ -121,8 +124,8 @@ function Dashboard() {
                     </Col>
                     <Col size="m8 s12">
                       <br></br>
-                      <p>Temperature: {weather.main.temp}°F</p>
-                      <p>Feels Like: {weather.main.feels_like}°F</p>
+                      <p>Temperature: {weather.main.temp.toFixed(0)}°F</p>
+                      <p>Feels Like: {weather.main.feels_like.toFixed(0)}°F</p>
                       <p>Humidity: {weather.main.humidity}%</p>
                     </Col>
                   </Row>
@@ -131,9 +134,9 @@ function Dashboard() {
             </Row>
           // </Card>
         ) : (
-          ""
+          "No weather data found for your city input. :("
           )}
-        {JSON.stringify(currentTrip) !== "{}" ? (
+        {currentTrip.tripSchedule.length ? (
           // <Card>
             <Row>
               <Col size="m12">
@@ -160,7 +163,7 @@ function Dashboard() {
             </Row>
           // </Card>
         ) : (
-          ""
+          "Add something to your trip schedule to see it here!"
           )}
           </Card>
         ) : (

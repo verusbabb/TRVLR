@@ -37,7 +37,6 @@ function Signup() {
       formObject.userName,
       formObject.firstName,
       formObject.lastName,
-      formObject.password
     );
     if (
       formObject.userName &&
@@ -61,7 +60,6 @@ function Signup() {
             .then(async (res) => {
               // setSuccess(true);
               // setFail(false);
-              console.log(res);
               dispatch({
                 type: "add",
                 id: res.data._id,
@@ -71,9 +69,6 @@ function Signup() {
                 memberOf: res.data.memberOf,
                 isAuthenticated: "true",
               });
-              console.log(state);
-
-              // history.push("/dashboard");
             })
             .catch((err) => {
               // setSuccess(false);

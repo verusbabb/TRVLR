@@ -21,7 +21,6 @@ const API = {
   },
   // UPDATED saveUser route that now includes authentication
   saveUser: function (userData) {
-    console.log(userData);
     return axios.post("/api/users/signup", userData);
   },
   // Saves a trip to the database
@@ -31,7 +30,6 @@ const API = {
   },
 
   findOneUser: function (userData) {
-    console.log(userData);
     return axios.post("/api/users/login", {
       username: userData.userName,
       password: userData.password,

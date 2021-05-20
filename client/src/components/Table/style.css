@@ -9,10 +9,18 @@
     table {
       table-layout: fixed;
       width: 100%;
-      word-wrap: break-word;
+      word-wrap:unset;
+      
     };
   }
 
   table {
-    background-color: white;
+    background: rgba( 233, 233, 233, 0.20 );
+    /* box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 ); */
+    backdrop-filter: blur( 10.0px );
+    -webkit-backdrop-filter: blur( 10.0px );
   }
+
+ th, td {
+  text-align:center;
+ }

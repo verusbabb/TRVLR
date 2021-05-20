@@ -9,6 +9,7 @@ import API from "../utils/API";
 import { useUserContext } from "../utils/userContext";
 import { Table, TableHead, TableBody } from "../components/Table";
 import moment from "moment";
+import { Modal, Button } from "react-materialize";
 
 function Dashboard() {
   const [trips, setTrips] = useState([]);
@@ -181,17 +182,46 @@ function Dashboard() {
                       <Link to={"/trips/" + trip._id}>
                         <strong>{trip.tripName}</strong>
                       </Link>
-                      <DeleteBtn onClick={() => removeTrip(trip._id)} />
+                      
                       <p>
                         Dates: {trip.startDate} to {trip.endDate}
                       </p>
                       <p>Trip ID: {trip.tripId}</p>
+                      <br></br>
+                      {/* <a onClick={() => removeTrip(trip._id)} className="btn-flat white-text red">Delete trip</a> */}
+                      <Modal
+              actions={[
+                <Button flat modal="close" node="button" waves="green">
+                  Close
+                </Button>,
+                <Button className="modal-close red" onClick={() => removeTrip(trip._id)}>Delete Trip</Button>
+              ]}
+              bottomSheet={false}
+              fixedFooter={false}
+              header="Are you sure? This will delete all trip data for all trip members!"
+              id="Modal-0"
+              open={false}
+              options={{
+                // container: "body",
+                dismissible: true,
+                endingTop: "10%",
+                inDuration: 250,
+                opacity: 0.5,
+                outDuration: 250,
+                preventScrolling: true,
+                startingTop: "4%",
+              }}
+              trigger={<Link  className="btn-flat white-text red">Delete trip</Link>}
+            ></Modal>
+
                     </Card>
                   ))}
                 </List>
               ) : (
                 <h3>No Results to Display</h3>
+                
               )}
+              
             </Col>
           </Row>
         </Card>

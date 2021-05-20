@@ -38,11 +38,6 @@ mongoose.connect(
     useUnifiedTopology: true,
     useCreateIndex: true,
     useFindAndModify: false
-  },
-  function (err) {
-    if (err) throw err;
-
-    console.log("Successfully connected to db");
   }
 );
 

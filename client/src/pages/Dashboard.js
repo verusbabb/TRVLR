@@ -102,12 +102,14 @@ function Dashboard() {
             </h1>
           </Jumbotron>
         </Card>
+        {JSON.stringify(currentTrip) !== "{}" ? (
+        <Card>
         {JSON.stringify(weather) !== "{}" ? (
-          <Card>
+          // <Card>
             <Row>
               <Col size="m12">
-                <h3>Current Trip Forecast</h3>
-                <h4>{currentTrip.tripName}</h4>
+                <h5>It looks like you're currently on a trip to {currentTrip.tripName}!</h5>
+                <h4>Current weather in {currentTrip.tripName}:</h4>
                 <Card>
                   <Row>
                     <Col size="m4 s12">
@@ -122,44 +124,17 @@ function Dashboard() {
                     </Col>
                   </Row>
                 </Card>
-{/* 
-                <Table>
-                  <TableHead>
-                    <th>Temperature</th>
-                    <th>Feels Like</th>
-                    <th>Humidity</th>
-                    <th>Description</th>
-                    <th></th>
-                  </TableHead>
-                  <TableBody>
-                    <tr>
-                      <td>
-                        {weather.main.temp}°F
-                      </td>
-                      <td>
-                        {weather.main.feels_like}°F
-                      </td>
-                      <td>
-                        {weather.main.humidity}%
-                      </td>
-                      <td>
-                        {weather.weather[0].description}
-                      </td>
-                    </tr>
-                  </TableBody>
-                </Table> */}
               </Col>
             </Row>
-          </Card>
+          // </Card>
         ) : (
           ""
-        )}
+          )}
         {JSON.stringify(currentTrip) !== "{}" ? (
-          <Card>
+          // <Card>
             <Row>
               <Col size="m12">
-                <h3>Current Trip Schedule</h3>
-                <h4>{currentTrip.tripName}</h4>
+                <h4>{currentTrip.tripName} Schedule:</h4>
                 <Link to={"/trips/" + currentTrip._id}>Go to Dashboard to add an activity</Link>
 
                 <Table>
@@ -180,6 +155,10 @@ function Dashboard() {
                 </Table>
               </Col>
             </Row>
+          // </Card>
+        ) : (
+          ""
+          )}
           </Card>
         ) : (
           ""

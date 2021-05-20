@@ -150,14 +150,14 @@ function Dashboard() {
                   {user.memberOf.map((trip, index) => (
                     <Card key={index}>
                       <Link to={"/trips/" + trip._id}>
-                        <strong>{trip.tripName}</strong>
-                      </Link>
+                        <h4 className="trip-name">{trip.tripName}</h4>
                       
                       <p>
-                        Dates: {trip.startDate} to {trip.endDate}
+                        {trip.startDate} to {trip.endDate}
                       </p>
                       <p>Trip ID: {trip.tripId}</p>
                       <br></br>
+                      </Link>
                       {/* <a onClick={() => removeTrip(trip._id)} className="btn-flat white-text red">Delete trip</a> */}
                       <Modal
               actions={[
@@ -181,7 +181,7 @@ function Dashboard() {
                 preventScrolling: true,
                 startingTop: "4%",
               }}
-              trigger={<Link  className="btn-flat white-text red">Delete trip</Link>}
+              trigger={<Link  className="btn-flat white-text red darken-2">Delete trip</Link>}
             ></Modal>
 
                     </Card>

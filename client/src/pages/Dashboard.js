@@ -134,7 +134,7 @@ function Dashboard() {
             </Row>
           // </Card>
         ) : (
-          "No weather data found for your city input. :("
+          <p>No weather data found for your city input. :(</p>
           )}
         {currentTrip.tripSchedule.length ? (
           // <Card>
@@ -163,7 +163,7 @@ function Dashboard() {
             </Row>
           // </Card>
         ) : (
-          "Add something to your trip schedule to see it here!"
+          <p>Add something to your trip schedule to see it here!</p>
           )}
           </Card>
         ) : (

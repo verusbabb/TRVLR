@@ -21,6 +21,10 @@ const TripSchema = new Schema({
     required: true,
   },
 
+  tripCity: {
+    type: String
+  },
+
   startDate: {
     type: String,
   },

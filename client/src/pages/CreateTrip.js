@@ -31,6 +31,7 @@ function CreateTrip() {
                 id: state.id,
                 tripId: randomID(),
                 tripName: formObject.tripName,
+                tripCity: formObject.tripCity,
                 startDate: document.getElementById("startDate").value,
                 endDate: document.getElementById("endDate").value,
                 description: formObject.description,
@@ -116,7 +117,19 @@ function CreateTrip() {
                         <Input
                             onChange={handleInputChange}
                             name="tripName"
-                            placeholder="Where are you going?"
+                            placeholder="Give your trip a name!"
+                        />
+                        <h3>City</h3>
+                        <span>Enter a city name to get live weather data while on your trip!</span>
+                        <Input
+                            onChange={handleInputChange}
+                            name="tripCity"
+                            placeholder="City Name"
+                        />
+                        <Input
+                            onChange={handleInputChange}
+                            name="tripState"
+                            placeholder="State and/or country"
                         />
                         <h3>Trip Dates</h3>
                         <DatePicker

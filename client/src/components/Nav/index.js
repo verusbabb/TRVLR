@@ -17,7 +17,7 @@ function Nav() {
         <Navbar className="transparentBG no-shadows">
           <div>
             <Link to="/" className="brand-logo center">
-              Trip Planner
+              T R V L R
             </Link>
             <ul>
               {navLinks.map((link, index) => {
@@ -25,7 +25,7 @@ function Nav() {
                   return (
                     <>
                       <li key={index}>
-                        <Link to={link.linkTo} className="btn transparentBG">
+                        <Link to={link.linkTo} className="btn transparentBG no-shadows">
                           {link.linkName}
                         </Link>
                       </li>
@@ -35,7 +35,7 @@ function Nav() {
                   return (
                     <>
                       <li key={index}>
-                        <Link to={link.linkTo} className="btn transparentBG">
+                        <Link to={link.linkTo} className="btn transparentBG no-shadows">
                           {link.linkName}
                         </Link>
                       </li>

@@ -147,10 +147,11 @@ function Collections() {
                     key={index}
                     expanded={false}
                     header={collect.collectionName}
-                    // icon={<Icon>filter_drama</Icon>}
+ 
                     node="div"
                   >
                     {collect.collectionDescription}
+                    
                     <br></br>
                     <br></br>
                     <Modal
@@ -184,6 +185,7 @@ function Collections() {
                         </Link>
                       }
                     >
+                      
                       {/* <form> */}
                       <Input
                         onChange={handleInputChange}
@@ -227,11 +229,13 @@ function Collections() {
                             </tr>
                           ))}
                         </TableBody>
+                        
                       </Table>
                     ) : (
                       <p>to get started</p>
                     )}
-                    <DeleteButton onClick={(() => removeCategory(collect._id))} />
+                    <br></br>
+                    <a onClick={(() => removeCategory(collect._id))} className="red btn-flat white-text">Delete Category</a>
                   </CollapsibleItem>
                 ))}
               </Collapsible>

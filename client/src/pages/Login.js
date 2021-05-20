@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Input, FormBtn } from "../components/Form";
-import { Col, Row, Container } from "../components/Grid";
+import { Col, Row } from "../components/Grid";
 import Card from "../components/Card";
 import API from "../utils/API";
 import { useUserContext } from "../utils/userContext";
@@ -11,7 +11,7 @@ function Login() {
   const [success, setSuccess] = useState(true);
   const [fail, setFail] = useState(true);
   const history = useHistory();
-  const { state, dispatch } = useUserContext();
+  const { dispatch } = useUserContext();
 
   function handleInputChange(event) {
     const { name, value } = event.target;
@@ -21,7 +21,6 @@ function Login() {
 
   function handleFormSubmit(event) {
     event.preventDefault();
-    // console.log(formObject.userName, formObject.password);
     if (formObject.userName && formObject.password) {
       API.findOneUser({
         userName: formObject.userName,
@@ -44,7 +43,7 @@ function Login() {
         .catch((err) => {
           setSuccess(false);
           setFail(true);
-          console.log(401);
+          console.log(err);
         });
     }
   }

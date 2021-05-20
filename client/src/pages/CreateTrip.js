@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useContext } from "react";
-import { useHistory, Link } from "react-router-dom";
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import Card from "../components/Card";
-import { Container, Row, Col } from "../components/Grid";
+import { Container } from "../components/Grid";
 import { Input, TextArea } from "../components/Form";
 import API from "../utils/API";
 import { useUserContext } from "../utils/userContext";
@@ -9,7 +9,6 @@ import Jumbotron from "../components/Jumbotron";
 import { Button, DatePicker } from "react-materialize";
 
 function CreateTrip() {
-    const [trips, setTrips] = useState([]);
     const [formObject, setFormObject] = useState({});
     const [success, setSuccess] = useState(true);
     const [fail, setFail] = useState(true);
@@ -27,19 +26,18 @@ function CreateTrip() {
 
     function handleFormSubmit(event) {
         event.preventDefault();
-        console.log(state);
         if (formObject.tripName) {
             API.saveTrip({
                 id: state.id,
                 tripId: randomID(),
                 tripName: formObject.tripName,
+                tripCity: formObject.tripCity,
                 startDate: document.getElementById("startDate").value,
                 endDate: document.getElementById("endDate").value,
                 description: formObject.description,
                 members: [state.id]
             })
                 .then(async (res) => {
-                    console.log(res);
                     dispatch({
                         type: "update",
                         memberOf: res.data.memberOf,
@@ -64,7 +62,6 @@ function CreateTrip() {
                 }
             )
                 .then((res) => {
-                    console.log(res.data)
                     API.updateTrip(
                         res.data._id,
                         {
@@ -72,7 +69,6 @@ function CreateTrip() {
                         }
                     )
                         .then(async (res) => {
-                            console.log(res.data, "line 80 createtrip")
                             dispatch({
                                 type: "update",
                                 memberOf: res.data.memberOf,
@@ -121,7 +117,19 @@ function CreateTrip() {
                         <Input
                             onChange={handleInputChange}
                             name="tripName"
-                            placeholder="Where are you going?"
+                            placeholder="Give your trip a name!"
+                        />
+                        <h3>City</h3>
+                        <span>Enter a city name to get live weather data while on your trip!</span>
+                        <Input
+                            onChange={handleInputChange}
+                            name="tripCity"
+                            placeholder="City Name"
+                        />
+                        <Input
+                            onChange={handleInputChange}
+                            name="tripState"
+                            placeholder="State and/or country"
                         />
                         <h3>Trip Dates</h3>
                         <DatePicker

@@ -2,12 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Col, Row, Container } from "../components/Grid";
 import Card from "../components/Card";
-import { List, ListItem } from "../components/List";
 import { Collection, CollectionItem } from "react-materialize";
-import DeleteBtn from "../components/DeleteBtn";
-import SearchBar from "../components/SearchBar";
-import SubmitButton from "../components/SubmitButton";
-import { useUserContext } from "../utils/userContext";
 import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
 import Collections from "../components/Collections";
@@ -16,9 +11,8 @@ import Schedule from "./Schedule";
 
 function Trip() {
     const [trip, setTrip] = useState({ members: [] });
-    const [friendUsername, setFriendUsername] = useState("");
-    const [friendData, setFriendData] = useState({});
-    const { state } = useUserContext();
+    // const [friendUsername, setFriendUsername] = useState("");
+    // const [friendData, setFriendData] = useState({});
 
     // When this component mounts, grab the trip with the _id of props.match.params.id
     // e.g. localhost:3000/trips/599dcb67f0f16317844583fc
@@ -28,45 +22,44 @@ function Trip() {
         API.getTrip(id)
             .then((res) => {
                 setTrip(res.data);
-                console.log(trip)
             })
             .catch((err) => console.log(err));
-    }, [friendData]);
+    }, []);
 
-    function handleInputChange(e) {
-        const username = e.target.value;
+    // function handleInputChange(e) {
+    //     const username = e.target.value;
 
-        setFriendUsername(username);
-    }
+    //     setFriendUsername(username);
+    // }
 
-    function handleSubmit(e) {
-        e.preventDefault();
+    // function handleSubmit(e) {
+    //     e.preventDefault();
 
-        API.getUserByUsername(friendUsername)
-            .then((res) => {
-                setFriendData(res.data);
+    //     API.getUserByUsername(friendUsername)
+    //         .then((res) => {
+    //             setFriendData(res.data);
 
-                if (trip.members.some((e) => e.userName === friendUsername)) {
-                    return;
-                }
-                console.log(friendData);
-                API.updateTrip(id, {
-                    members: [
-                        ...trip.members,
-                        {
-                            userName: friendData.userName,
-                            name: {
-                                firstName: friendData.name.firstName,
-                                lastName: friendData.name.lastName,
-                            },
-                        },
-                    ],
-                })
-                    .then((res) => setTrip(res.data))
-                    .catch((err) => console.log(err));
-            })
-            .catch((err) => console.log(err));
-    }
+    //             if (trip.members.some((e) => e.userName === friendUsername)) {
+    //                 return;
+    //             }
+    //             console.log(friendData);
+    //             API.updateTrip(id, {
+    //                 members: [
+    //                     ...trip.members,
+    //                     {
+    //                         userName: friendData.userName,
+    //                         name: {
+    //                             firstName: friendData.name.firstName,
+    //                             lastName: friendData.name.lastName,
+    //                         },
+    //                     },
+    //                 ],
+    //             })
+    //                 .then((res) => setTrip(res.data))
+    //                 .catch((err) => console.log(err));
+    //         })
+    //         .catch((err) => console.log(err));
+    // }
 
     return (
         <Container fluid>

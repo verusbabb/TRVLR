@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import "./style.css";
 import { useUserContext } from "../../utils/userContext";
-import React, { useState, useEffect, useContext } from "react";
+import React from "react";
 import navLinks from "../../utils/navlinks.json";
 import "materialize-css"
 import { Navbar } from "react-materialize";

@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import Card from "../components/Card";
-// import DeleteBtn from "../components/DeleteBtn";
 import { Row, Col } from "../components/Grid";
-import { Input, TextArea, FormBtn } from "../components/Form";
+import { Input, TextArea } from "../components/Form";
 import { Table, TableHead, TableBody } from "../components/Table";
 import API from "../utils/API";
 import { useUserContext } from "../utils/userContext";
@@ -14,10 +13,8 @@ import DeleteButton from "../components/DeleteBtn";
 function Schedule() {
 
     const [sched, setSched] = useState({});
-    const [trip, setTrip] = useState({});
     const { state } = useUserContext();
     const [formObject, setFormObject] = useState({});
-    const [modalOpen, setModalOpen] = useState(false)
 
     const { id } = useParams();
 
@@ -28,24 +25,19 @@ function Schedule() {
     function loadTrip() {
         API.getTrip(id)
             .then(res => {
-                setTrip(res.data);
-                console.log(res.data);
                 sortSched(res.data.tripSchedule);
             })
             .catch(err => console.log(err));
     }
 
     function sortSched(unsortedSchedule) {
-        console.log(unsortedSchedule, "unsorted");
         let sortedSchedule = unsortedSchedule.sort((a, b) => {
             return moment(a.activityDate + ", " + a.startTime).valueOf() - moment(b.activityDate + ", " + b.startTime).valueOf();
         });
-        console.log(sortedSchedule, "sorted")
         setSched(sortedSchedule);
     }
 
     function removeSchedule(scheduleId) {
-        console.log(scheduleId);
         API.deleteSchedule(scheduleId)
             .then((res) => {
                 loadTrip();
@@ -59,7 +51,6 @@ function Schedule() {
     };
 
     function handleFormSubmit(event) {
-        console.log(state)
         event.preventDefault();
 
         if (formObject.activityName) {
@@ -72,9 +63,6 @@ function Schedule() {
                 activityDescription: formObject.activityDescription
             })
                 .then((res) => {
-                    console.log(res.data.tripSchedule, "schedule test")
-
-
                     loadTrip();
                     handleFormClear();
                 }

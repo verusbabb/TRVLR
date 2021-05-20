@@ -7,7 +7,7 @@ body {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
-  background: black;
+  background: rgb(255, 253, 253);
   background-image: url("./assets/svg2.png");
   background-attachment: fixed;
   background-repeat: no-repeat;
@@ -18,7 +18,7 @@ body {
 main {
   flex: 1 0 auto;
   min-width: 80vw;
-  min-height: 100%;
+  min-height: 50vh;
 }
 
 .transparentBG {
@@ -30,12 +30,12 @@ main {
 }
 
 .card {
-  background: rgba( 255, 255, 255, 0.65 );
-box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-backdrop-filter: blur( 4px );
--webkit-backdrop-filter: blur( 4px );
-border-radius: 10px;
-border: 1px solid rgba( 255, 255, 255, 0.18 );
+  background: rgba( 233, 233, 233, 0.20 );
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+  backdrop-filter: blur( 18.0px );
+  -webkit-backdrop-filter: blur( 18.0px );
+  border-radius: 10px;
+  outline: 2px solid white;
 }
 
 .form-control {
@@ -58,4 +58,17 @@ textarea{
 
 h1 {
   font-size: 3.5rem !important;
+  font-family: 'Maven Pro', sans-serif;
+}
+
+.collapsible-header, .collection-item {
+  background: rgba( 233, 233, 233, 0.20 ) !important;
+  /* box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 ); */
+  backdrop-filter: blur( 10.0px ) ;
+  -webkit-backdrop-filter: blur( 10.0px );
+  border: 2px solid white;
+}
+
+h3, h2, h4 {
+  font-family: 'Maven Pro', sans-serif;
 }

@@ -19,7 +19,7 @@ function Nav() {
             <Link to="/" className="brand-logo center">
               T R V L R
             </Link>
-            <ul>
+            <ul className="sidenav-close">
               {navLinks.map((link, index) => {
                 if (state.userName && link.logged === "in")
                   return (

@@ -123,7 +123,7 @@ function Collections() {
                 <Input
                   onChange={handleInputChange}
                   name="collectionName"
-                  placeholder="Name of the Category"
+                  placeholder="Name of the Category, i.e. Restaurants or Hotels"
                 />
                 <TextArea
                   onChange={handleInputChange}

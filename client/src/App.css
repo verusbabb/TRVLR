@@ -54,7 +54,9 @@ textarea{
   height: 10vh;
 }
 
-
+.trip-name {
+  font-weight: bolder;
+}
 
 h1 {
   font-size: 3.5rem !important;

@@ -94,3 +94,33 @@ circle.timepicker-canvas-bg {
 .delete-confirm {
   background-color: red !important;
 }
+
+@media screen 
+  and (min-device-width: 600px){
+.mobile-buttons, .mobile-welcome {
+  display: none;
+}
+  }
+@media screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 600px) {
+.large-welcome {
+  display: none;
+}
+.mobile-welcome {
+  font-weight:800
+}
+
+.mobile-action{
+  text-align: center;
+}
+
+.mobile-buttons{
+  text-align: center;
+}
+.roundedbtn {
+  background-color: black !important;
+  border-radius:16px; 
+  margin-bottom: 1em;
+}
+}

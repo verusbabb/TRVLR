@@ -122,5 +122,9 @@ circle.timepicker-canvas-bg {
   background-color: black !important;
   border-radius:16px; 
   margin-bottom: 1em;
+  height: 50px;
+  line-height: 50px;
+  width: 35%;
+  font-size:15px !important;
 }
 }

@@ -101,7 +101,7 @@ function Expenses() {
                                 preventScrolling: true,
                                 startingTop: "4%",
                             }}
-                            trigger={<Link node="button">+ Add an Expense</Link>}
+                            trigger={<Link node="button" className="btn-small transparentBG link-btn">+ Add an Expense</Link>}
                         >
                             <form id="add-expense-form">
                                 <Input

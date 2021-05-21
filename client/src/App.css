@@ -74,3 +74,23 @@ h1 {
 h3, h2, h4 {
   font-family: 'Maven Pro', sans-serif;
 }
+
+.link-btn{
+  text-transform: none !important;
+}
+
+.btn, .btn-large, .datepicker-date-display, .timepicker-digital-display {
+  background-color: #4bc7c8 !important;
+}
+
+.timepicker-canvas line {
+  stroke:#4bc7c8 !important;
+}
+
+circle.timepicker-canvas-bg {
+  fill: #4bc7c8 !important;
+}
+
+.delete-confirm {
+  background-color: red !important;
+}

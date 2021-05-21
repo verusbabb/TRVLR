@@ -117,7 +117,7 @@ function Collections() {
                 preventScrolling: true,
                 startingTop: "4%",
               }}
-              trigger={<Link to="" node="button">+ Add a Category</Link>}
+              trigger={<Link to="" node="button" className="btn-small transparentBG link-btn">+ Add a Category</Link>}
             >
               <form id="add-collection-form">
                 <Input
@@ -232,7 +232,7 @@ function Collections() {
                       <p>to get started</p>
                     )}
                     <br></br>
-                    <a onClick={(() => removeCategory(collect._id))} className="red btn-flat white-text">Delete Category</a>
+                    <a onClick={(() => removeCategory(collect._id))} className="transparentBG btn-flat red-text">Delete Category</a>
                   </CollapsibleItem>
                 ))}
               </Collapsible>

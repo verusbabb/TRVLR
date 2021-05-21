@@ -84,7 +84,7 @@ function Dashboard() {
               <Col size="m12">
                 <h5>It looks like you're currently on a trip to {currentTrip.tripCity}!</h5>
                 <br></br>
-                <Link to={"/trips/" + currentTrip._id}>Go to Trip Dashboard ➜</Link>
+                <Link to={"/trips/" + currentTrip._id} className="btn-small transparentBG link-btn">View / Add Trip Details</Link>
 
                 <h4>Current weather in {currentTrip.tripCity}:</h4>
                 <Card>
@@ -112,7 +112,7 @@ function Dashboard() {
             <Row>
               <Col size="m12">
                 <h4>{currentTrip.tripName} Schedule:</h4>
-                <Link to={"/trips/" + currentTrip._id}>Go to Dashboard to add an activity</Link>
+                {/* <Link to={"/trips/" + currentTrip._id}>Go to Dashboard to add an activity</Link> */}
 
                 <Table>
                   <TableHead>
@@ -144,7 +144,7 @@ function Dashboard() {
           <Row>
             <Col size="m12 s12">
               <h2>My Trips</h2>
-              <Link to="/createtrip">+ Add a trip</Link>
+              <Link to="/createtrip" className="btn-small transparentBG link-btn">+ Add a trip</Link>
               {user.memberOf ? (
                 <List>
                   {user.memberOf.map((trip, index) => (
@@ -162,9 +162,9 @@ function Dashboard() {
                       <Modal
               actions={[
                 <Button flat modal="close" node="button" waves="green">
-                  Close
+                  Cancel
                 </Button>,
-                <Button className="modal-close red" onClick={() => removeTrip(trip._id)}>Delete Trip</Button>
+                <Button className="modal-close delete-confirm" onClick={() => removeTrip(trip._id)}>Delete Trip</Button>
               ]}
               bottomSheet={false}
               fixedFooter={false}
@@ -181,7 +181,7 @@ function Dashboard() {
                 preventScrolling: true,
                 startingTop: "4%",
               }}
-              trigger={<Link  className="btn-flat white-text red darken-2">Delete trip</Link>}
+              trigger={<DeleteBtn />}
             ></Modal>
 
                     </Card>

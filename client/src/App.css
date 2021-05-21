@@ -21,7 +21,7 @@ main {
   min-height: 50vh;
 }
 
-.transparentBG {
+.transparentBG, a.btn {
   background-color: rgba(0,0,0,0) !important;
 }
 

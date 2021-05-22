@@ -8,7 +8,6 @@ import { List } from "../components/List";
 import API from "../utils/API";
 import { useUserContext } from "../utils/userContext";
 import { Table, TableHead, TableBody } from "../components/Table";
-import moment from "moment";
 import { Modal, Button } from "react-materialize";
 
 function Dashboard() {
@@ -21,6 +20,7 @@ function Dashboard() {
 
   useEffect(() => {
     loadTrips();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function getWeather(location) {
@@ -47,13 +47,9 @@ function Dashboard() {
           let endDate = res.data.memberOf[i].endDate;
           let tripStart = Date.parse(startDate);
           let tripEnd = Date.parse(endDate);
-
           if (tripStart <= Date.now() && tripEnd >= Date.now()) {
             setCurrentTrip(res.data.memberOf[i]);
             getWeather(res.data.memberOf[i].tripCity);
-
-          } else {
-            return;
           }
         }
       })

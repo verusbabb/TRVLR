@@ -24,6 +24,7 @@ function Trip() {
                 setTrip(res.data);
             })
             .catch((err) => console.log(err));
+            // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     // function handleInputChange(e) {

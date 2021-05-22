@@ -17,6 +17,7 @@ function Collections() {
 
   useEffect(() => {
     loadTrip();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function loadTrip() {
@@ -232,7 +233,7 @@ function Collections() {
                       <p>to get started</p>
                     )}
                     <br></br>
-                    <a onClick={(() => removeCategory(collect._id))} className="transparentBG btn-flat red-text">Delete Category</a>
+                    <Link onClick={(() => removeCategory(collect._id))} className="transparentBG btn-flat red-text">Delete Category</Link>
                   </CollapsibleItem>
                 ))}
               </Collapsible>

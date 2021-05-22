@@ -18,6 +18,7 @@ function Expenses() {
 
     useEffect(() => {
         loadTrip();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id]);
 
     function loadTrip() {

@@ -23,24 +23,21 @@ function Nav() {
               {navLinks.map((link, index) => {
                 if (state.userName && link.logged === "in")
                   return (
-                    <>
                       <li key={index}>
                         <Link to={link.linkTo} className="btn transparentBG no-shadows">
                           {link.linkName}
                         </Link>
                       </li>
-                    </>
                   );
                 else if (!state.userName && link.logged === "out")
                   return (
-                    <>
                       <li key={index}>
                         <Link to={link.linkTo} className="btn transparentBG no-shadows">
                           {link.linkName}
                         </Link>
                       </li>
-                    </>
                   );
+                return "";
               })}
             </ul>
           </div>

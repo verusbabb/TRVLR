@@ -42,7 +42,6 @@ function Collections() {
   }
 
   function handleFormSubmit(event) {
-    console.log(state);
     event.preventDefault();
     if (formObject.collectionName) {
       API.createCollection(id, {
@@ -50,7 +49,6 @@ function Collections() {
         collectionDescription: formObject.collectionDescription,
       })
         .then((res) => {
-          console.log(res);
           loadTrip();
           handleFormClear();
         })
@@ -61,7 +59,6 @@ function Collections() {
   const handleItemEntry = (collectionId) => {
     // event.preventDefault();
     if (formObject.itemName) {
-      console.log(formObject, collectionId);
       API.createCollectionItem(collectionId, {
         itemName: formObject.itemName,
         itemUrl: formObject.itemUrl,

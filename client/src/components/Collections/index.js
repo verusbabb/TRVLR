@@ -98,7 +98,7 @@ function Collections() {
                 <Button flat modal="close" node="button" waves="green">
                   Close
                 </Button>,
-                <Button className="modal-close" onClick={handleFormSubmit}>Add</Button>
+                <Button className="modal-close roundedbtn" onClick={handleFormSubmit}>Add</Button>
               ]}
               bottomSheet={false}
               fixedFooter={false}
@@ -115,7 +115,7 @@ function Collections() {
                 preventScrolling: true,
                 startingTop: "4%",
               }}
-              trigger={<Link to="" node="button" className="btn-small transparentBG link-btn">+ Add a Category</Link>}
+              trigger={<Link to="" node="button" className="roundedbtn btn-small white-text link-btn">+ Add a Category</Link>}
             >
               <form id="add-collection-form">
                 <Input
@@ -154,7 +154,7 @@ function Collections() {
                         <Button flat modal="close" node="button" waves="green">
                           Close
                         </Button>,
-                        <Button className="modal-close" onClick={() => handleItemEntry(collect._id)}>
+                        <Button className="modal-close roundedbtn" onClick={() => handleItemEntry(collect._id)}>
                         Add
                       </Button>
                       ]}
@@ -175,7 +175,7 @@ function Collections() {
                         startingTop: "4%",
                       }}
                       trigger={
-                        <Link node="button" className="btn-small link-btn transparentBG">
+                        <Link node="button" className="btn-small roundedbtn white-text link-btn">
                           + Add an Item
                         </Link>
                       }
@@ -227,7 +227,7 @@ function Collections() {
                         
                       </Table>
                     ) : (
-                      <p>to get started</p>
+                      <p>Share some ideas to get started!</p>
                     )}
                     <br></br>
                     <Link onClick={(() => removeCategory(collect._id))} className="transparentBG btn-flat red-text">Delete Category</Link>

@@ -12,11 +12,12 @@ function Nav() {
   return (
     <>
       <header>
-        <Navbar className="transparentBG no-shadows">
-          <div>
-            <Link to="/" className="brand-logo center">
-              T R V L R
-            </Link>
+        <Navbar className="transparentBG no-shadows"
+        alignLinks="right"
+        brand={<Link to="/" className="brand-logo center" id="brand-logo">
+        T R V L R
+      </Link>}>
+          <div className="navbar-default">
             <ul className="sidenav-close">
               {navLinks.map((link, index) => {
                 if (state.userName && link.logged === "in")

@@ -70,9 +70,9 @@ function Dashboard() {
       <Container>
         <Card>
           <Jumbotron>
-            <h1>
+            <h5>
               Welcome {state?.firstName} {state?.lastName}!
-            </h1>
+            </h5>
           </Jumbotron>
         </Card>
         {JSON.stringify(currentTrip) !== "{}" ? (
@@ -83,7 +83,7 @@ function Dashboard() {
               <Col size="m12">
                 <h5>It looks like you're currently on a trip to {currentTrip.tripCity}!</h5>
                 <br></br>
-                <Link to={"/trips/" + currentTrip._id} className="btn-small transparentBG link-btn">View / Add Trip Details</Link>
+                <Link to={"/trips/" + currentTrip._id} className="roundedbtn btn-small white-text trip-details">Trip Details</Link>
 
                 <h4>Current weather in {currentTrip.tripCity}:</h4>
                 <Card>
@@ -143,7 +143,7 @@ function Dashboard() {
           <Row>
             <Col size="m12 s12">
               <h2>My Trips</h2>
-              <Link to="/createtrip" className="btn-small transparentBG link-btn">+ Add a trip</Link>
+              <Link to="/createtrip" className="roundedbtn btn-small white-text">+ Add a trip</Link>
               {user.memberOf ? (
                 <List>
                   {user.memberOf.map((trip, index) => (
@@ -156,8 +156,8 @@ function Dashboard() {
                       </p>
                       <p>Trip ID: {trip.tripId}</p>
                       <br></br>
+                      <Button className="roundedbtn go-to">Trip Details</Button>
                       </Link>
-                      {/* <a onClick={() => removeTrip(trip._id)} className="btn-flat white-text red">Delete trip</a> */}
                       <Modal
               actions={[
                 <Button flat modal="close" node="button" waves="green">

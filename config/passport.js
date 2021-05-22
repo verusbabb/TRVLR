@@ -16,7 +16,6 @@ passport.use(
       })
         .then((dbUser) => {
           // If there's no user with the given username
-          console.log(dbUser);
           if (!dbUser) {
             return done(null, false, {
               message: "Incorrect username.",

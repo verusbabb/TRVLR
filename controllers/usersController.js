@@ -59,17 +59,15 @@ module.exports = {
 
   addTrip: function (req, res) {
     db.Trip.create(req.body)
-      .then(function (dbTrip) {
-        return db.User.findOneAndUpdate(
+      .then((dbTrip) => {
+        db.User.findOneAndUpdate(
           { _id: req.user._id },
           {
             $addToSet: { memberOf: dbTrip.id },
           },
           { new: true, upsert: true }
-        );
-      })
-      .then(function (dbUser) {
-        res.json(dbUser);
+        )
+        .then((dbUser) => res.json(dbUser))
       })
       .catch(function (err) {
         res.json(err);

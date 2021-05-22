@@ -9,8 +9,6 @@ import { Navbar } from "react-materialize";
 function Nav() {
   const { state } = useUserContext();
 
-  console.log(state);
-
   return (
     <>
       <header>

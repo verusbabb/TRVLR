@@ -64,7 +64,7 @@ function Collections() {
       API.createCollectionItem(collectionId, {
         itemName: formObject.itemName,
         itemUrl: formObject.itemUrl,
-        itemDescription: formObject.itemDescription,
+        // itemDescription: formObject.itemDescription,
         itemSubmitter: state.firstName,
       })
         .then((res) => {
@@ -84,7 +84,7 @@ function Collections() {
         collectionDescription: "",
         itemName: "",
         itemUrl: "",
-        itemDescription: ""
+        // itemDescription: ""
     });
 };
 
@@ -196,12 +196,12 @@ function Collections() {
                         value={formObject.itemUrl}
                         placeholder="(Optional) Enter a link"
                       />
-                      <TextArea
+                      {/* <TextArea
                         onChange={handleInputChange}
                         name="itemDescription"
                         value={formObject.itemDescription}
                         placeholder="(Optional) Add a description"
-                      ></TextArea>
+                      ></TextArea> */}
                       
                       {/* </form> */}
                     </Modal>

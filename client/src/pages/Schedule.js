@@ -60,7 +60,7 @@ function Schedule() {
                 activitySubmitter: state.firstName,
                 startTime: document.getElementById("startTime").value,
                 endTime: document.getElementById("endTime").value,
-                activityDescription: formObject.activityDescription
+                // activityDescription: formObject.activityDescription
             })
                 .then((res) => {
                     loadTrip();
@@ -155,12 +155,12 @@ function Schedule() {
                                         autoClose: true
                                     }}
                                 />
-                                <TextArea
+                                {/* <TextArea
                                     onChange={handleInputChange}
                                     name="activityDescription"
                                     value={formObject.activityDescription}
                                     placeholder="(Optional) Add any necessary details about the activity here"
-                                />
+                                /> */}
 
                             </form>
                         </Modal>

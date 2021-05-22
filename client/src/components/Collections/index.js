@@ -177,8 +177,8 @@ function Collections() {
                         startingTop: "4%",
                       }}
                       trigger={
-                        <Link node="button">
-                          + Add an Item to this Collection
+                        <Link node="button" className="btn-small link-btn transparentBG">
+                          + Add an Item
                         </Link>
                       }
                     >
@@ -205,7 +205,7 @@ function Collections() {
                       
                       {/* </form> */}
                     </Modal>
-
+                      <br/><br/>
                     {collect.collectionItems.length ? (
                       <Table>
                         <TableHead>

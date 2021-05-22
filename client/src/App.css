@@ -100,6 +100,7 @@ circle.timepicker-canvas-bg {
   line-height: 50px;
   width: auto;
   font-size:15px !important;
+  text-transform: none !important;
 }
 
 .link-btn{
@@ -154,25 +155,28 @@ circle.timepicker-canvas-bg {
   height: 30px;
   line-height: 30px;
   width: auto;
-  font-size:8px !important;
+  font-size:15px !important;
 }
 
 .go-to {
-  font-size:6px !important;
-  height: 30px;
-  line-height: 30px;
+  font-size:15px !important;
+  height: 35px;
+  line-height: 35px;
 }
 
 .modal-close {
-  font-size:10px !important;
-  height: 25px;
-  line-height: 25px;
+  font-size:15px !important;
+  height: 35px;
+  line-height: 35px;
+  text-transform: none;
+  width: 50%
 }
 
 .bigger-text {
   font-size:15px !important;
   height: 50px;
   line-height: 50px;
+  text-transform: uppercase !important;
 }
 
 }

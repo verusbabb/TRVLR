@@ -1,6 +1,10 @@
 import "./style.css"
 import { Link } from "react-router-dom";
+
 function index() {
+
+    // document.getElementById("brand-logo").hide();
+
     return (
         <div className="container valign-wrapper">
             <div className="row valign">
@@ -16,7 +20,7 @@ function index() {
                     </div>
                 </div>
                 <div className="mobile-buttons">
-                    <Link to="/login" className="roundedbtn btn-small white-text">Log In</Link>
+                    <Link to="/login" className="roundedbtn btn-small white-text bigger-text">Log In</Link>
                     <br></br>
                     <Link to= "/signup" className="roundedTransparent btn-small transparentBG no-shadows">Sign Up</Link>
                 </div>

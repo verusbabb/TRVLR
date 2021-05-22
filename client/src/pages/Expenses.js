@@ -82,7 +82,7 @@ function Expenses() {
                                 <Button flat modal="close" node="button" waves="green">
                                     Close
                                 </Button>,
-                                <Button onClick={handleFormSubmit} className="modal-close">Add</Button>
+                                <Button onClick={handleFormSubmit} className="modal-close roundedbtn">Add</Button>
 
                             ]}
                             bottomSheet={false}
@@ -102,7 +102,7 @@ function Expenses() {
                                 preventScrolling: true,
                                 startingTop: "4%",
                             }}
-                            trigger={<Link node="button" className="btn-small transparentBG link-btn">+ Add an Expense</Link>}
+                            trigger={<Link node="button" className="btn-small roundedbtn white-text link-btn">+ Add an Expense</Link>}
                         >
                             <form id="add-expense-form">
                                 <Input

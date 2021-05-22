@@ -97,7 +97,7 @@ function Schedule() {
                                 </Button>,
                                 <Button
                                     onClick={handleFormSubmit}
-                                    className="modal-close"
+                                    className="modal-close roundedbtn"
                                 >Add</Button>
                             ]}
                             bottomSheet={false}
@@ -117,7 +117,7 @@ function Schedule() {
                                 preventScrolling: true,
                                 startingTop: "4%",
                             }}
-                            trigger={<Link node="button" className="btn-small transparentBG link-btn">+ Add an Activity</Link>}
+                            trigger={<Link node="button" className="btn-small roundedbtn white-text link-btn">+ Add an Activity</Link>}
                         >
                             <form id="addScheduleForm">
                                 <Input

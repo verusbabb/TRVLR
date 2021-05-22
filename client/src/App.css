@@ -18,7 +18,7 @@ body {
 main {
   flex: 1 0 auto;
   min-width: 80vw;
-  min-height: 50vh;
+  min-height: 85vh;
 }
 
 .transparentBG, a.btn {
@@ -75,9 +75,6 @@ h3, h2, h4 {
   font-family: 'Maven Pro', sans-serif;
 }
 
-.link-btn{
-  text-transform: none !important;
-}
 
 .btn, .btn-large, .datepicker-date-display, .timepicker-digital-display {
   background-color: #4bc7c8 !important;
@@ -93,6 +90,38 @@ circle.timepicker-canvas-bg {
 
 .delete-confirm {
   background-color: red !important;
+}
+
+.roundedbtn {
+  background-color: black !important;
+  border-radius:16px; 
+  margin-bottom: 1em;
+  height: 50px;
+  line-height: 50px;
+  width: auto;
+  font-size:15px !important;
+}
+
+.link-btn{
+  text-transform: none !important;
+  height: 35px;
+  line-height: 35px;
+}
+
+.bigger-text {
+  font-size:15px !important;
+}
+
+.go-to {
+  font-size:8px !important;
+  height: 30px;
+  line-height: 30px;
+}
+
+.modal-close {
+  font-size:10px !important;
+  height: 25px;
+  line-height: 25px;
 }
 
 @media screen 
@@ -122,9 +151,28 @@ circle.timepicker-canvas-bg {
   background-color: black !important;
   border-radius:16px; 
   margin-bottom: 1em;
+  height: 30px;
+  line-height: 30px;
+  width: auto;
+  font-size:8px !important;
+}
+
+.go-to {
+  font-size:6px !important;
+  height: 30px;
+  line-height: 30px;
+}
+
+.modal-close {
+  font-size:10px !important;
+  height: 25px;
+  line-height: 25px;
+}
+
+.bigger-text {
+  font-size:15px !important;
   height: 50px;
   line-height: 50px;
-  width: 35%;
-  font-size:15px !important;
 }
+
 }

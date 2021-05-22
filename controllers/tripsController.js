@@ -96,8 +96,10 @@ module.exports = {
   },
 
   updateTrip: function (req, res) {
+    console.log(req.params.id, "123");
     db.Trip.findByIdAndUpdate({ _id: req.params.id }, req.body)
       .then(function (dbTrip) {
+        console.log(req.user._id, "456");
         return db.User.findByIdAndUpdate(
           req.user._id,
           {

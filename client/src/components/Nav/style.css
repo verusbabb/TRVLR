@@ -39,8 +39,9 @@ a {
   background-color: lightgrey;
 }
 
-/* .sidenav li>a.btn {
-  background-color: black !important;
-} */
+
+.sidenav li>a.btn {
+  background-color: lightgrey !important;
+}
 
 }

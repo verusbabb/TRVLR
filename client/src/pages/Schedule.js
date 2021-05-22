@@ -60,7 +60,7 @@ function Schedule() {
                 activitySubmitter: state.firstName,
                 startTime: document.getElementById("startTime").value,
                 endTime: document.getElementById("endTime").value,
-                activityDescription: formObject.activityDescription
+                // activityDescription: formObject.activityDescription
             })
                 .then((res) => {
                     loadTrip();
@@ -116,7 +116,7 @@ function Schedule() {
                                 preventScrolling: true,
                                 startingTop: "4%",
                             }}
-                            trigger={<Link node="button">+ Add an Activity</Link>}
+                            trigger={<Link node="button" className="btn-small transparentBG link-btn">+ Add an Activity</Link>}
                         >
                             <form id="addScheduleForm">
                                 <Input
@@ -155,15 +155,16 @@ function Schedule() {
                                         autoClose: true
                                     }}
                                 />
-                                <TextArea
+                                {/* <TextArea
                                     onChange={handleInputChange}
                                     name="activityDescription"
                                     value={formObject.activityDescription}
                                     placeholder="(Optional) Add any necessary details about the activity here"
-                                />
+                                /> */}
 
                             </form>
                         </Modal>
+                        <br/><br/>
                         {sched.length ? (
                             <Table >
                                 <TableHead>

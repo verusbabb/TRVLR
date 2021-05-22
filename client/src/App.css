@@ -21,7 +21,7 @@ main {
   min-height: 50vh;
 }
 
-.transparentBG {
+.transparentBG, a.btn {
   background-color: rgba(0,0,0,0) !important;
 }
 
@@ -73,4 +73,58 @@ h1 {
 
 h3, h2, h4 {
   font-family: 'Maven Pro', sans-serif;
+}
+
+.link-btn{
+  text-transform: none !important;
+}
+
+.btn, .btn-large, .datepicker-date-display, .timepicker-digital-display {
+  background-color: #4bc7c8 !important;
+}
+
+.timepicker-canvas line {
+  stroke:#4bc7c8 !important;
+}
+
+circle.timepicker-canvas-bg {
+  fill: #4bc7c8 !important;
+}
+
+.delete-confirm {
+  background-color: red !important;
+}
+
+@media screen 
+  and (min-device-width: 600px){
+.mobile-buttons, .mobile-welcome {
+  display: none;
+}
+  }
+@media screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 600px) {
+.large-welcome {
+  display: none;
+}
+.mobile-welcome {
+  font-weight:800
+}
+
+.mobile-action{
+  text-align: center;
+}
+
+.mobile-buttons{
+  text-align: center;
+}
+.roundedbtn {
+  background-color: black !important;
+  border-radius:16px; 
+  margin-bottom: 1em;
+  height: 50px;
+  line-height: 50px;
+  width: 35%;
+  font-size:15px !important;
+}
 }

@@ -119,7 +119,7 @@ function Trip() {
             <Card>
                 <Row>
                     <Col size="m12 s12">
-                        <Link to="/dashboard">← Back to Dashboard</Link>
+                        <Link to="/dashboard" className="btn-small  transparentBG link-btn">← Back to Dashboard</Link>
                     </Col>
                 </Row>
             </Card>

@@ -10,6 +10,7 @@ import Login from "./pages/Login";
 import Signout from "./pages/Signout";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
+import { Link } from "react-router-dom";
 import {
   BrowserRouter as Router,
   Route,
@@ -52,6 +53,9 @@ function App() {
 
   return (
     <Router>
+      {/* <Link to="/dashboard" className="brand-logo-mobile center">
+              T R V L R
+            </Link> */}
       <Nav />
       <main className="valign-wrapper">
         <Switch>

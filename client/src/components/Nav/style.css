@@ -9,7 +9,6 @@ nav {
 
 header {
   width: 100%;
-
 }
 
 a {
@@ -26,7 +25,8 @@ a {
   and (min-device-width: 320px) 
   and (max-device-width: 992px) {
 .brand-logo {
-  display:none !important;
+  font-size: 2em !important;
+  /* display:inline-block !important; */
 }
 
  .sidenav, .nav-wrapper{

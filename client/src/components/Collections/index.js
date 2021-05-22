@@ -17,6 +17,7 @@ function Collections() {
 
   useEffect(() => {
     loadTrip();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function loadTrip() {
@@ -64,7 +65,7 @@ function Collections() {
       API.createCollectionItem(collectionId, {
         itemName: formObject.itemName,
         itemUrl: formObject.itemUrl,
-        itemDescription: formObject.itemDescription,
+        // itemDescription: formObject.itemDescription,
         itemSubmitter: state.firstName,
       })
         .then((res) => {
@@ -84,7 +85,7 @@ function Collections() {
         collectionDescription: "",
         itemName: "",
         itemUrl: "",
-        itemDescription: ""
+        // itemDescription: ""
     });
 };
 
@@ -100,7 +101,7 @@ function Collections() {
                 <Button flat modal="close" node="button" waves="green">
                   Close
                 </Button>,
-                <Button className="modal-close" onClick={handleFormSubmit}>Add</Button>
+                <Button className="modal-close roundedbtn" onClick={handleFormSubmit}>Add</Button>
               ]}
               bottomSheet={false}
               fixedFooter={false}
@@ -117,7 +118,7 @@ function Collections() {
                 preventScrolling: true,
                 startingTop: "4%",
               }}
-              trigger={<Link to="" node="button" className="btn-small transparentBG link-btn">+ Add a Category</Link>}
+              trigger={<Link to="" node="button" className="roundedbtn btn-small white-text link-btn">+ Add a Category</Link>}
             >
               <form id="add-collection-form">
                 <Input
@@ -156,7 +157,7 @@ function Collections() {
                         <Button flat modal="close" node="button" waves="green">
                           Close
                         </Button>,
-                        <Button className="modal-close" onClick={() => handleItemEntry(collect._id)}>
+                        <Button className="modal-close roundedbtn" onClick={() => handleItemEntry(collect._id)}>
                         Add
                       </Button>
                       ]}
@@ -177,8 +178,8 @@ function Collections() {
                         startingTop: "4%",
                       }}
                       trigger={
-                        <Link node="button">
-                          + Add an Item to this Collection
+                        <Link node="button" className="btn-small roundedbtn white-text link-btn">
+                          + Add an Item
                         </Link>
                       }
                     >
@@ -196,16 +197,16 @@ function Collections() {
                         value={formObject.itemUrl}
                         placeholder="(Optional) Enter a link"
                       />
-                      <TextArea
+                      {/* <TextArea
                         onChange={handleInputChange}
                         name="itemDescription"
                         value={formObject.itemDescription}
                         placeholder="(Optional) Add a description"
-                      ></TextArea>
+                      ></TextArea> */}
                       
                       {/* </form> */}
                     </Modal>
-
+                      <br/><br/>
                     {collect.collectionItems.length ? (
                       <Table>
                         <TableHead>
@@ -229,10 +230,10 @@ function Collections() {
                         
                       </Table>
                     ) : (
-                      <p>to get started</p>
+                      <p>Share some ideas to get started!</p>
                     )}
                     <br></br>
-                    <a onClick={(() => removeCategory(collect._id))} className="transparentBG btn-flat red-text">Delete Category</a>
+                    <Link onClick={(() => removeCategory(collect._id))} className="transparentBG btn-flat red-text">Delete Category</Link>
                   </CollapsibleItem>
                 ))}
               </Collapsible>

@@ -3,7 +3,7 @@ import "./style.css";
 function Footer() {
     return (
         <>
-            <footer className="page-footer transparentBG">
+            <footer className="page-footer">
                 <div className="container">
                     <div className="row">
                         <div className="col l8 s12">
@@ -19,6 +19,11 @@ function Footer() {
                                 <li><a className="white-text" href="https://github.com/cmoss703">Christina Moss</a></li>
                             </ul>
                         </div>
+                    </div>
+                </div>
+                <div className="footer-copyright">
+                    <div class="container">
+                        
                     </div>
                 </div>
             </footer>

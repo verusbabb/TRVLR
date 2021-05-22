@@ -3,12 +3,15 @@ h1, h5 {
 }
 
 .card-panel {
-    margin-top: 12% !important;
+    margin-top: 0% !important;
+}
+
+.large-welcome {
+  font-weight:800
 }
 
 @media screen 
   and (min-device-width: 320px) 
   and (max-device-width: 992px) {
-
 
 }

@@ -72,6 +72,7 @@ function Login() {
                 <FormBtn
                   disabled={!(formObject.userName && formObject.password)}
                   onClick={handleFormSubmit}
+                  className="roundedbtn"
                 >
                   Log in
                 </FormBtn>

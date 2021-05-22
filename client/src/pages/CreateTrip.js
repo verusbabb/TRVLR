@@ -103,7 +103,7 @@ function CreateTrip() {
                             name="tripId"
                             placeholder="Insert 9 Character ID Here"
                         />
-                        <Button disabled={!formObject.tripId} onClick={handleIdSubmit}>
+                        <Button disabled={!formObject.tripId} onClick={handleIdSubmit} className="roundedbtn btn-small white-text bigger-text">
                             Add
                         </Button>
                     </form>
@@ -155,7 +155,7 @@ function CreateTrip() {
                             name="description"
                             placeholder="(Optional) What kind of trip is this, what are your hopes and dreams? Are you looking to accomplish anything specific?"
                         />
-                        <Button disabled={!formObject.tripName} onClick={handleFormSubmit}>
+                        <Button disabled={!formObject.tripName} onClick={handleFormSubmit} className="roundedbtn btn-small white-text bigger-text">
                             Create
             </Button>
                         {!success && <div> Whoops! Please try again.</div>}

@@ -24,6 +24,7 @@ function Trip() {
                 setTrip(res.data);
             })
             .catch((err) => console.log(err));
+            // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     // function handleInputChange(e) {
@@ -66,12 +67,12 @@ function Trip() {
             <Card>
                 <Row>
                     <Col size="m12 s12">
-                        <Jumbotron>
-                            <h1>{trip.tripName}</h1>
-                        </Jumbotron>
-                        <h3>
+                        {/* <Jumbotron> */}
+                            <h3>{trip.tripName}</h3>
+                        {/* </Jumbotron> */}
+                        <p>
                             {trip.startDate} to {trip.endDate}
-                        </h3>
+                        </p>
                     </Col>
                 </Row>
                 <Row>
@@ -119,7 +120,7 @@ function Trip() {
             <Card>
                 <Row>
                     <Col size="m12 s12">
-                        <Link to="/dashboard" className="btn-small  transparentBG link-btn">← Back to Dashboard</Link>
+                        <Link to="/dashboard" className="btn-small roundedbtn white-text link-btn">← Back to Dashboard</Link>
                     </Col>
                 </Row>
             </Card>

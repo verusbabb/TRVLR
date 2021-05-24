@@ -25,7 +25,7 @@ const API = {
   },
   // Saves a trip to the database
   saveTrip: function (tripData) {
-    return axios.post("/api/users/:id", tripData);
+    return axios.post("/api/trips/", tripData);
   },
 
   findOneUser: function (userData) {
@@ -57,6 +57,9 @@ const API = {
     return axios.put("/api/trips/" + id, {
       members: tripData.members,
     });
+  },
+  editTrip: function (id, tripData) {
+    return axios.put("/api/trips/editTrip/" + id, tripData)
   },
   // Deletes the trip with the given id
   deleteTrip: function (id) {

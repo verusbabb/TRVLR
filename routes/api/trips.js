@@ -29,6 +29,10 @@ router
   .put(tripsController.createCollectionItem)
   .delete(tripsController.deleteCollection);
 
+router
+  .route("/editTrip/:id")
+  .put(tripsController.editTrip)
+
 // Matches with "/api/trips/tripId"
 router.route("/tripId/:tripId").get(tripsController.findTripByTripId);
 

@@ -9,12 +9,14 @@ import API from "../utils/API";
 import { useUserContext } from "../utils/userContext";
 import { Table, TableHead, TableBody } from "../components/Table";
 import { Modal, Button } from "react-materialize";
+import moment from "moment";
 
 function Dashboard() {
   const [user, setUser] = useState([]);
   const { state } = useUserContext();
   const [currentTrip, setCurrentTrip] = useState({});
   const [weather, setWeather] = useState({});
+  const [sched, setSched] = useState({});
 
   const apiKey = process.env.REACT_APP_API_KEY;
 
@@ -37,6 +39,13 @@ function Dashboard() {
       .catch(err => console.log(err));
   }
 
+  function sortSched(unsortedSchedule) {
+    let sortedSchedule = unsortedSchedule.sort((a, b) => {
+        return moment(a.activityDate + ", " + a.startTime).valueOf() - moment(b.activityDate + ", " + b.startTime).valueOf();
+    });
+    setSched(sortedSchedule);
+}
+
   function loadTrips() {
     API.getUser(state.id)
       .then((res) => {
@@ -50,6 +59,7 @@ function Dashboard() {
           if (tripStart <= Date.now() && tripEnd >= Date.now()) {
             setCurrentTrip(res.data.memberOf[i]);
             getWeather(res.data.memberOf[i].tripCity);
+            sortSched(res.data.memberOf[i].tripSchedule);
           }
         }
       })

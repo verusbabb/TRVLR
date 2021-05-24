@@ -14,7 +14,7 @@ function Nav() {
       <header>
         <Navbar className="transparentBG no-shadows"
         alignLinks="right"
-        brand={<Link to="/" className="brand-logo center" id="brand-logo">
+        brand={<Link to="/dashboard" className="brand-logo center" id="brand-logo">
         T R V L R
       </Link>}>
           <div className="navbar-default">

@@ -62,7 +62,7 @@ function Collections() {
       API.createCollectionItem(collectionId, {
         itemName: formObject.itemName,
         itemUrl: formObject.itemUrl,
-        // itemDescription: formObject.itemDescription,
+        itemDescription: formObject.itemDescription,
         itemSubmitter: state.firstName,
       })
         .then((res) => {
@@ -78,13 +78,13 @@ function Collections() {
     document.getElementById("add-collection-form").reset();
 
     setFormObject({
-        collectionName: "",
-        collectionDescription: "",
-        itemName: "",
-        itemUrl: "",
-        // itemDescription: ""
+      collectionName: "",
+      collectionDescription: "",
+      itemName: "",
+      itemUrl: "",
+      itemDescription: ""
     });
-};
+  };
 
   return (
     <>
@@ -128,7 +128,7 @@ function Collections() {
                   name="collectionDescription"
                   placeholder="(Optional) Add any necessary details here"
                 />
-                
+
               </form>
             </Modal>
           </Col>
@@ -142,11 +142,11 @@ function Collections() {
                     key={index}
                     expanded={false}
                     header={collect.collectionName}
- 
+
                     node="div"
                   >
                     {collect.collectionDescription}
-                    
+
                     <br></br>
                     <br></br>
                     <Modal
@@ -155,7 +155,7 @@ function Collections() {
                           Close
                         </Button>,
                         <Button className="modal-close roundedbtn" onClick={() => handleItemEntry(collect._id)}>
-                        Add
+                          Add
                       </Button>
                       ]}
                       bottomSheet={false}
@@ -180,7 +180,7 @@ function Collections() {
                         </Link>
                       }
                     >
-                      
+
                       {/* <form> */}
                       <Input
                         onChange={handleInputChange}
@@ -194,16 +194,16 @@ function Collections() {
                         value={formObject.itemUrl}
                         placeholder="(Optional) Enter a link"
                       />
-                      {/* <TextArea
+                      <TextArea
                         onChange={handleInputChange}
                         name="itemDescription"
                         value={formObject.itemDescription}
                         placeholder="(Optional) Add a description"
-                      ></TextArea> */}
-                      
+                      ></TextArea>
+
                       {/* </form> */}
                     </Modal>
-                      <br/><br/>
+                    <br /><br />
                     {collect.collectionItems.length ? (
                       <Table>
                         <TableHead>
@@ -214,17 +214,45 @@ function Collections() {
                         <TableBody>
                           {collect.collectionItems.map((item, index) => (
                             <tr key={index}>
-                              <td>{item.itemName}</td>
+                              <Modal
+                                actions={[
+                                  <Button flat modal="close" node="button" waves="green">
+                                    Close
+                              </Button>,
+                                ]}
+                                bottomSheet={false}
+                                fixedFooter={false}
+                                header={item.itemName}
+                                id="collectionItem"
+                                className="modal"
+                                open={false}
+                                options={{
+                                  container: "body",
+                                  dismissible: true,
+                                  endingTop: "10%",
+                                  inDuration: 250,
+                                  opacity: 0.5,
+                                  outDuration: 250,
+                                  preventScrolling: true,
+                                  startingTop: "4%",
+                                }}
+                                trigger={
+                                  
+                                  <td className="pointer">{item.itemName}</td>
+                                }
+                                >{item.itemDescription}
+                              </Modal>
+
                               <td>
                                 <a href={item.itemUrl} target="_blank" rel="noreferrer">
-                                <i class="material-icons">link</i>
+                                  <i class="material-icons">link</i>
                                 </a>
                               </td>
                               <td>{item.itemSubmitter}</td>
                             </tr>
                           ))}
                         </TableBody>
-                        
+
                       </Table>
                     ) : (
                       <p>Share some ideas to get started!</p>

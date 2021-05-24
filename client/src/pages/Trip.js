@@ -113,12 +113,19 @@ function Trip() {
                     </Col>
                 </Row>
                 <Row>
-                    <Col size="m6 offset-m3">
+                    <Col size="m12">
                         <p>
                             {trip.startDate} to {trip.endDate}
                         </p>
                     </Col>
-                    <Col size="m3">
+
+                </Row>
+                <Row>
+                    <Col size="m12">
+                        <p>{trip.description}</p>
+                    </Col>
+                </Row>
+                    <Col size="m12">
                         <Modal
                             actions={[
                                 <Button flat modal="close" node="button" waves="green">
@@ -142,7 +149,7 @@ function Trip() {
                                 startingTop: "4%",
                             }}
                             trigger={
-                                <div className="edit-btn" role="button">
+                                <div className="edit-btn pointer" role="button">
                                     <i className="material-icons">edit</i>
                                 </div>
                             }
@@ -207,13 +214,6 @@ function Trip() {
                             </form>
                         </Modal>
                     </Col>
-
-                </Row>
-                <Row>
-                    <Col size="m12">
-                        <p>{trip.description}</p>
-                    </Col>
-                </Row>
             </Card>
             <Card>
                 <Row>

@@ -19,7 +19,7 @@ function index() {
                     <h5 className="black-text">Plan your next trip with your friends - all in one place.</h5>
                     </div>
                 </div>
-                <div className="mobile-buttons">
+                <div className="center">
                     <Link to="/login" className="roundedbtn btn-small white-text bigger-text">Log In</Link>
                     <br></br>
                     <Link to= "/signup" className="roundedTransparent btn-small transparentBG no-shadows">Sign Up</Link>

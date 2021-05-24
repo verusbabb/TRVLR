@@ -109,6 +109,10 @@ circle.timepicker-canvas-bg {
   line-height: 35px;
 }
 
+.pointer {
+  cursor: pointer;
+}
+
 .bigger-text {
   font-size:15px !important;
 }
@@ -178,5 +182,7 @@ circle.timepicker-canvas-bg {
   line-height: 50px;
   text-transform: uppercase !important;
 }
+
+
 
 }

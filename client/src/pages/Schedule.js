@@ -61,7 +61,7 @@ function Schedule() {
                 activitySubmitter: state.firstName,
                 startTime: document.getElementById("startTime").value,
                 endTime: document.getElementById("endTime").value,
-                // activityDescription: formObject.activityDescription
+                activityDescription: formObject.activityDescription
             })
                 .then((res) => {
                     loadTrip();
@@ -165,7 +165,7 @@ function Schedule() {
 
                             </form>
                         </Modal>
-                        <br/><br/>
+                        <br /><br />
                         {sched.length ? (
                             <Table >
                                 <TableHead>
@@ -177,7 +177,34 @@ function Schedule() {
                                     {sched.map((schedule, index) => (
                                         <tr key={index}>
                                             <td>{schedule.activityDate}</td>
-                                            <td>{schedule.activityName}</td>
+                                            <Modal
+                                                actions={[
+                                                    <Button flat modal="close" node="button" waves="green">
+                                                        Close
+                                                    </Button>,
+                                                ]}
+                                                bottomSheet={false}
+                                                fixedFooter={false}
+                                                header={schedule.activityName}
+                                                id="scheduleDescription"
+                                                className="modal"
+                                                open={false}
+                                                options={{
+                                                    container: "body",
+                                                    dismissible: true,
+                                                    endingTop: "10%",
+                                                    inDuration: 250,
+                                                    opacity: 0.5,
+                                                    outDuration: 250,
+                                                    preventScrolling: true,
+                                                    startingTop: "4%",
+                                                }}
+                                                trigger={
+
+                                                    <td className="pointer">{schedule.activityName}</td>
+                                                }
+                                            >{schedule.activityDescription}
+                                            </Modal>
                                             <td>{schedule.startTime}</td>
                                             <td><DeleteButton onClick={(() => removeSchedule(schedule._id))} /></td>
                                         </tr>

@@ -61,7 +61,7 @@ function Schedule() {
                 activitySubmitter: state.firstName,
                 startTime: document.getElementById("startTime").value,
                 endTime: document.getElementById("endTime").value,
-                // activityDescription: formObject.activityDescription
+                activityDescription: formObject.activityDescription
             })
                 .then((res) => {
                     loadTrip();

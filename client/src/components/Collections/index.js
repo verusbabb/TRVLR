@@ -223,7 +223,7 @@ function Collections() {
                                 bottomSheet={false}
                                 fixedFooter={false}
                                 header={item.itemName}
-                                id="collectionItem"
+                                id="itemDescription"
                                 className="modal"
                                 open={false}
                                 options={{

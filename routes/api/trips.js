@@ -30,6 +30,10 @@ router
   .delete(tripsController.deleteCollection);
 
 router
+  .route("/packing/:id")
+  .post(tripsController.createPackingItem);
+
+router
   .route("/editTrip/:id")
   .put(tripsController.editTrip)
 

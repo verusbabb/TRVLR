@@ -96,6 +96,19 @@ module.exports = {
       .catch((err) => res.status(422).json(err));
   },
 
+  createPackingItem: function (req, res) {
+    db.Packing.create(req.body)
+      .then((dbPackingItem) => {
+        return db.Trip.findByIdAndUpdate(
+          req.params.id,
+          { $addToSet: { tripPacking: dbPackingItem._id } },
+          { new: true, upsert: true }
+        ).then((packingData) => {
+          res.json(packingData);
+        });
+      })
+  },
+
   updateTrip: function (req, res) {
     console.log(req.params.id, "123");
     db.Trip.findByIdAndUpdate({ _id: req.params.id }, req.body)

@@ -11,6 +11,7 @@ import API from "../utils/API";
 import Collections from "../components/Collections";
 import Expenses from "./Expenses";
 import Schedule from "./Schedule";
+import Packing from "./Packing";
 
 
 function Trip() {
@@ -251,6 +252,7 @@ function Trip() {
             <Collections />
             <Schedule />
             <Expenses />
+            <Packing />
             <Card>
                 <Row>
                     <Col size="m12 s12">

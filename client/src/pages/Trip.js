@@ -6,7 +6,7 @@ import { Modal, Button, DatePicker } from "react-materialize";
 
 import Card from "../components/Card";
 import { Collection, CollectionItem } from "react-materialize";
-import Jumbotron from "../components/Jumbotron";
+// import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
 import Collections from "../components/Collections";
 import Expenses from "./Expenses";

@@ -93,6 +93,14 @@ const API = {
   deleteCollection: function (id) {
     return axios.delete("/api/trips/collection/" + id);
   },
+
+  createPackingItem: function (id, packingData) {
+    return axios.post(`/api/trips/packing/${id}`, packingData);
+  },
+
+  deletePackingItem: function (id) {
+    return axios.delete("/api/trips/packing/" + id);
+  },
 };
 
 export default API;

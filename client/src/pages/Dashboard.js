@@ -43,7 +43,8 @@ function Dashboard() {
     let sortedSchedule = unsortedSchedule.sort((a, b) => {
         return moment(a.activityDate + ", " + a.startTime).valueOf() - moment(b.activityDate + ", " + b.startTime).valueOf();
     });
-    setSched(sortedSchedule);
+    const todayEvents = sortedSchedule.filter(event => event.activityDate === moment().format("MMM DD, YYYY"));
+    setSched(todayEvents);
 }
 
   function loadTrips() {
@@ -116,11 +117,11 @@ function Dashboard() {
         ) : (
           <p>No weather data found for your city input. :(</p>
           )}
-        {currentTrip.tripSchedule.length ? (
+        {sched.length ? (
           // <Card>
             <Row>
               <Col size="m12">
-                <h4>{currentTrip.tripName} Schedule:</h4>
+                <h4>Today's Schedule:</h4>
                 {/* <Link to={"/trips/" + currentTrip._id}>Go to Dashboard to add an activity</Link> */}
 
                 <Table>
@@ -130,7 +131,7 @@ function Dashboard() {
                     <th>Time</th>
                   </TableHead>
                   <TableBody>
-                    {currentTrip.tripSchedule.map((schedule, index) => (
+                    {sched.map((schedule, index) => (
                       <tr key={index}>
                         <td>{schedule.activityDate}</td>
                         <td>{schedule.activityName}</td>
@@ -143,7 +144,7 @@ function Dashboard() {
             </Row>
           // </Card>
         ) : (
-          <p>Add something to your trip schedule to see it here!</p>
+          <p>You don't have any events scheduled for today!</p>
           )}
           </Card>
         ) : (

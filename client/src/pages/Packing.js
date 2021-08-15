@@ -3,23 +3,42 @@ import { Link, useParams } from "react-router-dom";
 import Card from "../components/Card";
 import { Input } from "../components/Form";
 import { Row, Col } from "../components/Grid";
-// import { Table, TableHead, TableBody } from "../components/Table";
+import { Table, TableHead, TableBody } from "../components/Table";
 import API from "../utils/API";
 import { useUserContext } from "../utils/userContext";
 import { Modal, Button } from "react-materialize";
-// import DeleteButton from "../components/DeleteBtn";
+import DeleteButton from "../components/DeleteBtn";
 
 function Packing() {
-    // const [packingItem, setPackingItem] = useState({});
+    const [packingList, setPackingList] = useState({});
     const [formObject, setFormObject] = useState({});
     const { state } = useUserContext();
     const { id } = useParams();
+
+    useEffect(() => {
+        loadTrip();
+    }, [id])
+
+    function loadTrip() {
+        API.getTrip(id)
+            .then((res) => {
+                setPackingList(res.data.tripPacking);
+            })
+    }
+
+    function removePackingItem(packingID) {
+        API.deletePackingItem(packingID)
+            .then((res) => {
+                loadTrip();
+            })
+            .catch(err => console.log(err));
+    }
 
     function handleInputChange(event) {
         const { name, value } = event.target;
         setFormObject({ ...formObject, [name]: value });
     }
-    
+
     function handleFormSubmit(event) {
         event.preventDefault();
         if (formObject.packingAmount) {
@@ -29,7 +48,7 @@ function Packing() {
                 packingSubmitter: state.id,
             })
                 .then((res) => {
-                    // loadTrip();
+                    loadTrip();
                     handleFormClear();
 
                 })
@@ -52,7 +71,7 @@ function Packing() {
         <div>
             <Card>
                 <Row>
-                <Col size="m12 s12">
+                    <Col size="m12 s12">
                         <h1>Packing List</h1>
                         <br></br>
                         <Modal
@@ -96,6 +115,24 @@ function Packing() {
                                 />
                             </form>
                         </Modal>
+                        {packingList.length ? (
+                            <Table>
+                                <TableHead>
+                                    <th>Item</th>
+                                    <th>Quantity</th>
+                                </TableHead>
+                                <TableBody>
+                                    {packingList.map((packingItem, index) => (
+                                        <tr key={index}>
+                                            <td>{packingItem.packingDescription}</td>
+                                            <td>{packingItem.packingAmount}</td>
+                                            <td><DeleteButton onClick={(() => removePackingItem(packingItem._id))} /></td>
+                                        </tr>
+                                    )
+                                    )}
+                                </TableBody>
+                            </Table>
+                        ) : ""}
                     </Col>
                 </Row>
             </Card>

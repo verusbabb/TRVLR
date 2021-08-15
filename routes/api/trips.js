@@ -31,7 +31,8 @@ router
 
 router
   .route("/packing/:id")
-  .post(tripsController.createPackingItem);
+  .post(tripsController.createPackingItem)
+  .delete(tripsController.deletePackingItem);
 
 router
   .route("/editTrip/:id")

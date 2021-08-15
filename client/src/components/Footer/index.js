@@ -22,8 +22,8 @@ function Footer() {
                     </div>
                 </div>
                 <div className="footer-copyright">
-                    <div class="container">
-                        
+                    <div className="container">
+
                     </div>
                 </div>
             </footer>

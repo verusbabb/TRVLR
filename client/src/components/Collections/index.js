@@ -156,7 +156,7 @@ function Collections() {
                         </Button>,
                         <Button className="modal-close roundedbtn" onClick={() => handleItemEntry(collect._id)}>
                           Add
-                      </Button>
+                        </Button>
                       ]}
                       bottomSheet={false}
                       fixedFooter={false}
@@ -218,7 +218,7 @@ function Collections() {
                                 actions={[
                                   <Button flat modal="close" node="button" waves="green">
                                     Close
-                              </Button>,
+                                  </Button>,
                                 ]}
                                 bottomSheet={false}
                                 fixedFooter={false}
@@ -237,15 +237,15 @@ function Collections() {
                                   startingTop: "4%",
                                 }}
                                 trigger={
-                                  
+
                                   <td className="pointer">{item.itemName}</td>
                                 }
-                                >{item.itemDescription}
+                              >{item.itemDescription}
                               </Modal>
 
                               <td>
                                 <a href={item.itemUrl} target="_blank" rel="noreferrer">
-                                  <i class="material-icons">link</i>
+                                  <i className="material-icons">link</i>
                                 </a>
                               </td>
                               <td>{item.itemSubmitter}</td>

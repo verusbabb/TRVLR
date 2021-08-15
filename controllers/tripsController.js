@@ -15,6 +15,7 @@ module.exports = {
       .populate("tripSchedule")
       .populate("tripCollections")
       .populate("members")
+      .populate("tripPacking")
       .sort({ "tripSchedule.activityName": -1 })
       .exec()
       .then((dbModel) => res.json(dbModel))
@@ -127,10 +128,10 @@ module.exports = {
   },
   editTrip: function (req, res) {
     db.Trip.findByIdAndUpdate({ _id: req.params.id }, req.body)
-    .then(function (dbTrip) {
-      res.json(dbTrip)
-    })
-    .catch((err) => res.status(422).json(err));
+      .then(function (dbTrip) {
+        res.json(dbTrip)
+      })
+      .catch((err) => res.status(422).json(err));
   },
   removeTrip: function (req, res) {
     db.Trip.findById({ _id: req.params.id })
@@ -139,18 +140,23 @@ module.exports = {
       .catch((err) => res.status(422).json(err));
   },
   deleteExpense: function (req, res) {
-    db.Expense.deleteOne({ _id: req.params.id})
+    db.Expense.deleteOne({ _id: req.params.id })
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
   deleteSchedule: function (req, res) {
-    db.Schedule.deleteOne({ _id: req.params.id})
+    db.Schedule.deleteOne({ _id: req.params.id })
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
   deleteCollection: function (req, res) {
-    db.Collection.deleteOne({ _id: req.params.id})
-    .then((dbModel) => res.json(dbModel))
-    .catch((err) => res.status(422).json(err));
+    db.Collection.deleteOne({ _id: req.params.id })
+      .then((dbModel) => res.json(dbModel))
+      .catch((err) => res.status(422).json(err));
+  },
+  deletePackingItem: function (req, res) {
+    db.Packing.deleteOne({ _id: req.params.id })
+      .then(dbModel => res.json(dbModel))
+      .catch((err) => res.status(422).json(err));
   }
 };
